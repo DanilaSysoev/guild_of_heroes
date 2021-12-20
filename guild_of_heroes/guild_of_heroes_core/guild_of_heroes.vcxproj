@@ -18,6 +18,13 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\guild.hpp" />
+    <ClInclude Include="include\guild_of_heroes.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\guild.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>

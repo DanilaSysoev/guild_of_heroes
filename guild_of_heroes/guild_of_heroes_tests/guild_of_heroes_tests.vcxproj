@@ -33,7 +33,7 @@
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>..\guild_of_heroes\include;$(IncludePath)</IncludePath>
+    <IncludePath>..\guild_of_heroes_core\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -48,7 +48,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\guild_of_heroes\guild_of_heroes.vcxproj">
+    <ProjectReference Include="..\guild_of_heroes_core\guild_of_heroes.vcxproj">
       <Project>{6121fa1e-5355-456d-9a2e-b96b6c28f228}</Project>
     </ProjectReference>
   </ItemGroup>

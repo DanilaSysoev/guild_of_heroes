@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31624.102
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "guild_of_heroes_core", "guild_of_heroes\guild_of_heroes.vcxproj", "{6121FA1E-5355-456D-9A2E-B96B6C28F228}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "guild_of_heroes_core", "guild_of_heroes_core\guild_of_heroes.vcxproj", "{6121FA1E-5355-456D-9A2E-B96B6C28F228}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "guild_of_heroes_tests", "guild_of_heroes_tests\guild_of_heroes_tests.vcxproj", "{78715495-7AB5-46AA-8B33-FAFCB69D2243}"
 EndProject
