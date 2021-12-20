@@ -8,7 +8,7 @@ TEST(HeroTests, create_creationWithSomeName_creationOk) {
 	EXPECT_NE(hero, nullptr);
 	delete hero;
 }
-TEST(HeroTests, create_creationWithEmptyName_throwException) {
+TEST(HeroTests, create_creationWithEmptyName_throwsException) {
 	EXPECT_THROW(Hero::create(""), std::invalid_argument);
 }
 TEST(HeroTests, create_creationWithSomeName_skillsCountEqualsZero) {
@@ -26,5 +26,10 @@ TEST(HeroTests, addSkill_addSomeSkill_skillsCountEqualsOne) {
 	Hero* hero = Hero::create("my hero");
 	hero->addSkill("some skill", 1);
 	EXPECT_EQ(hero->getSkillsCount(), 1);
+	delete hero;
+}
+TEST(HeroTests, addSkill_addSkillWithEmptyName_throwsException) {
+	Hero* hero = Hero::create("my hero");
+	EXPECT_THROW(hero->addSkill("", 1);, std::invalid_argument);	
 	delete hero;
 }

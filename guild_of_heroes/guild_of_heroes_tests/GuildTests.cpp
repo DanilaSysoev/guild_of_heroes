@@ -8,7 +8,7 @@ TEST(GuildTests, create_creationWithSomeName_creationOk) {
 	EXPECT_NE(guild, nullptr);
 	delete guild;
 }
-TEST(GuildTests, create_creationWithEmptyName_throwException) {
+TEST(GuildTests, create_creationWithEmptyName_throwsException) {
 	EXPECT_THROW(Guild::create(""), std::invalid_argument);
 }
 
