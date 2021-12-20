@@ -5,6 +5,7 @@ namespace guild_of_heroes {
 	class Hero {
 	public:
 		std::string getName() const;
+		int getSkillsCount() const;
 
 		static Hero* create(const std::string& name);
 
