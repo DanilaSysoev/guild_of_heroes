@@ -56,3 +56,9 @@ TEST(HeroTests, getSkill_getSkillWithUnexistingName_returnZero) {
 	EXPECT_EQ(hero->getSkill("some skill"), 0);
 	delete hero;
 }
+
+TEST(HeroTests, getSkills_getSkillsForEmptyHero_returnEmptyMap) {
+	Hero* hero = Hero::create("my hero");
+	EXPECT_TRUE(hero->getSkills().empty());
+	delete hero;
+}
