@@ -51,3 +51,8 @@ TEST(HeroTests, addSkill_addSkillWithExistingName_rewriteOldValue) {
 	EXPECT_EQ(hero->getSkill("some skill"), 2);
 	delete hero;
 }
+TEST(HeroTests, getSkill_getSkillWithUnexistingName_returnZero) {
+	Hero* hero = Hero::create("my hero");
+	EXPECT_EQ(hero->getSkill("some skill"), 0);
+	delete hero;
+}
