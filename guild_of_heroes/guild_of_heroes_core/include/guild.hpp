@@ -4,6 +4,8 @@
 namespace guild_of_heroes {
 	class Guild {
 	public:
+		std::string getName() const;
+
 		static Guild* create(const std::string& name);
 
 	private:

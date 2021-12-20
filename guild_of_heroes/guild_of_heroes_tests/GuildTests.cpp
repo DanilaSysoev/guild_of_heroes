@@ -11,6 +11,6 @@ TEST(GuildTests, create_creationWithSomeName_creationOk) {
 
 TEST(GuildTests, getName_creationWithSomeName_returnCorrectName) {
 	Guild* guild = Guild::create("my guild");
-	EXPECT_STREQ(guild->getName(), "my guild");
+	EXPECT_EQ(guild->getName(), "my guild");
 	delete guild;
 }
