@@ -38,6 +38,12 @@ TEST(HeroTests, addSkill_addSkillWithNegativeValue_throwsException) {
 	EXPECT_THROW(hero->addSkill("some skill", -1), std::invalid_argument);
 	delete hero;
 }
+TEST(HeroTests, addSkill_addSkillWithSomeValue_getSkillReturnCorrectValue) {
+	Hero* hero = Hero::create("my hero");
+	hero->addSkill("some skill", 1);
+	EXPECT_EQ(hero->getSkill("some skill"), 1);
+	delete hero;
+}
 TEST(HeroTests, addSkill_addSkillWithExistingName_rewriteOldValue) {
 	Hero* hero = Hero::create("my hero");
 	hero->addSkill("some skill", 1);
