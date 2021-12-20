@@ -17,6 +17,8 @@ guild_of_heroes::Hero::addSkill(const std::string& skillName, int skillValue)
 		throw std::invalid_argument("skillValue must be positive");
 	if(skills.find(skillName) != skills.end())
 		throw std::invalid_argument("skill with same name already exist");
+	if(skillName.empty())
+		throw std::invalid_argument("skillName can not be empty");
 	skills[skillName] = skillValue;
 }
 
