@@ -8,3 +8,6 @@ TEST(HeroTests, create_creationWithSomeName_creationOk) {
 	EXPECT_NE(hero, nullptr);
 	delete hero;
 }
+TEST(HeroTests, create_creationWithEmptyName_throwException) {
+	EXPECT_THROW(Hero::create(""), std::invalid_argument);
+}
