@@ -71,3 +71,15 @@ TEST(HeroTests, getSkills_addOneSkill_returnCorrectMap) {
 	EXPECT_EQ(skills.size(), 1);
 	delete hero;
 }
+TEST(HeroTests, getSkills_addTwoSkills_returnCorrectMap) {
+	Hero* hero = Hero::create("my hero");
+	hero->addSkill("skill 1", 10);
+	hero->addSkill("skill 2", 20);
+	auto skills = hero->getSkills();
+	EXPECT_EQ(skills.size(), 2);
+	EXPECT_EQ(skills["skill 1"], 10);
+	EXPECT_EQ(skills.size(), 2);
+	EXPECT_EQ(skills["skill 2"], 20);
+	EXPECT_EQ(skills.size(), 2);
+	delete hero;
+}
