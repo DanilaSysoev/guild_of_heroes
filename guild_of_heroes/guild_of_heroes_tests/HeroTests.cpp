@@ -33,3 +33,8 @@ TEST(HeroTests, addSkill_addSkillWithEmptyName_throwsException) {
 	EXPECT_THROW(hero->addSkill("", 1);, std::invalid_argument);	
 	delete hero;
 }
+TEST(HeroTests, addSkill_addSkillWithNegativeValue_throwsException) {
+	Hero* hero = Hero::create("my hero");
+	EXPECT_THROW(hero->addSkill("some skill", -1); , std::invalid_argument);
+	delete hero;
+}
