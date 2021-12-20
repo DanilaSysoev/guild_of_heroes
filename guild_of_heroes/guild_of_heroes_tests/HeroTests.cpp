@@ -62,3 +62,12 @@ TEST(HeroTests, getSkills_getSkillsForEmptyHero_returnEmptyMap) {
 	EXPECT_TRUE(hero->getSkills().empty());
 	delete hero;
 }
+TEST(HeroTests, getSkills_addOneSkill_returnCorrectMap) {
+	Hero* hero = Hero::create("my hero");
+	hero->addSkill("some skill", 10);
+	auto skills = hero->getSkills();
+	EXPECT_EQ(skills.size(), 1);
+	EXPECT_EQ(skills["some skill"], 10);
+	EXPECT_EQ(skills.size(), 1);
+	delete hero;
+}
