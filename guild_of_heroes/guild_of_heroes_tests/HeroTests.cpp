@@ -30,11 +30,18 @@ TEST(HeroTests, addSkill_addSomeSkill_skillsCountEqualsOne) {
 }
 TEST(HeroTests, addSkill_addSkillWithEmptyName_throwsException) {
 	Hero* hero = Hero::create("my hero");
-	EXPECT_THROW(hero->addSkill("", 1);, std::invalid_argument);	
+	EXPECT_THROW(hero->addSkill("", 1), std::invalid_argument);	
 	delete hero;
 }
 TEST(HeroTests, addSkill_addSkillWithNegativeValue_throwsException) {
 	Hero* hero = Hero::create("my hero");
-	EXPECT_THROW(hero->addSkill("some skill", -1); , std::invalid_argument);
+	EXPECT_THROW(hero->addSkill("some skill", -1), std::invalid_argument);
+	delete hero;
+}
+TEST(HeroTests, addSkill_addSkillWithExistingName_rewriteOldValue) {
+	Hero* hero = Hero::create("my hero");
+	hero->addSkill("some skill", 1);
+	hero->addSkill("some skill", 2);
+	EXPECT_EQ(hero->getSkill("some skill"), 2);
 	delete hero;
 }
