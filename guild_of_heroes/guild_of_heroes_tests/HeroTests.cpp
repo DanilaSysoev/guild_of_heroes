@@ -22,3 +22,9 @@ TEST(HeroTests, getName_creationWithSomeName_returnCorrectName) {
 	EXPECT_EQ(hero->getName(), "my hero");
 	delete hero;
 }
+TEST(HeroTests, addSkill_addSomeSkill_skillsCountEqualsOne) {
+	Hero* hero = Hero::create("my hero");
+	hero->addSkill("some skill", 1);
+	EXPECT_EQ(hero->getSkillsCount(), 1);
+	delete hero;
+}
