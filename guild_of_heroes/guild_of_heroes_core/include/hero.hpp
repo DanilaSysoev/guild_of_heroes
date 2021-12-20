@@ -1,11 +1,14 @@
 #pragma once
 #include <string>
+#include <map>
 
 namespace guild_of_heroes {
 	class Hero {
 	public:
 		std::string getName() const;
 		int getSkillsCount() const;
+
+		void addSkill(const std::string& skillName, int skillValue);
 
 		static Hero* create(const std::string& name);
 
@@ -14,5 +17,6 @@ namespace guild_of_heroes {
 		Hero(const std::string& name);
 
 		std::string name;
+		std::map<std::string, int> skills;
 	};
 }

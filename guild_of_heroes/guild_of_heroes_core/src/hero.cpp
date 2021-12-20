@@ -7,13 +7,23 @@ guild_of_heroes::Hero::getName() const {
 }
 int
 guild_of_heroes::Hero::getSkillsCount() const {
-	return 0;
+	return skills.size();
+}
+
+void 
+guild_of_heroes::Hero::addSkill(const std::string& skillName, int skillValue)
+{
+	if(skillValue <= 0) 
+		throw std::invalid_argument("skillValue must be positive");
+	if(skills.find(skillName) != skills.end())
+		throw std::invalid_argument("skill with same name already exist");
+	skills[skillName] = skillValue;
 }
 
 guild_of_heroes::Hero*
 guild_of_heroes::Hero::create(const std::string& name) {
 	if (name.empty())
-		throw std::invalid_argument("name");
+		throw std::invalid_argument("name can not be empty");
 	return new Hero(name);
 }
 
