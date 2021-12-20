@@ -11,3 +11,9 @@ TEST(HeroTests, create_creationWithSomeName_creationOk) {
 TEST(HeroTests, create_creationWithEmptyName_throwException) {
 	EXPECT_THROW(Hero::create(""), std::invalid_argument);
 }
+
+TEST(HeroTests, getName_creationWithSomeName_returnCorrectName) {
+	Hero* hero = Hero::create("my hero");
+	EXPECT_EQ(hero->getName(), "my hero");
+	delete hero;
+}
