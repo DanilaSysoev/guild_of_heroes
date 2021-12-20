@@ -1,3 +1,4 @@
+#include <stdexcept>
 #include "guild.hpp"
 
 std::string
@@ -7,6 +8,8 @@ guild_of_heroes::Guild::getName() const {
 
 guild_of_heroes::Guild*
 guild_of_heroes::Guild::create(const std::string& name) {
+	if (name.empty())
+		throw std::invalid_argument("name");
 	return new Guild(name);
 }
 
