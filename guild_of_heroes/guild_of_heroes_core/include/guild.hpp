@@ -8,6 +8,7 @@ namespace guild_of_heroes {
 
 		static Guild* create(const std::string& name);
 
+
 	private:
 		Guild(const std::string& name);
 

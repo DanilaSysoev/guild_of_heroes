@@ -1,6 +1,11 @@
 #include <stdexcept>
 #include "hero.hpp"
 
+std::string
+guild_of_heroes::Hero::getName() const {
+	return name;
+}
+
 guild_of_heroes::Hero*
 guild_of_heroes::Hero::create(const std::string& name) {
 	if (name.empty())
