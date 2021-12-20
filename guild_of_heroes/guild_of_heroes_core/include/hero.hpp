@@ -7,6 +7,7 @@ namespace guild_of_heroes {
 	public:
 		std::string getName() const;
 		int getSkill(const std::string skillName) const;
+		std::map<std::string, int> getSkills() const;
 		int getSkillsCount() const;
 
 		void addSkill(const std::string& skillName, int skillValue);

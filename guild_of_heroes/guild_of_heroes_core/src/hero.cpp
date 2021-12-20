@@ -13,6 +13,11 @@ guild_of_heroes::Hero::getSkill(const std::string skillName) const
 		return 0;
 	return skillPair->second;
 }
+std::map<std::string, int>
+guild_of_heroes::Hero::getSkills() const
+{
+	return skills;
+}
 int
 guild_of_heroes::Hero::getSkillsCount() const {
 	return skills.size();
