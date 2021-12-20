@@ -6,6 +6,14 @@ guild_of_heroes::Hero::getName() const {
 	return name;
 }
 int
+guild_of_heroes::Hero::getSkill(const std::string skillName) const
+{
+	auto skillPair = skills.find(skillName);
+	if (skillPair == skills.end())
+		return 0;
+	return skillPair->second;
+}
+int
 guild_of_heroes::Hero::getSkillsCount() const {
 	return skills.size();
 }
