@@ -41,7 +41,15 @@ guild_of_heroes::Settlement::setRaceWeight(const std::string& race, int weight)
 {
 	if (weight < 0)
 		throw std::invalid_argument("Race weight can not be negative");
-	racesWeights[race] = weight;
+
+	auto raceWeight = racesWeights.find(race);
+	if (weight == 0 && raceWeight != racesWeights.end()) {
+		if(racesWeights.size() == 1)
+			throw std::logic_error("Impossible remove last race");
+		racesWeights.erase(raceWeight);
+	}
+	else if(weight != 0)
+		racesWeights[race] = weight;
 }
 
 guild_of_heroes::Settlement*
