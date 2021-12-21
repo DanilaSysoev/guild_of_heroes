@@ -95,3 +95,8 @@ TEST(HeroTests, setDailyFee_setPositiveFee_dailyFeeEqualsSettedValue) {
 	EXPECT_EQ(hero->getDailyFee(), 10);
 	delete hero;
 }
+TEST(HeroTests, setDailyFee_setNegativeFee_throwsException) {
+	Hero* hero = Hero::create("my hero");
+	EXPECT_THROW(hero->setDailyFee(-10), std::invalid_argument);	
+	delete hero;
+}
