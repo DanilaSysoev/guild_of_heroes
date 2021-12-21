@@ -35,7 +35,11 @@ TEST(SettlementTests, setSize_setPositiveSize_getSizeReturnCorrectValue) {
 }
 TEST(SettlementTests, setSize_setNegativeSize_throwsException) {
 	Settlement* settlement = Settlement::create("my settlement");
-	EXPECT_THROW_WITH_MESSAGE(settlement->setSize(-5), std::invalid_argument, "settlement size can not be negative");	
+	EXPECT_THROW_WITH_MESSAGE(
+		settlement->setSize(-5),
+		std::invalid_argument,
+		"settlement size can not be negative"
+	);	
 	delete settlement;
 }
 TEST(SettlementTests, setSize_setZeroSize_getSizeReturnCorrectValue) {
@@ -96,5 +100,15 @@ TEST(SettlementTests, getMaxSizeInPast_setSizeThirdGreater_returnGreater) {
 	settlement->setSize(4);
 	settlement->setSize(5);
 	EXPECT_EQ(settlement->getMaxSizeInPast(), 5);
+	delete settlement;
+}
+
+TEST(SettlementTests, getRaceWeight_createNewSettlement_throwsException) {
+	Settlement* settlement = Settlement::create("my settlement");
+	EXPECT_THROW_WITH_MESSAGE(
+		settlement->getRaceWeight("human"),
+		std::logic_error,
+		"settlement state error: races not setupped"
+	);
 	delete settlement;
 }
