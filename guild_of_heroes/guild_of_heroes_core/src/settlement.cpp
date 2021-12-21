@@ -39,6 +39,8 @@ guild_of_heroes::Settlement::getRaceWeight(const std::string& race) const
 void
 guild_of_heroes::Settlement::setRaceWeight(const std::string& race, int weight)
 {
+	if (weight < 0)
+		throw std::invalid_argument("Race weight can not be negative");
 	racesWeights[race] = weight;
 }
 
