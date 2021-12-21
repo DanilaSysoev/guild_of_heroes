@@ -8,7 +8,7 @@ guild_of_heroes::Settlement::getSize() const {
 
 int
 guild_of_heroes::Settlement::getMaxSizeInPast() const {
-	return 1;
+	return maxSizeInPast;
 }
 
 void
@@ -16,6 +16,8 @@ guild_of_heroes::Settlement::setSize(int size) {
 	if (size < 0)
 		throw std::invalid_argument("Settlement size can not be negative");
 	this->size = size;
+	if (size > maxSizeInPast)
+		maxSizeInPast = size;
 }
 
 bool
@@ -31,6 +33,5 @@ guild_of_heroes::Settlement::create(const std::string& name) {
 }
 
 guild_of_heroes::Settlement::Settlement(const std::string& name)
-	: Nameable(name) {
-	this->size = 1;
+	: Nameable(name), size(1), maxSizeInPast(1) {
 }

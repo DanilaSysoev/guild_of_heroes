@@ -15,5 +15,6 @@ namespace guild_of_heroes {
 		Settlement(const std::string& name);
 
 		int size;
+		int maxSizeInPast;
 	};
 }
