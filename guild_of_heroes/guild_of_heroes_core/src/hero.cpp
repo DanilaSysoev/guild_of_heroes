@@ -32,6 +32,8 @@ guild_of_heroes::Hero::getDailyFee() const
 void
 guild_of_heroes::Hero::setDailyFee(int fee)
 {
+	if (fee < 0)
+		throw std::invalid_argument("fee can not be negative");
 	this->dailyFee = fee;
 }
 
