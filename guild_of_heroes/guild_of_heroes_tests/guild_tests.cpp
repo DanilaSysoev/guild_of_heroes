@@ -9,7 +9,11 @@ TEST(GuildTests, create_creationWithSomeName_creationOk) {
 	delete guild;
 }
 TEST(GuildTests, create_creationWithEmptyName_throwsException) {
-	EXPECT_THROW_WITH_MESSAGE(Guild::create(""), std::invalid_argument, "name can not be empty");
+	EXPECT_THROW_WITH_MESSAGE(
+		Guild::create(""), 
+		std::invalid_argument,
+		"name can not be empty"
+	);
 }
 
 TEST(GuildTests, getName_creationWithSomeName_returnCorrectName) {

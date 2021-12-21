@@ -9,7 +9,11 @@ TEST(SettlementTests, create_creationWithSomeName_creationOk) {
 	delete settlement;
 }
 TEST(SettlementTests, create_creationWithEmptyName_throwsException) {
-	EXPECT_THROW(Settlement::create(""), std::invalid_argument);
+	EXPECT_THROW_WITH_MESSAGE(
+		Settlement::create(""),
+		std::invalid_argument, 
+		"name can not be empty"
+	);
 }
 
 TEST(SettlementTests, getName_creationWithSomeName_returnCorrectName) {

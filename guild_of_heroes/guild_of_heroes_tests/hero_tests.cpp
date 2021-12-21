@@ -9,7 +9,9 @@ TEST(HeroTests, create_creationWithSomeName_creationOk) {
 	delete hero;
 }
 TEST(HeroTests, create_creationWithEmptyName_throwsException) {
-	EXPECT_THROW(Hero::create(""), std::invalid_argument);
+	EXPECT_THROW_WITH_MESSAGE(
+		Hero::create(""), std::invalid_argument, "name can not be empty"
+	);
 }
 TEST(HeroTests, create_creationWithSomeName_skillsCountEqualsZero) {
 	Hero* hero = Hero::create("my hero");
@@ -30,12 +32,20 @@ TEST(HeroTests, addSkill_addSomeSkill_skillsCountEqualsOne) {
 }
 TEST(HeroTests, addSkill_addSkillWithEmptyName_throwsException) {
 	Hero* hero = Hero::create("my hero");
-	EXPECT_THROW(hero->addSkill("", 1), std::invalid_argument);	
+	EXPECT_THROW_WITH_MESSAGE(
+		hero->addSkill("", 1),
+		std::invalid_argument,
+		"skillName can not be empty"
+	);
 	delete hero;
 }
 TEST(HeroTests, addSkill_addSkillWithNegativeValue_throwsException) {
 	Hero* hero = Hero::create("my hero");
-	EXPECT_THROW(hero->addSkill("some skill", -1), std::invalid_argument);
+	EXPECT_THROW_WITH_MESSAGE(
+		hero->addSkill("some skill", -1), 
+		std::invalid_argument, 
+		"skillValue must be positive"
+	);
 	delete hero;
 }
 TEST(HeroTests, addSkill_addSkillWithSomeValue_getSkillReturnCorrectValue) {
@@ -97,6 +107,10 @@ TEST(HeroTests, setDailyFee_setPositiveFee_dailyFeeEqualsSettedValue) {
 }
 TEST(HeroTests, setDailyFee_setNegativeFee_throwsException) {
 	Hero* hero = Hero::create("my hero");
-	EXPECT_THROW(hero->setDailyFee(-10), std::invalid_argument);	
+	EXPECT_THROW_WITH_MESSAGE(
+		hero->setDailyFee(-10), 
+		std::invalid_argument, 
+		"fee can not be negative"
+	);
 	delete hero;
 }
