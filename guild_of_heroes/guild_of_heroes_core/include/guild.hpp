@@ -1,17 +1,13 @@
 #pragma once
-#include<string>
+#include "nameable.hpp"
 
 namespace guild_of_heroes {
-	class Guild {
+	class Guild : public Nameable {
 	public:
-		std::string getName() const;
-
 		static Guild* create(const std::string& name);
 
 
 	private:
 		Guild(const std::string& name);
-
-		std::string name;
 	};
 }

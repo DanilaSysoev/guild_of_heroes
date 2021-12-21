@@ -1,10 +1,6 @@
 #include <stdexcept>
 #include "hero.hpp"
 
-std::string
-guild_of_heroes::Hero::getName() const {
-	return name;
-}
 int
 guild_of_heroes::Hero::getSkill(const std::string skillName) const
 {
@@ -14,8 +10,7 @@ guild_of_heroes::Hero::getSkill(const std::string skillName) const
 	return skillPair->second;
 }
 std::map<std::string, int>
-guild_of_heroes::Hero::getSkills() const
-{
+guild_of_heroes::Hero::getSkills() const {
 	return skills;
 }
 int
@@ -24,22 +19,19 @@ guild_of_heroes::Hero::getSkillsCount() const {
 }
 
 int
-guild_of_heroes::Hero::getDailyFee() const
-{
+guild_of_heroes::Hero::getDailyFee() const {
 	return dailyFee;
 }
 
 void
-guild_of_heroes::Hero::setDailyFee(int fee)
-{
+guild_of_heroes::Hero::setDailyFee(int fee) {
 	if (fee < 0)
 		throw std::invalid_argument("fee can not be negative");
 	this->dailyFee = fee;
 }
 
 void 
-guild_of_heroes::Hero::addSkill(const std::string& skillName, int skillValue)
-{
+guild_of_heroes::Hero::addSkill(const std::string& skillName, int skillValue) {
 	if(skillValue <= 0) 
 		throw std::invalid_argument("skillValue must be positive");
 	if(skillName.empty())
@@ -54,6 +46,6 @@ guild_of_heroes::Hero::create(const std::string& name) {
 	return new Hero(name);
 }
 
-guild_of_heroes::Hero::Hero(const std::string& name) {
-	this->name = name;
-}
+guild_of_heroes::Hero::Hero(const std::string& name)
+	: Nameable (name) 
+{ }

@@ -1,11 +1,10 @@
 #pragma once
-#include <string>
 #include <map>
+#include "nameable.hpp"
 
 namespace guild_of_heroes {
-	class Hero {
+	class Hero : public Nameable {
 	public:
-		std::string getName() const;
 		int getSkill(const std::string skillName) const;
 		std::map<std::string, int> getSkills() const;
 		int getSkillsCount() const;
@@ -20,7 +19,6 @@ namespace guild_of_heroes {
 	private:
 		Hero(const std::string& name);
 
-		std::string name;
 		std::map<std::string, int> skills;
 		int dailyFee;
 	};
