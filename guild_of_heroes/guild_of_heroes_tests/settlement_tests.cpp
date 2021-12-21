@@ -21,3 +21,9 @@ TEST(SettlementTests, getName_creationWithSomeName_returnCorrectName) {
 	EXPECT_EQ(settlement->getName(), "my settlement");
 	delete settlement;
 }
+
+TEST(SettlementTests, getSize_createNewSettlement_returnOne) {
+	Settlement* settlement = Settlement::create("my settlement");
+	EXPECT_EQ(settlement->getSize(), 1);
+	delete settlement;
+}
