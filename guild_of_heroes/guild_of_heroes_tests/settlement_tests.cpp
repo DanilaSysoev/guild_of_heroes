@@ -131,3 +131,12 @@ TEST(SettlementTests, getRaceWeight_setWeightExistingRace_returnNewValue) {
 	EXPECT_EQ(settlement->getRaceWeight("human"), 500);
 	delete settlement;
 }
+TEST(SettlementTests, setRaceWeight_setNegativeWeight_throwsException) {
+	Settlement* settlement = Settlement::create("my settlement");
+	EXPECT_THROW_WITH_MESSAGE(
+		settlement->setRaceWeight("human", -1000),
+		std::invalid_argument,
+		"race weight can not be negative"
+	);
+	delete settlement;
+}
