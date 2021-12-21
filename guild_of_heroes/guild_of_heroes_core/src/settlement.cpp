@@ -13,6 +13,11 @@ guild_of_heroes::Settlement::setSize(int size) {
 	this->size = size;
 }
 
+bool
+guild_of_heroes::Settlement::isAbandoned() const {
+	return size == 0;
+}
+
 guild_of_heroes::Settlement*
 guild_of_heroes::Settlement::create(const std::string& name) {
 	if (name.empty())

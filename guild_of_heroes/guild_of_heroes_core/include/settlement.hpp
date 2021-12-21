@@ -6,6 +6,7 @@ namespace guild_of_heroes {
 	public:
 		int getSize() const;
 		void setSize(int size);
+		bool isAbandoned() const;
 
 		static Settlement* create(const std::string& name);
 
