@@ -27,3 +27,9 @@ TEST(SettlementTests, getSize_createNewSettlement_returnOne) {
 	EXPECT_EQ(settlement->getSize(), 1);
 	delete settlement;
 }
+TEST(SettlementTests, setSize_setPositiveSize_getSizeReturnCorrectValue) {
+	Settlement* settlement = Settlement::create("my settlement");
+	settlement->setSize(5);
+	EXPECT_EQ(settlement->getSize(), 5);
+	delete settlement;
+}
