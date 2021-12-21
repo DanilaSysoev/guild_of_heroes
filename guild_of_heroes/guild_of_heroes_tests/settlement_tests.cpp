@@ -175,7 +175,16 @@ TEST(SettlementTests, setRaceWeight_raceNameIsEmpty_throwsException) {
 	Settlement* settlement = Settlement::create("my settlement");
 	EXPECT_THROW_WITH_MESSAGE(
 		settlement->setRaceWeight("", 1000),
-		std::logic_error,
+		std::invalid_argument,
+		"race name can not be empty"
+	);
+	delete settlement;
+}
+TEST(SettlementTests, getRaceWeight_raceNameIsEmpty_throwsException) {
+	Settlement* settlement = Settlement::create("my settlement");
+	EXPECT_THROW_WITH_MESSAGE(
+		settlement->getRaceWeight(""),
+		std::invalid_argument,
 		"race name can not be empty"
 	);
 	delete settlement;
