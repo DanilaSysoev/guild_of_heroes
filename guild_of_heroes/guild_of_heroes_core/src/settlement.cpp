@@ -41,6 +41,8 @@ guild_of_heroes::Settlement::setRaceWeight(const std::string& race, int weight)
 {
 	if (weight < 0)
 		throw std::invalid_argument("Race weight can not be negative");
+	if(race.empty())
+		throw std::invalid_argument("Race name can not be empty");
 
 	auto raceWeight = racesWeights.find(race);
 	if (weight == 0 && raceWeight != racesWeights.end()) {
