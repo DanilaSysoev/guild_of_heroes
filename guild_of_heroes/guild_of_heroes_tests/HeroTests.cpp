@@ -83,3 +83,9 @@ TEST(HeroTests, getSkills_addTwoSkills_returnCorrectMap) {
 	EXPECT_EQ(skills.size(), 2);
 	delete hero;
 }
+
+TEST(HeroTests, getDailyFee_createNewHero_dailyFeeEqualsZero) {
+	Hero* hero = Hero::create("my hero");	
+	EXPECT_EQ(hero->getDailyFee(), 0);
+	delete hero;
+}
