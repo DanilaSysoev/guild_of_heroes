@@ -3,7 +3,12 @@
 
 int
 guild_of_heroes::Settlement::getSize() const {
-	return 1;
+	return size;
+}
+
+void
+guild_of_heroes::Settlement::setSize(int size) {
+	this->size = size;
 }
 
 guild_of_heroes::Settlement*
@@ -14,5 +19,6 @@ guild_of_heroes::Settlement::create(const std::string& name) {
 }
 
 guild_of_heroes::Settlement::Settlement(const std::string& name)
-	: Nameable(name)
-{ }
+	: Nameable(name) {
+	this->size = 1;
+}
