@@ -56,3 +56,9 @@ TEST(SettlementTests, isAbandoned_setSizeToZero_isAbandoned) {
 	EXPECT_TRUE(settlement->isAbandoned());
 	delete settlement;
 }
+TEST(SettlementTests, isAbandoned_setPositiveSize_isNotAbandoned) {
+	Settlement* settlement = Settlement::create("my settlement");
+	settlement->setSize(5);
+	EXPECT_FALSE(settlement->isAbandoned());
+	delete settlement;
+}
