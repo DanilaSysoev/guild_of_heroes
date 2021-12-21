@@ -140,3 +140,12 @@ TEST(SettlementTests, setRaceWeight_setNegativeWeight_throwsException) {
 	);
 	delete settlement;
 }
+TEST(SettlementTests, setRaceWeight_existTwoRacesSetZeroWeightOne_isOk) {
+	Settlement* settlement = Settlement::create("my settlement");	
+	settlement->setRaceWeight("human", 1000);
+	settlement->setRaceWeight("dwarf", 2000);
+	settlement->setRaceWeight("human", 0);
+	EXPECT_EQ(settlement->getRaceWeight("human"), 0);
+	EXPECT_EQ(settlement->getRaceWeight("dwarf"), 2000);
+	delete settlement;
+}
