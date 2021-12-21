@@ -62,3 +62,9 @@ TEST(SettlementTests, isAbandoned_setPositiveSize_isNotAbandoned) {
 	EXPECT_FALSE(settlement->isAbandoned());
 	delete settlement;
 }
+
+TEST(SettlementTests, getMaxSizeInPast_createNewSettlement_returnOne) {
+	Settlement* settlement = Settlement::create("my settlement");
+	EXPECT_EQ(settlement->getMaxSizeInPast(), 1);
+	delete settlement;
+}
