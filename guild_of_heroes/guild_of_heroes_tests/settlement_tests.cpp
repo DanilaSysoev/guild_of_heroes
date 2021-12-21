@@ -112,9 +112,22 @@ TEST(SettlementTests, getRaceWeight_createNewSettlement_throwsException) {
 	);
 	delete settlement;
 }
-TEST(SettlementTests, setRaceWeight_setWeightforOneRace_getRaceWeightReturnOk) {
+TEST(SettlementTests, setRaceWeight_setWeightForOneRace_getRaceWeightReturnOk) {
 	Settlement* settlement = Settlement::create("my settlement");
 	settlement->setRaceWeight("human", 1000);
 	EXPECT_EQ(settlement->getRaceWeight("human"), 1000);
+	delete settlement;
+}
+TEST(SettlementTests, getRaceWeight_getWeightUnexistingRace_returnZero) {
+	Settlement* settlement = Settlement::create("my settlement");
+	settlement->setRaceWeight("human", 1000);
+	EXPECT_EQ(settlement->getRaceWeight("orc"), 0);
+	delete settlement;
+}
+TEST(SettlementTests, getRaceWeight_setWeightExistingRace_returnNewValue) {
+	Settlement* settlement = Settlement::create("my settlement");
+	settlement->setRaceWeight("human", 1000);
+	settlement->setRaceWeight("human", 500);
+	EXPECT_EQ(settlement->getRaceWeight("human"), 500);
 	delete settlement;
 }
