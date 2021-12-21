@@ -10,6 +10,7 @@ namespace guild_of_heroes {
 		std::map<std::string, int> getSkills() const;
 		int getSkillsCount() const;
 		int getDailyFee() const;
+		void setDailyFee(int fee);
 
 		void addSkill(const std::string& skillName, int skillValue);
 

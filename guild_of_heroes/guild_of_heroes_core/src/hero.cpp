@@ -26,7 +26,13 @@ guild_of_heroes::Hero::getSkillsCount() const {
 int
 guild_of_heroes::Hero::getDailyFee() const
 {
-	return 0;
+	return dailyFee;
+}
+
+void
+guild_of_heroes::Hero::setDailyFee(int fee)
+{
+	this->dailyFee = fee;
 }
 
 void 
