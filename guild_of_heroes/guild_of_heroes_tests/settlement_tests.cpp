@@ -182,6 +182,7 @@ TEST(SettlementTests, setRaceWeight_raceNameIsEmpty_throwsException) {
 }
 TEST(SettlementTests, getRaceWeight_raceNameIsEmpty_throwsException) {
 	Settlement* settlement = Settlement::create("my settlement");
+	settlement->setRaceWeight("human", 1000);
 	EXPECT_THROW_WITH_MESSAGE(
 		settlement->getRaceWeight(""),
 		std::invalid_argument,

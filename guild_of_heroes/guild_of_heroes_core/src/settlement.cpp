@@ -30,6 +30,9 @@ guild_of_heroes::Settlement::getRaceWeight(const std::string& race) const
 {
 	if(racesWeights.empty())
 		throw std::logic_error("Settlement state error: races not setupped");
+	if (race.empty())
+		throw std::invalid_argument("Race name can not be empty");
+
 	auto raceWeight = racesWeights.find(race);
 	if (raceWeight == racesWeights.end())
 		return 0;
