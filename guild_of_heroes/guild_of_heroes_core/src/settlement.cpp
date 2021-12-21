@@ -26,9 +26,20 @@ guild_of_heroes::Settlement::isAbandoned() const {
 }
 
 int
-guild_of_heroes::Settlement::getRaceWeight(const std::string& race)
+guild_of_heroes::Settlement::getRaceWeight(const std::string& race) const
 {
-	throw std::logic_error("Settlement state error: races not setupped");
+	if(racesWeights.empty())
+		throw std::logic_error("Settlement state error: races not setupped");
+	auto raceWeight = racesWeights.find(race);
+	if (raceWeight == racesWeights.end())
+		return 0;
+	return raceWeight->second;
+}
+
+void
+guild_of_heroes::Settlement::setRaceWeight(const std::string& race, int weight)
+{
+	racesWeights[race] = weight;
 }
 
 guild_of_heroes::Settlement*
