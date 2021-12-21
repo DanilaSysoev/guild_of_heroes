@@ -74,3 +74,11 @@ TEST(SettlementTests, getMaxSizeInPast_setSizeOneTime_returnNewValue) {
 	EXPECT_EQ(settlement->getMaxSizeInPast(), 5);
 	delete settlement;
 }
+TEST(SettlementTests, getMaxSizeInPast_setSizeFirstGreater_returnGreater) {
+	Settlement* settlement = Settlement::create("my settlement");
+	settlement->setSize(5);
+	settlement->setSize(3);
+	settlement->setSize(4);
+	EXPECT_EQ(settlement->getMaxSizeInPast(), 5);
+	delete settlement;
+}
