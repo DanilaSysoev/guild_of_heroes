@@ -6,6 +6,11 @@ guild_of_heroes::Settlement::getSize() const {
 	return size;
 }
 
+int
+guild_of_heroes::Settlement::getMaxSizeInPast() const {
+	return 1;
+}
+
 void
 guild_of_heroes::Settlement::setSize(int size) {
 	if (size < 0)

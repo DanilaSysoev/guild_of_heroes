@@ -5,6 +5,7 @@ namespace guild_of_heroes {
 	class Settlement : public Nameable {
 	public:
 		int getSize() const;
+		int getMaxSizeInPast() const;
 		void setSize(int size);
 		bool isAbandoned() const;
 
