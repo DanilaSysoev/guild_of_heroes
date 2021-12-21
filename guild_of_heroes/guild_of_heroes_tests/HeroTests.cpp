@@ -89,3 +89,9 @@ TEST(HeroTests, getDailyFee_createNewHero_dailyFeeEqualsZero) {
 	EXPECT_EQ(hero->getDailyFee(), 0);
 	delete hero;
 }
+TEST(HeroTests, setDailyFee_setPositiveFee_dailyFeeEqualsSettedValue) {
+	Hero* hero = Hero::create("my hero");
+	hero->setDailyFee(10);
+	EXPECT_EQ(hero->getDailyFee(), 10);
+	delete hero;
+}
