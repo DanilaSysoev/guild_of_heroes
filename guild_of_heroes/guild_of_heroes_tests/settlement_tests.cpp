@@ -149,3 +149,15 @@ TEST(SettlementTests, setRaceWeight_existTwoRacesSetZeroWeightOne_isOk) {
 	EXPECT_EQ(settlement->getRaceWeight("dwarf"), 2000);
 	delete settlement;
 }
+TEST(SettlementTests, setRaceWeight_existTwoRacesSetZeroBoth_throwsException) {
+	Settlement* settlement = Settlement::create("my settlement");
+	settlement->setRaceWeight("human", 1000);
+	settlement->setRaceWeight("dwarf", 2000);
+	settlement->setRaceWeight("human", 0);
+	EXPECT_THROW_WITH_MESSAGE(
+		settlement->setRaceWeight("dwarf", 0),
+		std::logic_error,
+		"impossible remove last race"
+	);
+	delete settlement;
+}
