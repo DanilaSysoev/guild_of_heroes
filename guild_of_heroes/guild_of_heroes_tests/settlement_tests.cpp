@@ -161,3 +161,13 @@ TEST(SettlementTests, setRaceWeight_existTwoRacesSetZeroBoth_throwsException) {
 	);
 	delete settlement;
 }
+TEST(SettlementTests, setRaceWeight_setOneRaceWeightToZero_throwsException) {
+	Settlement* settlement = Settlement::create("my settlement");
+	settlement->setRaceWeight("human", 0);
+	EXPECT_THROW_WITH_MESSAGE(
+		settlement->getRaceWeight("human"),
+		std::logic_error,
+		"settlement state error: races not setupped"
+	);
+	delete settlement;
+}
