@@ -12,6 +12,10 @@ namespace guild_of_heroes {
 		int getRaceWeight(const std::string& race) const;
 		void setRaceWeight(const std::string& race, int weight);
 
+		bool existOnlyOneRace();
+
+		bool raceExist(std::map<std::string, int>::iterator& raceWeight);
+
 		static Settlement* create(const std::string& name);
 
 	private:

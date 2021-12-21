@@ -45,13 +45,25 @@ guild_of_heroes::Settlement::setRaceWeight(const std::string& race, int weight)
 		throw std::invalid_argument("Race name can not be empty");
 
 	auto raceWeight = racesWeights.find(race);
-	if (weight == 0 && raceWeight != racesWeights.end()) {
-		if(racesWeights.size() == 1)
+	if (weight == 0 && raceExist(raceWeight)) {
+		if (existOnlyOneRace())
 			throw std::logic_error("Impossible remove last race");
 		racesWeights.erase(raceWeight);
 	}
 	else if(weight != 0)
 		racesWeights[race] = weight;
+}
+
+bool
+guild_of_heroes::Settlement::existOnlyOneRace() {
+	return racesWeights.size() == 1;
+}
+
+bool
+guild_of_heroes::Settlement::raceExist(
+	std::map<std::string, int>::iterator& raceWeight
+) {
+	return raceWeight != racesWeights.end();
 }
 
 guild_of_heroes::Settlement*
