@@ -112,3 +112,9 @@ TEST(SettlementTests, getRaceWeight_createNewSettlement_throwsException) {
 	);
 	delete settlement;
 }
+TEST(SettlementTests, setRaceWeight_setWeightforOneRace_getRaceWeightReturnOk) {
+	Settlement* settlement = Settlement::create("my settlement");
+	settlement->setRaceWeight("human", 1000);
+	EXPECT_EQ(settlement->getRaceWeight("human"), 1000);
+	delete settlement;
+}
