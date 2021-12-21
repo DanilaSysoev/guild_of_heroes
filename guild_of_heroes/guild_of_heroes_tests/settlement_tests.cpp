@@ -33,3 +33,8 @@ TEST(SettlementTests, setSize_setPositiveSize_getSizeReturnCorrectValue) {
 	EXPECT_EQ(settlement->getSize(), 5);
 	delete settlement;
 }
+TEST(SettlementTests, setSize_setNegativeSize_throwsException) {
+	Settlement* settlement = Settlement::create("my settlement");
+	EXPECT_THROW_WITH_MESSAGE(settlement->setSize(-5), std::invalid_argument, "settlement size can not be negative");	
+	delete settlement;
+}
