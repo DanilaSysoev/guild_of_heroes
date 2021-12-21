@@ -11,15 +11,13 @@ namespace guild_of_heroes {
 		bool isAbandoned() const;
 		int getRaceWeight(const std::string& race) const;
 		void setRaceWeight(const std::string& race, int weight);
-
 		bool existOnlyOneRace();
-
-		bool raceExist(std::map<std::string, int>::iterator& raceWeight);
 
 		static Settlement* create(const std::string& name);
 
 	private:
 		Settlement(const std::string& name);
+		bool raceExist(std::map<std::string, int>::iterator& raceWeight);
 
 		int size;
 		int maxSizeInPast;
