@@ -8,6 +8,10 @@ guild_of_heroes::Settlement::getSize() const {
 
 void
 guild_of_heroes::Settlement::setSize(int size) {
+	if (size < 0)
+		throw std::invalid_argument("Settlement size can not be negative");
+	if(size == 0)
+		throw std::invalid_argument("Settlement size can not be zero");
 	this->size = size;
 }
 
