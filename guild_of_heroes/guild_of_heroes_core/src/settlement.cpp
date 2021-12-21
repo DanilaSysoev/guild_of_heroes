@@ -25,6 +25,12 @@ guild_of_heroes::Settlement::isAbandoned() const {
 	return size == 0;
 }
 
+int
+guild_of_heroes::Settlement::getRaceWeight(const std::string& race)
+{
+	throw std::logic_error("Settlement state error: races not setupped");
+}
+
 guild_of_heroes::Settlement*
 guild_of_heroes::Settlement::create(const std::string& name) {
 	if (name.empty())

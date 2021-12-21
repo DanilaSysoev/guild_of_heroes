@@ -8,6 +8,7 @@ namespace guild_of_heroes {
 		int getMaxSizeInPast() const;
 		void setSize(int size);
 		bool isAbandoned() const;
+		int getRaceWeight(const std::string& race);
 
 		static Settlement* create(const std::string& name);
 
