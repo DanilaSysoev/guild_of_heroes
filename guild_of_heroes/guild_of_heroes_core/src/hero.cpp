@@ -23,6 +23,12 @@ guild_of_heroes::Hero::getSkillsCount() const {
 	return skills.size();
 }
 
+int
+guild_of_heroes::Hero::getDailyFee() const
+{
+	return 0;
+}
+
 void 
 guild_of_heroes::Hero::addSkill(const std::string& skillName, int skillValue)
 {
