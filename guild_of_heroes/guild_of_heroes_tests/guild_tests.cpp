@@ -38,4 +38,17 @@ TEST(GuildTests, addHero_addFirstHero_heroesCountOne) {
 	guild->addHero(hero);
 	EXPECT_EQ(guild->getHeroesCount(), 1);
 	delete guild;
+	delete hero;
+}
+TEST(GuildTests, addHero_addSecondHero_heroesCountIncrement) {
+	Guild* guild = Guild::create("my guild");
+	Hero* hero1 = Hero::create("my hero 1");
+	Hero* hero2 = Hero::create("my hero 2");
+	guild->addHero(hero1);
+	EXPECT_EQ(guild->getHeroesCount(), 1);
+	guild->addHero(hero2);
+	EXPECT_EQ(guild->getHeroesCount(), 2);
+	delete guild;
+	delete hero1;
+	delete hero2;
 }
