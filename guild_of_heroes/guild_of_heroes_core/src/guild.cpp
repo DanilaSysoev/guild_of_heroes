@@ -4,7 +4,13 @@
 Int
 guild_of_heroes::Guild::getHeroesCount() const
 {
-	return 0;
+	return heroes.size();
+}
+
+std::vector<guild_of_heroes::Hero*>
+guild_of_heroes::Guild::getHeroes() const
+{
+	return heroes;
 }
 
 guild_of_heroes::Guild*
