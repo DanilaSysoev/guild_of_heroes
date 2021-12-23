@@ -12,12 +12,12 @@ guild_of_heroes::Settlement::getMaxSizeInPast() const {
 }
 
 void
-guild_of_heroes::Settlement::setSize(Int size) {
-	if (size < 0)
+guild_of_heroes::Settlement::setSize(Int newSize) {
+	if (newSize < 0)
 		throw std::invalid_argument("Settlement size can not be negative");
-	this->size = size;
-	if (size > maxSizeInPast)
-		maxSizeInPast = size;
+	this->size = newSize;
+	if (newSize > maxSizeInPast)
+		maxSizeInPast = newSize;
 }
 
 bool

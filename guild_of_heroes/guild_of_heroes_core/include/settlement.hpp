@@ -7,7 +7,7 @@ namespace guild_of_heroes {
 	public:
 		Int getSize() const;
 		Int getMaxSizeInPast() const;
-		void setSize(Int size);
+		void setSize(Int newSize);
 		bool isAbandoned() const;
 		Int getRaceWeight(const std::string& race) const;
 		void setRaceWeight(const std::string& race, Int weight);

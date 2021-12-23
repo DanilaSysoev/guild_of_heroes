@@ -1,4 +1,4 @@
-#include "..\include\nameable.hpp"
+#include "nameable.hpp"
 
 std::string
 guild_of_heroes::Nameable::getName() const {

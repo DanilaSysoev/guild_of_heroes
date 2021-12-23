@@ -32,3 +32,10 @@ TEST(GuildTests, getName_creationWithSomeName_returnCorrectName) {
 	delete guild;
 }
 
+TEST(GuildTests, addHero_addFirstHero_heroesCountOne) {
+	Guild* guild = Guild::create("my guild");
+	Hero* hero = Hero::create("my hero");
+	guild->addHero(hero);
+	EXPECT_EQ(guild->getHeroesCount(), 1);
+	delete guild;
+}

@@ -47,5 +47,5 @@ guild_of_heroes::Hero::create(const std::string& name) {
 }
 
 guild_of_heroes::Hero::Hero(const std::string& name)
-	: Nameable (name) 
+	: Nameable(name), dailyFee(0)
 { }
