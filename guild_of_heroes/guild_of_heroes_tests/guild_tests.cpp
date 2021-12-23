@@ -79,7 +79,7 @@ TEST(GuildTests, addHero_addNullHero_throwsException) {
 	delete guild;
 }
 
-TEST(GuildTests, removeHero_removeExistHeroHero_heroesCountDecrement) {
+TEST(GuildTests, removeHero_removeExistHero_heroesCountDecrement) {
 	Guild* guild = Guild::create("my guild");
 	Hero* hero1 = Hero::create("my hero 1");
 	Hero* hero2 = Hero::create("my hero 2");
@@ -88,6 +88,20 @@ TEST(GuildTests, removeHero_removeExistHeroHero_heroesCountDecrement) {
 	EXPECT_EQ(guild->getHeroesCount(), 2);
 	guild->removeHero(hero1);
 	EXPECT_EQ(guild->getHeroesCount(), 1);
+	delete guild;
+	delete hero1;
+	delete hero2;
+}
+TEST(GuildTests, removeHero_removeNonExistentHero_throwsException) {
+	Guild* guild = Guild::create("my guild");
+	Hero* hero1 = Hero::create("my hero 1");
+	Hero* hero2 = Hero::create("my hero 2");
+	guild->addHero(hero1);
+	EXPECT_THROW_WITH_MESSAGE(
+		guild->removeHero(hero2),
+		std::logic_error,
+		"attempt to delete non-existent hero"
+	);
 	delete guild;
 	delete hero1;
 	delete hero2;

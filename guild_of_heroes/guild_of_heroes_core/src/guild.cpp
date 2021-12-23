@@ -26,7 +26,7 @@ guild_of_heroes::Guild::removeHero(Hero* hero)
 {
 	auto item = std::find(heroes.begin(), heroes.end(), hero);
 	if (item == heroes.end())
-		throw std::logic_error("attempt to delete non-existent hero");
+		throw std::logic_error("Attempt to delete non-existent hero");
 	heroes.erase(item);
 }
 
