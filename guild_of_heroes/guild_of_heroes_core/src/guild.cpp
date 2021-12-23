@@ -21,6 +21,15 @@ guild_of_heroes::Guild::addHero(Hero* hero)
 	heroes.push_back(hero);
 }
 
+void
+guild_of_heroes::Guild::removeHero(Hero* hero)
+{
+	auto item = std::find(heroes.begin(), heroes.end(), hero);
+	if (item == heroes.end())
+		throw std::logic_error("attempt to delete non-existent hero");
+	heroes.erase(item);
+}
+
 guild_of_heroes::Guild*
 guild_of_heroes::Guild::create(const std::string& name) {
 	if (name.empty())

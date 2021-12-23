@@ -1,5 +1,7 @@
 #pragma once
 #include <vector>
+#include <set>
+#include <algorithm>
 #include "nameable.hpp"
 
 
@@ -11,6 +13,7 @@ namespace guild_of_heroes {
 		Int getHeroesCount() const;
 		std::vector<Hero*> getHeroes() const;
 		void addHero(Hero* hero);
+		void removeHero(Hero* hero);
 
 		static Guild* create(const std::string& name);
 
