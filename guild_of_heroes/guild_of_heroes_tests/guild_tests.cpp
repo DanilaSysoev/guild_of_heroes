@@ -52,3 +52,12 @@ TEST(GuildTests, addHero_addSecondHero_heroesCountIncrement) {
 	delete hero1;
 	delete hero2;
 }
+TEST(GuildTests, addHero_addNullHero_throwsException) {
+	Guild* guild = Guild::create("my guild");	
+	EXPECT_THROW_WITH_MESSAGE(
+		guild->addHero(nullptr),
+		std::invalid_argument,
+		"hero can not be null"
+	);
+	delete guild;
+}
