@@ -19,6 +19,10 @@ guild_of_heroes::Guild::addHero(Hero* hero)
 {
 	if (hero == nullptr)
 		throw std::invalid_argument("Hero can not be null");
+	auto item = std::find(heroes.begin(), heroes.end(), hero);
+	if(item != heroes.end())
+		throw std::invalid_argument("Hero already added");
+
 	heroes.push_back(hero);
 }
 
