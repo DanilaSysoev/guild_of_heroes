@@ -4,6 +4,8 @@
 namespace guild_of_heroes {
 	class Guild : public Nameable {
 	public:
+		Int getHeroesCount() const;
+
 		static Guild* create(const std::string& name);
 
 
