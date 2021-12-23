@@ -52,6 +52,27 @@ TEST(GuildTests, addHero_addSecondHero_heroesCountIncrement) {
 	delete hero1;
 	delete hero2;
 }
+TEST(GuildTests, addHero_addNullHero_throwsException) {
+	Guild* guild = Guild::create("my guild");
+	EXPECT_THROW_WITH_MESSAGE(
+		guild->addHero(nullptr),
+		std::invalid_argument,
+		"hero can not be null"
+	);
+	delete guild;
+}
+TEST(GuildTests, addHero_addExistHero_throwsException) {
+	Guild* guild = Guild::create("my guild");
+	Hero* hero1 = Hero::create("my hero 1");
+	guild->addHero(hero1);
+	EXPECT_THROW_WITH_MESSAGE(
+		guild->addHero(hero1),
+		std::invalid_argument,
+		"hero already added"
+	);
+	delete guild;
+}
+
 TEST(GuildTests, getHeroes_addTwoHeroes_resultContainsBoth) {
 	Guild* guild = Guild::create("my guild");
 	Hero* hero1 = Hero::create("my hero 1");
@@ -67,16 +88,6 @@ TEST(GuildTests, getHeroes_addTwoHeroes_resultContainsBoth) {
 	delete guild;
 	delete hero1;
 	delete hero2;
-}
-
-TEST(GuildTests, addHero_addNullHero_throwsException) {
-	Guild* guild = Guild::create("my guild");	
-	EXPECT_THROW_WITH_MESSAGE(
-		guild->addHero(nullptr),
-		std::invalid_argument,
-		"hero can not be null"
-	);
-	delete guild;
 }
 
 TEST(GuildTests, removeHero_removeExistHero_heroesCountDecrement) {
