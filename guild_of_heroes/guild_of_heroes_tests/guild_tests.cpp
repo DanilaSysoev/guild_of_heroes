@@ -20,6 +20,11 @@ TEST(GuildTests, create_creationWithSomeName_heroesCountZero) {
 	EXPECT_EQ(guild->getHeroesCount(), 0);
 	delete guild;
 }
+TEST(GuildTests, create_creationWithSomeName_heroesListIsEmpty) {
+	Guild* guild = Guild::create("my guild");
+	EXPECT_EQ(guild->getHeroes(), std::vector<Hero*>());
+	delete guild;
+}
 
 TEST(GuildTests, getName_creationWithSomeName_returnCorrectName) {
 	Guild* guild = Guild::create("my guild");
