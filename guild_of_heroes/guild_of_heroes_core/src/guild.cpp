@@ -29,5 +29,5 @@ guild_of_heroes::Guild::create(const std::string& name) {
 }
 
 guild_of_heroes::Guild::Guild(const std::string& name)
-	: Nameable(name) 
+	: Nameable(name), heroes()
 { }

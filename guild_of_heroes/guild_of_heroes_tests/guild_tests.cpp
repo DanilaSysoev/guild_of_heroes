@@ -61,3 +61,17 @@ TEST(GuildTests, addHero_addNullHero_throwsException) {
 	);
 	delete guild;
 }
+
+TEST(GuildTests, removeHero_removeExistHeroHero_heroesCountDecrement) {
+	Guild* guild = Guild::create("my guild");
+	Hero* hero1 = Hero::create("my hero 1");
+	Hero* hero2 = Hero::create("my hero 2");
+	guild->addHero(hero1);
+	guild->addHero(hero2);
+	EXPECT_EQ(guild->getHeroesCount(), 2);
+	guild->removeHero(hero1);
+	EXPECT_EQ(guild->getHeroesCount(), 1);
+	delete guild;
+	delete hero1;
+	delete hero2;
+}
