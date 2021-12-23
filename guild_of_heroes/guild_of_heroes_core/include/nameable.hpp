@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include "types.hpp"
 
 namespace guild_of_heroes {
 	class Nameable {

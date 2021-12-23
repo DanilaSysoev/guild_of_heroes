@@ -5,13 +5,13 @@
 namespace guild_of_heroes {
 	class Hero : public Nameable {
 	public:
-		int getSkill(const std::string skillName) const;
-		std::map<std::string, int> getSkills() const;
-		int getSkillsCount() const;
-		int getDailyFee() const;
-		void setDailyFee(int fee);
+		Int getSkill(const std::string skillName) const;
+		std::map<std::string, Int> getSkills() const;
+		Int getSkillsCount() const;
+		Int getDailyFee() const;
+		void setDailyFee(Int fee);
 
-		void addSkill(const std::string& skillName, int skillValue);
+		void addSkill(const std::string& skillName, Int skillValue);
 
 		static Hero* create(const std::string& name);
 
@@ -19,7 +19,7 @@ namespace guild_of_heroes {
 	private:
 		Hero(const std::string& name);
 
-		std::map<std::string, int> skills;
-		int dailyFee;
+		std::map<std::string, Int> skills;
+		Int dailyFee;
 	};
 }

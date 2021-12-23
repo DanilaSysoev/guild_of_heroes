@@ -5,22 +5,22 @@
 namespace guild_of_heroes {
 	class Settlement : public Nameable {
 	public:
-		int getSize() const;
-		int getMaxSizeInPast() const;
-		void setSize(int size);
+		Int getSize() const;
+		Int getMaxSizeInPast() const;
+		void setSize(Int size);
 		bool isAbandoned() const;
-		int getRaceWeight(const std::string& race) const;
-		void setRaceWeight(const std::string& race, int weight);
+		Int getRaceWeight(const std::string& race) const;
+		void setRaceWeight(const std::string& race, Int weight);
 		bool existOnlyOneRace();
 
 		static Settlement* create(const std::string& name);
 
 	private:
 		Settlement(const std::string& name);
-		bool raceExist(std::map<std::string, int>::iterator& raceWeight);
+		bool raceExist(std::map<std::string, Int>::iterator& raceWeight);
 
-		int size;
-		int maxSizeInPast;
-		std::map<std::string, int> racesWeights;
+		Int size;
+		Int maxSizeInPast;
+		std::map<std::string, Int> racesWeights;
 	};
 }

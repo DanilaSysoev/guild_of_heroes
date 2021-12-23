@@ -1,7 +1,7 @@
 #include <stdexcept>
 #include "hero.hpp"
 
-int
+Int
 guild_of_heroes::Hero::getSkill(const std::string skillName) const
 {
 	auto skillPair = skills.find(skillName);
@@ -9,29 +9,29 @@ guild_of_heroes::Hero::getSkill(const std::string skillName) const
 		return 0;
 	return skillPair->second;
 }
-std::map<std::string, int>
+std::map<std::string, Int>
 guild_of_heroes::Hero::getSkills() const {
 	return skills;
 }
-int
+Int
 guild_of_heroes::Hero::getSkillsCount() const {
 	return skills.size();
 }
 
-int
+Int
 guild_of_heroes::Hero::getDailyFee() const {
 	return dailyFee;
 }
 
 void
-guild_of_heroes::Hero::setDailyFee(int fee) {
+guild_of_heroes::Hero::setDailyFee(Int fee) {
 	if (fee < 0)
 		throw std::invalid_argument("fee can not be negative");
 	this->dailyFee = fee;
 }
 
 void 
-guild_of_heroes::Hero::addSkill(const std::string& skillName, int skillValue) {
+guild_of_heroes::Hero::addSkill(const std::string& skillName, Int skillValue) {
 	if(skillValue <= 0) 
 		throw std::invalid_argument("skillValue must be positive");
 	if(skillName.empty())

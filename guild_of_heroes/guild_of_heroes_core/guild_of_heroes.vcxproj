@@ -24,6 +24,7 @@
     <ClInclude Include="include\hero.hpp" />
     <ClInclude Include="include\nameable.hpp" />
     <ClInclude Include="include\settlement.hpp" />
+    <ClInclude Include="include\types.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\guild.cpp" />

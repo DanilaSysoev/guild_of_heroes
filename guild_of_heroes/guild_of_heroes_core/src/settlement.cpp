@@ -1,18 +1,18 @@
 #include <stdexcept>
 #include "settlement.hpp"
 
-int
+Int
 guild_of_heroes::Settlement::getSize() const {
 	return size;
 }
 
-int
+Int
 guild_of_heroes::Settlement::getMaxSizeInPast() const {
 	return maxSizeInPast;
 }
 
 void
-guild_of_heroes::Settlement::setSize(int size) {
+guild_of_heroes::Settlement::setSize(Int size) {
 	if (size < 0)
 		throw std::invalid_argument("Settlement size can not be negative");
 	this->size = size;
@@ -25,7 +25,7 @@ guild_of_heroes::Settlement::isAbandoned() const {
 	return size == 0;
 }
 
-int
+Int
 guild_of_heroes::Settlement::getRaceWeight(const std::string& race) const
 {
 	if(racesWeights.empty())
@@ -40,7 +40,7 @@ guild_of_heroes::Settlement::getRaceWeight(const std::string& race) const
 }
 
 void
-guild_of_heroes::Settlement::setRaceWeight(const std::string& race, int weight)
+guild_of_heroes::Settlement::setRaceWeight(const std::string& race, Int weight)
 {
 	if (weight < 0)
 		throw std::invalid_argument("Race weight can not be negative");
@@ -64,7 +64,7 @@ guild_of_heroes::Settlement::existOnlyOneRace() {
 
 bool
 guild_of_heroes::Settlement::raceExist(
-	std::map<std::string, int>::iterator& raceWeight
+	std::map<std::string, Int>::iterator& raceWeight
 ) {
 	return raceWeight != racesWeights.end();
 }
