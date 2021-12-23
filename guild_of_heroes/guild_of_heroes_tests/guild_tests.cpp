@@ -106,3 +106,20 @@ TEST(GuildTests, removeHero_removeNonExistentHero_throwsException) {
 	delete hero1;
 	delete hero2;
 }
+TEST(GuildTests, removeHero_removeExistHero_getHeroesReturnOk) {
+	Guild* guild = Guild::create("my guild");
+	Hero* hero1 = Hero::create("my hero 1");
+	Hero* hero2 = Hero::create("my hero 2");
+	guild->addHero(hero1);
+	guild->addHero(hero2);
+	guild->removeHero(hero1);
+
+	auto heroes = guild->getHeroes();
+	EXPECT_NE(std::find(heroes.begin(), heroes.end(), hero2), heroes.end());
+	EXPECT_EQ(std::find(heroes.begin(), heroes.end(), hero1), heroes.end());
+	EXPECT_EQ(heroes.size(), 1);
+
+	delete guild;
+	delete hero1;
+	delete hero2;
+}
