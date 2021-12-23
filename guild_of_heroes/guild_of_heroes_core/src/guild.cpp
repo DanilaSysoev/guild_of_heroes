@@ -16,6 +16,8 @@ guild_of_heroes::Guild::getHeroes() const
 void
 guild_of_heroes::Guild::addHero(Hero* hero)
 {
+	if (hero == nullptr)
+		throw std::invalid_argument("Hero can not be null");
 	heroes.push_back(hero);
 }
 
