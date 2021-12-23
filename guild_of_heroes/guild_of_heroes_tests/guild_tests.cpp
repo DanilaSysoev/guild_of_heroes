@@ -127,7 +127,7 @@ TEST(GuildTests, removeHero_removeExistHero_getHeroesReturnOk) {
 TEST(GuildTests, getHeroesDailyPayment_creatNewGuild_equalsZero) {
 	Guild* guild = Guild::create("my guild");
 
-	EXPECT_EQ(guild.getHeroesDailyPayment(), 0);
+	EXPECT_EQ(guild->getHeroesDailyPayment(), 0);
 
 	delete guild;
 }

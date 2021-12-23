@@ -14,6 +14,7 @@ namespace guild_of_heroes {
 		std::vector<Hero*> getHeroes() const;
 		void addHero(Hero* hero);
 		void removeHero(Hero* hero);
+		Int getHeroesDailyPayment() const;
 
 		static Guild* create(const std::string& name);
 

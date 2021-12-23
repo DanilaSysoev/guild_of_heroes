@@ -1,5 +1,6 @@
 #include <stdexcept>
 #include "guild.hpp"
+#include "hero.hpp"
 
 Int
 guild_of_heroes::Guild::getHeroesCount() const
@@ -28,6 +29,15 @@ guild_of_heroes::Guild::removeHero(Hero* hero)
 	if (item == heroes.end())
 		throw std::logic_error("Attempt to delete non-existent hero");
 	heroes.erase(item);
+}
+
+Int
+guild_of_heroes::Guild::getHeroesDailyPayment() const
+{
+	Int sum = 0;
+	for(auto hero: heroes)
+		sum += hero->getDailyFee();
+	return sum;
 }
 
 guild_of_heroes::Guild*
