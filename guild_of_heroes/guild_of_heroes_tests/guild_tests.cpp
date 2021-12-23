@@ -15,9 +15,15 @@ TEST(GuildTests, create_creationWithEmptyName_throwsException) {
 		"name can not be empty"
 	);
 }
+TEST(GuildTests, create_creationWithSomeName_heroesCountZero) {
+	Guild* guild = Guild::create("my guild");
+	EXPECT_EQ(guild->getHeroesCount(), 0);
+	delete guild;
+}
 
 TEST(GuildTests, getName_creationWithSomeName_returnCorrectName) {
 	Guild* guild = Guild::create("my guild");
 	EXPECT_EQ(guild->getName(), "my guild");
 	delete guild;
 }
+
