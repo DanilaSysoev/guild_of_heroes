@@ -52,6 +52,23 @@ TEST(GuildTests, addHero_addSecondHero_heroesCountIncrement) {
 	delete hero1;
 	delete hero2;
 }
+TEST(GuildTests, getHeroes_addTwoHeroes_resultContainsBoth) {
+	Guild* guild = Guild::create("my guild");
+	Hero* hero1 = Hero::create("my hero 1");
+	Hero* hero2 = Hero::create("my hero 2");
+	guild->addHero(hero1);
+	guild->addHero(hero2);
+
+	auto heroes = guild->getHeroes();
+	EXPECT_NE(std::find(heroes.begin(), heroes.end(), hero1), heroes.end());
+	EXPECT_NE(std::find(heroes.begin(), heroes.end(), hero2), heroes.end());
+	EXPECT_EQ(heroes.size(), 2);
+
+	delete guild;
+	delete hero1;
+	delete hero2;
+}
+
 TEST(GuildTests, addHero_addNullHero_throwsException) {
 	Guild* guild = Guild::create("my guild");	
 	EXPECT_THROW_WITH_MESSAGE(
