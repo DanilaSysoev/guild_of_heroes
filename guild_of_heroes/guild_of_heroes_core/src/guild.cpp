@@ -13,6 +13,12 @@ guild_of_heroes::Guild::getHeroes() const
 	return heroes;
 }
 
+void
+guild_of_heroes::Guild::addHero(Hero* hero)
+{
+	heroes.push_back(hero);
+}
+
 guild_of_heroes::Guild*
 guild_of_heroes::Guild::create(const std::string& name) {
 	if (name.empty())

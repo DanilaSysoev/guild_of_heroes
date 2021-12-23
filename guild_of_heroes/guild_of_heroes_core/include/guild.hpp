@@ -10,6 +10,7 @@ namespace guild_of_heroes {
 	public:
 		Int getHeroesCount() const;
 		std::vector<Hero*> getHeroes() const;
+		void addHero(Hero* hero);
 
 		static Guild* create(const std::string& name);
 
