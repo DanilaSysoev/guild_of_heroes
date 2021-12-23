@@ -131,3 +131,18 @@ TEST(GuildTests, getHeroesDailyPayment_creatNewGuild_equalsZero) {
 
 	delete guild;
 }
+TEST(GuildTests, getHeroesDailyPayment_twoHeroes_returnCorrect) {
+	Guild* guild = Guild::create("my guild");
+	Hero* hero1 = Hero::create("my hero 1");
+	Hero* hero2 = Hero::create("my hero 2");
+	hero1->setDailyFee(10);
+	hero2->setDailyFee(20);
+	guild->addHero(hero1);
+	guild->addHero(hero2);
+
+	EXPECT_EQ(guild->getHeroesDailyPayment(), 30);
+
+	delete guild;
+	delete hero1;
+	delete hero2;
+}
