@@ -32,6 +32,8 @@ namespace GuildOfHeroes.Core
 
         public static Guild Create(string name)
         {
+            if (name.Length == 0)
+                throw new ArgumentException("name can not be empty");
             return new Guild(name);
         }
 
