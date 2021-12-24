@@ -7,8 +7,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "guild_of_heroes_core", "gui
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "guild_of_heroes_tests", "guild_of_heroes_tests\guild_of_heroes_tests.vcxproj", "{78715495-7AB5-46AA-8B33-FAFCB69D2243}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "guild_of_heroes_ui", "guild_of_heroes_ui\guild_of_heroes_ui.vcxproj", "{468EF973-02CE-4193-9176-143C31265517}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -33,14 +31,6 @@ Global
 		{78715495-7AB5-46AA-8B33-FAFCB69D2243}.Release|x64.Build.0 = Release|x64
 		{78715495-7AB5-46AA-8B33-FAFCB69D2243}.Release|x86.ActiveCfg = Release|Win32
 		{78715495-7AB5-46AA-8B33-FAFCB69D2243}.Release|x86.Build.0 = Release|Win32
-		{468EF973-02CE-4193-9176-143C31265517}.Debug|x64.ActiveCfg = Debug|x64
-		{468EF973-02CE-4193-9176-143C31265517}.Debug|x64.Build.0 = Debug|x64
-		{468EF973-02CE-4193-9176-143C31265517}.Debug|x86.ActiveCfg = Debug|Win32
-		{468EF973-02CE-4193-9176-143C31265517}.Debug|x86.Build.0 = Debug|Win32
-		{468EF973-02CE-4193-9176-143C31265517}.Release|x64.ActiveCfg = Release|x64
-		{468EF973-02CE-4193-9176-143C31265517}.Release|x64.Build.0 = Release|x64
-		{468EF973-02CE-4193-9176-143C31265517}.Release|x86.ActiveCfg = Release|Win32
-		{468EF973-02CE-4193-9176-143C31265517}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
