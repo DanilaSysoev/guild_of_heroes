@@ -47,9 +47,9 @@ namespace GuildOfHeroes.Core
         public void AddSkill(string skillName, int skillValue)
         {
             if (skillValue <= 0)
-                throw new ArgumentException("SkillValue must be positive");
+                throw new ArgumentException("Skill Value must be positive");
             if (skillName.Length == 0)
-                throw new ArgumentException("SkillName can not be empty");
+                throw new ArgumentException("Skill Name can not be empty");
             if (NotOwnSkill(skillName))
                 skills.Add(skillName, skillValue);
             else
@@ -67,6 +67,8 @@ namespace GuildOfHeroes.Core
 
         public static Hero Create(string name)
         {
+            if (name.Length == 0)
+                throw new ArgumentException("name can not be empty");
             return new Hero(name);
         }
 
