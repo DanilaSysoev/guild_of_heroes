@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using GuildOfHeroes.Core;
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,217 +9,261 @@ namespace GuildOfHeroes.Tests
     class SettlementTests
 	{
 		[Test]
-		public void create_creationWithSomeName_creationOk)
+		public void create_creationWithSomeName_creationOk()
 		{
-			Settlement* settlement = Settlement::create("my settlement");
-			EXPECT_NE(settlement, nullptr);
-			delete settlement;
+			Settlement settlement = Settlement.Create("my settlement");
+			Assert.IsNotNull(settlement);
 		}
-		TEST(SettlementTests, create_creationWithEmptyName_throwsException)
+
+		[Test]
+		public void create_creationWithEmptyName_throwsException()
 		{
-			EXPECT_THROW_WITH_MESSAGE(
-				Settlement::create(""),
-				std::invalid_argument,
-				"name can not be empty"
+			var exc = Assert.Throws<ArgumentException>(
+				() => Settlement.Create("")
+			);
+			Assert.IsTrue(
+				exc.Message.ToLower().Contains("name can not be empty")
 			);
 		}
 
-		TEST(SettlementTests, getName_creationWithSomeName_returnCorrectName)
+		
+		[Test]
+		public void getName_creationWithSomeName_returnCorrectName()
 		{
-			Settlement* settlement = Settlement::create("my settlement");
-			EXPECT_EQ(settlement->getName(), "my settlement");
-			delete settlement;
+			Settlement settlement = Settlement.Create("my settlement");
+			Assert.AreEqual("my settlement", settlement.Name);
 		}
 
-		TEST(SettlementTests, getSize_createNewSettlement_returnOne)
+		
+		[Test]
+		public void getSize_createNewSettlement_returnOne()
 		{
-			Settlement* settlement = Settlement::create("my settlement");
-			EXPECT_EQ(settlement->getSize(), 1);
-			delete settlement;
+			Settlement settlement = Settlement.Create("my settlement");
+			Assert.AreEqual(1, settlement.Size);
 		}
-		TEST(SettlementTests, setSize_setPositiveSize_getSizeReturnCorrectValue)
+		
+		[Test]
+		public void setSize_setPositiveSize_getSizeReturnCorrectValue()
 		{
-			Settlement* settlement = Settlement::create("my settlement");
-			settlement->setSize(5);
-			EXPECT_EQ(settlement->getSize(), 5);
-			delete settlement;
+			Settlement settlement = Settlement.Create("my settlement");
+			settlement.Size = 5;
+			Assert.AreEqual(5, settlement.Size);
 		}
-		TEST(SettlementTests, setSize_setNegativeSize_throwsException)
+		
+		[Test]
+		public void setSize_setNegativeSize_throwsException()
 		{
-			Settlement* settlement = Settlement::create("my settlement");
-			EXPECT_THROW_WITH_MESSAGE(
-				settlement->setSize(-5),
-				std::invalid_argument,
-				"settlement size can not be negative"
+			Settlement settlement = Settlement.Create("my settlement");
+			var exc = Assert.Throws<ArgumentException>(
+				() => settlement.Size = -5
 			);
-			delete settlement;
+			Assert.IsTrue(
+				exc.Message.ToLower().Contains("settlement size can not be negative")
+			);
 		}
-		TEST(SettlementTests, setSize_setZeroSize_getSizeReturnCorrectValue)
+		
+		[Test]
+		public void setSize_setZeroSize_getSizeReturnCorrectValue()
 		{
-			Settlement* settlement = Settlement::create("my settlement");
-			settlement->setSize(0);
-			EXPECT_EQ(settlement->getSize(), 0);
-			delete settlement;
+			Settlement settlement = Settlement.Create("my settlement");
+			settlement.Size = 0;
+			Assert.AreEqual(0, settlement.Size);
 		}
 
-		TEST(SettlementTests, isAbandoned_createNewSettlement_isNotAbandoned)
+		
+		[Test]
+		public void isAbandoned_createNewSettlement_isNotAbandoned()
 		{
-			Settlement* settlement = Settlement::create("my settlement");
-			EXPECT_FALSE(settlement->isAbandoned());
-			delete settlement;
+			Settlement settlement = Settlement.Create("my settlement");
+			Assert.IsFalse(settlement.IsAbandoned);
 		}
-		TEST(SettlementTests, isAbandoned_setSizeToZero_isAbandoned)
+		
+		[Test]
+		public void isAbandoned_setSizeToZero_isAbandoned()
 		{
-			Settlement* settlement = Settlement::create("my settlement");
-			settlement->setSize(0);
-			EXPECT_TRUE(settlement->isAbandoned());
-			delete settlement;
+			Settlement settlement = Settlement.Create("my settlement");
+			settlement.Size = 0;
+			Assert.IsTrue(settlement.IsAbandoned);
 		}
-		TEST(SettlementTests, isAbandoned_setPositiveSize_isNotAbandoned)
+		
+		[Test]
+		public void isAbandoned_setPositiveSize_isNotAbandoned()
 		{
-			Settlement* settlement = Settlement::create("my settlement");
-			settlement->setSize(5);
-			EXPECT_FALSE(settlement->isAbandoned());
-			delete settlement;
-		}
-
-		TEST(SettlementTests, getMaxSizeInPast_createNewSettlement_returnOne)
-		{
-			Settlement* settlement = Settlement::create("my settlement");
-			EXPECT_EQ(settlement->getMaxSizeInPast(), 1);
-			delete settlement;
-		}
-		TEST(SettlementTests, getMaxSizeInPast_setSizeOneTime_returnNewValue)
-		{
-			Settlement* settlement = Settlement::create("my settlement");
-			settlement->setSize(5);
-			EXPECT_EQ(settlement->getMaxSizeInPast(), 5);
-			delete settlement;
-		}
-		TEST(SettlementTests, getMaxSizeInPast_setSizeFirstGreater_returnGreater)
-		{
-			Settlement* settlement = Settlement::create("my settlement");
-			settlement->setSize(5);
-			settlement->setSize(3);
-			settlement->setSize(4);
-			EXPECT_EQ(settlement->getMaxSizeInPast(), 5);
-			delete settlement;
-		}
-		TEST(SettlementTests, getMaxSizeInPast_setSizeSecondGreater_returnGreater)
-		{
-			Settlement* settlement = Settlement::create("my settlement");
-			settlement->setSize(3);
-			settlement->setSize(5);
-			settlement->setSize(4);
-			EXPECT_EQ(settlement->getMaxSizeInPast(), 5);
-			delete settlement;
-		}
-		TEST(SettlementTests, getMaxSizeInPast_setSizeThirdGreater_returnGreater)
-		{
-			Settlement* settlement = Settlement::create("my settlement");
-			settlement->setSize(3);
-			settlement->setSize(4);
-			settlement->setSize(5);
-			EXPECT_EQ(settlement->getMaxSizeInPast(), 5);
-			delete settlement;
+			Settlement settlement = Settlement.Create("my settlement");
+			settlement.Size = 5;
+			Assert.IsFalse(settlement.IsAbandoned);
 		}
 
-		TEST(SettlementTests, getRaceWeight_createNewSettlement_throwsException)
+		
+		[Test]
+		public void getMaxSizeInPast_createNewSettlement_returnOne()
 		{
-			Settlement* settlement = Settlement::create("my settlement");
-			EXPECT_THROW_WITH_MESSAGE(
-				settlement->getRaceWeight("human"),
-				std::logic_error,
-				"settlement state error: races not setupped"
+			Settlement settlement = Settlement.Create("my settlement");
+			Assert.AreEqual(1, settlement.MaxSizeInPast);
+		}
+		
+		[Test]
+		public void getMaxSizeInPast_setSizeOneTime_returnNewValue()
+		{
+			Settlement settlement = Settlement.Create("my settlement");
+			settlement.Size = 5;
+			Assert.AreEqual(5, settlement.MaxSizeInPast);
+		}
+		
+		[Test]
+		public void getMaxSizeInPast_setSizeFirstGreater_returnGreater()
+		{
+			Settlement settlement = Settlement.Create("my settlement");
+			settlement.Size = 5;
+			settlement.Size = 3;
+			settlement.Size = 4;
+			Assert.AreEqual(5, settlement.MaxSizeInPast);
+		}
+		
+		[Test]
+		public void getMaxSizeInPast_setSizeSecondGreater_returnGreater()
+		{
+			Settlement settlement = Settlement.Create("my settlement");
+			settlement.Size = 3;
+			settlement.Size = 5;
+			settlement.Size = 4;
+			Assert.AreEqual(5, settlement.MaxSizeInPast);
+		}
+		
+		[Test]
+		public void getMaxSizeInPast_setSizeThirdGreater_returnGreater()
+		{
+			Settlement settlement = Settlement.Create("my settlement");
+			settlement.Size = 3;
+			settlement.Size = 4;
+			settlement.Size = 5;
+			Assert.AreEqual(5, settlement.MaxSizeInPast);
+		}
+
+		
+		[Test]
+		public void getRaceWeight_createNewSettlement_throwsException()
+		{
+			Settlement settlement = Settlement.Create("my settlement");
+			var exc = Assert.Throws<InvalidOperationException>(
+				() => settlement.GetRaceWeight("human")
 			);
-			delete settlement;
-		}
-		TEST(SettlementTests, setRaceWeight_setWeightForOneRace_getRaceWeightReturnOk)
-		{
-			Settlement* settlement = Settlement::create("my settlement");
-			settlement->setRaceWeight("human", 1000);
-			EXPECT_EQ(settlement->getRaceWeight("human"), 1000);
-			delete settlement;
-		}
-		TEST(SettlementTests, getRaceWeight_getWeightUnexistingRace_returnZero)
-		{
-			Settlement* settlement = Settlement::create("my settlement");
-			settlement->setRaceWeight("human", 1000);
-			EXPECT_EQ(settlement->getRaceWeight("orc"), 0);
-			delete settlement;
-		}
-		TEST(SettlementTests, getRaceWeight_setWeightExistingRace_returnNewValue)
-		{
-			Settlement* settlement = Settlement::create("my settlement");
-			settlement->setRaceWeight("human", 1000);
-			settlement->setRaceWeight("human", 500);
-			EXPECT_EQ(settlement->getRaceWeight("human"), 500);
-			delete settlement;
-		}
-		TEST(SettlementTests, setRaceWeight_setNegativeWeight_throwsException)
-		{
-			Settlement* settlement = Settlement::create("my settlement");
-			EXPECT_THROW_WITH_MESSAGE(
-				settlement->setRaceWeight("human", -1000),
-				std::invalid_argument,
-				"race weight can not be negative"
+			Assert.IsTrue(
+				exc.Message.ToLower().Contains(
+					"settlement state error: races not setupped"
+				)
 			);
-			delete settlement;
 		}
-		TEST(SettlementTests, setRaceWeight_existTwoRacesSetZeroWeightOne_isOk)
+		
+		[Test]
+		public void setRaceWeight_setWeightForOneRace_getRaceWeightReturnOk()
 		{
-			Settlement* settlement = Settlement::create("my settlement");
-			settlement->setRaceWeight("human", 1000);
-			settlement->setRaceWeight("dwarf", 2000);
-			settlement->setRaceWeight("human", 0);
-			EXPECT_EQ(settlement->getRaceWeight("human"), 0);
-			EXPECT_EQ(settlement->getRaceWeight("dwarf"), 2000);
-			delete settlement;
+			Settlement settlement = Settlement.Create("my settlement");
+			settlement.SetRaceWeight("human", 1000);
+			Assert.AreEqual(1000, settlement.GetRaceWeight("human"));
 		}
-		TEST(SettlementTests, setRaceWeight_existTwoRacesSetZeroBoth_throwsException)
+		
+		[Test]
+		public void getRaceWeight_getWeightUnexistingRace_returnZero()
 		{
-			Settlement* settlement = Settlement::create("my settlement");
-			settlement->setRaceWeight("human", 1000);
-			settlement->setRaceWeight("dwarf", 2000);
-			settlement->setRaceWeight("human", 0);
-			EXPECT_THROW_WITH_MESSAGE(
-				settlement->setRaceWeight("dwarf", 0),
-				std::logic_error,
-				"impossible remove last race"
+			Settlement settlement = Settlement.Create("my settlement");
+			settlement.SetRaceWeight("human", 1000);
+			Assert.AreEqual(0, settlement.GetRaceWeight("orc"));
+		}
+		
+		[Test]
+		public void getRaceWeight_setWeightExistingRace_returnNewValue()
+		{
+			Settlement settlement = Settlement.Create("my settlement");
+			settlement.SetRaceWeight("human", 1000);
+			settlement.SetRaceWeight("human", 500);
+			Assert.AreEqual(500, settlement.GetRaceWeight("human"));
+		}
+		
+		[Test]
+		public void setRaceWeight_setNegativeWeight_throwsException()
+		{
+			Settlement settlement = Settlement.Create("my settlement");
+			var exc = Assert.Throws<ArgumentException>(
+				() => settlement.SetRaceWeight("human", -1000)
 			);
-			delete settlement;
-		}
-		TEST(SettlementTests, setRaceWeight_setOneRaceWeightToZero_throwsException)
-		{
-			Settlement* settlement = Settlement::create("my settlement");
-			settlement->setRaceWeight("human", 0);
-			EXPECT_THROW_WITH_MESSAGE(
-				settlement->getRaceWeight("human"),
-				std::logic_error,
-				"settlement state error: races not setupped"
+			Assert.IsTrue(
+				exc.Message.ToLower().Contains(
+					"race weight can not be negative"
+				)
 			);
-			delete settlement;
 		}
-		TEST(SettlementTests, setRaceWeight_raceNameIsEmpty_throwsException)
+		
+		[Test]
+		public void setRaceWeight_existTwoRacesSetZeroWeightOne_isOk()
 		{
-			Settlement* settlement = Settlement::create("my settlement");
-			EXPECT_THROW_WITH_MESSAGE(
-				settlement->setRaceWeight("", 1000),
-				std::invalid_argument,
-				"race name can not be empty"
-			);
-			delete settlement;
+			Settlement settlement = Settlement.Create("my settlement");
+			settlement.SetRaceWeight("human", 1000);
+			settlement.SetRaceWeight("dwarf", 2000);
+			settlement.SetRaceWeight("human", 0);
+			Assert.AreEqual(0, settlement.GetRaceWeight("human"));
+			Assert.AreEqual(2000, settlement.GetRaceWeight("dwarf"));
 		}
-		TEST(SettlementTests, getRaceWeight_raceNameIsEmpty_throwsException)
+		
+		[Test]
+		public void setRaceWeight_existTwoRacesSetZeroBoth_throwsException()
 		{
-			Settlement* settlement = Settlement::create("my settlement");
-			settlement->setRaceWeight("human", 1000);
-			EXPECT_THROW_WITH_MESSAGE(
-				settlement->getRaceWeight(""),
-				std::invalid_argument,
-				"race name can not be empty"
+			Settlement settlement = Settlement.Create("my settlement");
+			settlement.SetRaceWeight("human", 1000);
+			settlement.SetRaceWeight("dwarf", 2000);
+			settlement.SetRaceWeight("human", 0);
+			var exc = Assert.Throws<InvalidOperationException>(
+				() => settlement.SetRaceWeight("dwarf", 0)
 			);
-			delete settlement;
+			Assert.IsTrue(
+				exc.Message.ToLower().Contains(
+					"impossible remove last race"
+				)
+			);
+		}
+		
+		[Test]
+		public void setRaceWeight_setOneRaceWeightToZero_throwsException()
+		{
+			Settlement settlement = Settlement.Create("my settlement");
+			settlement.SetRaceWeight("human", 0);
+			var exc = Assert.Throws<InvalidOperationException>(
+				() => settlement.GetRaceWeight("human")
+			);
+			Assert.IsTrue(
+				exc.Message.ToLower().Contains(
+					"settlement state error: races not setupped"
+				)
+			);
+		}
+		
+		[Test]
+		public void setRaceWeight_raceNameIsEmpty_throwsException()
+		{
+			Settlement settlement = Settlement.Create("my settlement");
+			var exc = Assert.Throws<ArgumentException>(
+				() => settlement.SetRaceWeight("", 1000)
+			);
+			Assert.IsTrue(
+				exc.Message.ToLower().Contains(
+					"race name can not be empty"
+				)
+			);
+		}
+		
+		[Test]
+		public void getRaceWeight_raceNameIsEmpty_throwsException()
+		{
+			Settlement settlement = Settlement.Create("my settlement");
+			settlement.SetRaceWeight("human", 1000);
+			var exc = Assert.Throws<ArgumentException>(
+				() => settlement.GetRaceWeight("")
+			);
+			Assert.IsTrue(
+				exc.Message.ToLower().Contains(
+					"race name can not be empty"
+				)
+			);
 		}
 	}
 }

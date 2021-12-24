@@ -66,6 +66,8 @@ namespace GuildOfHeroes.Core
 
         public static Settlement Create(string name)
         {
+            if (name.Length == 0)
+                throw new ArgumentException("name can not be empty");
             return new Settlement(name);
         }
 
