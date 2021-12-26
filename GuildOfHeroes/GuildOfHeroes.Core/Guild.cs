@@ -35,6 +35,12 @@ namespace GuildOfHeroes.Core
                 resources.Add(name, 0);
             resources[name] += count;
         }
+        public int GetResource(string name)
+        {
+            if(resources.ContainsKey(name))
+                return resources[name];
+            return 0;
+        }
 
 
         public static Guild Create(string name)
