@@ -25,11 +25,11 @@ namespace GuildOfHeroes.Core
 
         public int    GetRaceWeight(string race)
         {
-            if (racesWeights.Count == 0)
+            if (RacesNotSetupped())
                 throw new InvalidOperationException("Settlement state error: races not setupped");
             if (race.Length == 0)
                 throw new ArgumentException("Race name can not be empty");
-                        
+
             if (RaceNotExist(race))
                 return 0;
             return racesWeights[race];
@@ -45,13 +45,16 @@ namespace GuildOfHeroes.Core
             {
                 if (MonoRacial)
                     throw new InvalidOperationException("Impossible remove last race");
+                racesTotalWeights -= racesWeights[race];
                 racesWeights.Remove(race);
             }
             else if (weight != 0)
             {
                 if (RaceNotExist(race))
                     racesWeights.Add(race, 0);
+                racesTotalWeights -= racesWeights[race];
                 racesWeights[race] = weight;
+                racesTotalWeights += racesWeights[race];
             }
         }
         public bool   RaceExist(string race)
@@ -64,7 +67,20 @@ namespace GuildOfHeroes.Core
         }
         public double GetRacePercent(string race)
         {
-            return 0;
+            int weight = 0;
+            if (RacesNotSetupped())
+                return 0;
+            if (RaceExist(race))
+                weight = racesWeights[race];
+            return 100.0 * weight / racesTotalWeights;
+        }
+        public bool   RacesNotSetupped()
+        {
+            return racesWeights.Count == 0;
+        }
+        public bool   RacesSetupped()
+        {
+            return racesWeights.Count > 0;
         }
 
         public static Settlement Create(string name)
@@ -82,10 +98,11 @@ namespace GuildOfHeroes.Core
             MaxSizeInPast = 1;
             size = 1;
             racesWeights = new Dictionary<string, int>();
+            racesTotalWeights = 0;
         }
 
         private int size;
         private Dictionary<string, int> racesWeights;
-
+        private int racesTotalWeights;
     }
 }
