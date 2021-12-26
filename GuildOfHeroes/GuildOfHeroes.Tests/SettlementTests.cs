@@ -363,7 +363,7 @@ namespace GuildOfHeroes.Tests
 		}
 
 		[Test]
-		public void GetRaceWeightns_newSettlement_throwsException()
+		public void GetRaceWeights_newSettlement_throwsException()
 		{
 			Settlement settlement = Settlement.Create("my settlement");
 			var exc = Assert.Throws<InvalidOperationException>(
@@ -374,6 +374,15 @@ namespace GuildOfHeroes.Tests
 					"settlement state error: races not setupped"
 				)
 			);
+		}
+		[Test]
+		public void GetRaceWeights_addOneRace_returnCorrectDict()
+		{
+			Settlement settlement = Settlement.Create("my settlement");
+			settlement.SetRaceWeight("human", 1000);
+			var percents = settlement.GetRaceWeights();
+			Assert.AreEqual(1, percents.Count);
+			Assert.AreEqual(1000, percents["human"]);
 		}
 	}
 }
