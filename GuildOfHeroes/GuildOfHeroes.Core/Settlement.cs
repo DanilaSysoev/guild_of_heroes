@@ -23,7 +23,7 @@ namespace GuildOfHeroes.Core
         public bool IsAbandoned => Size == 0;
         public bool MonoRacial => racesWeights.Count == 1;
 
-        public int  GetRaceWeight(string race)
+        public int    GetRaceWeight(string race)
         {
             if (racesWeights.Count == 0)
                 throw new InvalidOperationException("Settlement state error: races not setupped");
@@ -34,7 +34,7 @@ namespace GuildOfHeroes.Core
                 return 0;
             return racesWeights[race];
         }
-        public void SetRaceWeight(string race, int weight)
+        public void   SetRaceWeight(string race, int weight)
         {
             if (weight < 0)
                 throw new ArgumentException("Race weight can not be negative");
@@ -54,15 +54,18 @@ namespace GuildOfHeroes.Core
                 racesWeights[race] = weight;
             }
         }
-        public bool RaceExist(string race)
+        public bool   RaceExist(string race)
         {
             return racesWeights.ContainsKey(race);
         }
-        public bool RaceNotExist(string race)
+        public bool   RaceNotExist(string race)
         {
             return !racesWeights.ContainsKey(race);
         }
-
+        public double GetRacePercent(string race)
+        {
+            return 0;
+        }
 
         public static Settlement Create(string name)
         {
