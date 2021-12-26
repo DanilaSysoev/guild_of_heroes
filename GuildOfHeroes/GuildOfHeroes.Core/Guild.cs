@@ -30,11 +30,13 @@ namespace GuildOfHeroes.Core
         }
         public void AddResource(string name, int count)
         {
-
+            if (!resources.ContainsKey(name))
+                resources.Add(name, 0);
+            resources[name] += count;
         }
         public int GetResourcesTypesCount()
         {
-            return 0;
+            return resources.Count;
         }
 
 
@@ -51,8 +53,10 @@ namespace GuildOfHeroes.Core
             : base(name)
         {
             heroes = new List<Hero>();
+            resources = new Dictionary<string, int>();
         }
 
         private List<Hero> heroes;
+        private Dictionary<string, int> resources;
     }
 }
