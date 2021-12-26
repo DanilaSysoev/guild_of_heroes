@@ -120,7 +120,7 @@ namespace GuildOfHeroes.Core
         }
 
         private int size;
-        private Dictionary<string, int> racesWeights;
+        private readonly Dictionary<string, int> racesWeights;
         private int racesTotalWeights;
     }
 }

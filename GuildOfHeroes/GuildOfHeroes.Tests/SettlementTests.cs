@@ -9,14 +9,14 @@ namespace GuildOfHeroes.Tests
     class SettlementTests
 	{
 		[Test]
-		public void create_creationWithSomeName_creationOk()
+		public void Create_creationWithSomeName_creationOk()
 		{
 			Settlement settlement = Settlement.Create("my settlement");
 			Assert.IsNotNull(settlement);
 		}
 
 		[Test]
-		public void create_creationWithEmptyName_throwsException()
+		public void Create_creationWithEmptyName_throwsException()
 		{
 			var exc = Assert.Throws<ArgumentException>(
 				() => Settlement.Create("")
@@ -28,7 +28,7 @@ namespace GuildOfHeroes.Tests
 
 		
 		[Test]
-		public void getName_creationWithSomeName_returnCorrectName()
+		public void GetName_creationWithSomeName_returnCorrectName()
 		{
 			Settlement settlement = Settlement.Create("my settlement");
 			Assert.AreEqual("my settlement", settlement.Name);
@@ -36,14 +36,14 @@ namespace GuildOfHeroes.Tests
 
 		
 		[Test]
-		public void getSize_createNewSettlement_returnOne()
+		public void GetSize_createNewSettlement_returnOne()
 		{
 			Settlement settlement = Settlement.Create("my settlement");
 			Assert.AreEqual(1, settlement.Size);
 		}
 		
 		[Test]
-		public void setSize_setPositiveSize_getSizeReturnCorrectValue()
+		public void SetSize_setPositiveSize_getSizeReturnCorrectValue()
 		{
 			Settlement settlement = Settlement.Create("my settlement");
 			settlement.Size = 5;
@@ -51,7 +51,7 @@ namespace GuildOfHeroes.Tests
 		}
 		
 		[Test]
-		public void setSize_setNegativeSize_throwsException()
+		public void SetSize_setNegativeSize_throwsException()
 		{
 			Settlement settlement = Settlement.Create("my settlement");
 			var exc = Assert.Throws<ArgumentException>(
@@ -63,7 +63,7 @@ namespace GuildOfHeroes.Tests
 		}
 		
 		[Test]
-		public void setSize_setZeroSize_getSizeReturnCorrectValue()
+		public void SetSize_setZeroSize_getSizeReturnCorrectValue()
 		{
 			Settlement settlement = Settlement.Create("my settlement");
 			settlement.Size = 0;
@@ -72,14 +72,14 @@ namespace GuildOfHeroes.Tests
 
 		
 		[Test]
-		public void isAbandoned_createNewSettlement_isNotAbandoned()
+		public void IsAbandoned_createNewSettlement_isNotAbandoned()
 		{
 			Settlement settlement = Settlement.Create("my settlement");
 			Assert.IsFalse(settlement.IsAbandoned);
 		}
 		
 		[Test]
-		public void isAbandoned_setSizeToZero_isAbandoned()
+		public void IsAbandoned_setSizeToZero_isAbandoned()
 		{
 			Settlement settlement = Settlement.Create("my settlement");
 			settlement.Size = 0;
@@ -87,7 +87,7 @@ namespace GuildOfHeroes.Tests
 		}
 		
 		[Test]
-		public void isAbandoned_setPositiveSize_isNotAbandoned()
+		public void IsAbandoned_setPositiveSize_isNotAbandoned()
 		{
 			Settlement settlement = Settlement.Create("my settlement");
 			settlement.Size = 5;
@@ -96,14 +96,14 @@ namespace GuildOfHeroes.Tests
 
 		
 		[Test]
-		public void getMaxSizeInPast_createNewSettlement_returnOne()
+		public void GetMaxSizeInPast_createNewSettlement_returnOne()
 		{
 			Settlement settlement = Settlement.Create("my settlement");
 			Assert.AreEqual(1, settlement.MaxSizeInPast);
 		}
 		
 		[Test]
-		public void getMaxSizeInPast_setSizeOneTime_returnNewValue()
+		public void GetMaxSizeInPast_setSizeOneTime_returnNewValue()
 		{
 			Settlement settlement = Settlement.Create("my settlement");
 			settlement.Size = 5;
@@ -111,7 +111,7 @@ namespace GuildOfHeroes.Tests
 		}
 		
 		[Test]
-		public void getMaxSizeInPast_setSizeFirstGreater_returnGreater()
+		public void GetMaxSizeInPast_setSizeFirstGreater_returnGreater()
 		{
 			Settlement settlement = Settlement.Create("my settlement");
 			settlement.Size = 5;
@@ -121,7 +121,7 @@ namespace GuildOfHeroes.Tests
 		}
 		
 		[Test]
-		public void getMaxSizeInPast_setSizeSecondGreater_returnGreater()
+		public void GetMaxSizeInPast_setSizeSecondGreater_returnGreater()
 		{
 			Settlement settlement = Settlement.Create("my settlement");
 			settlement.Size = 3;
@@ -131,7 +131,7 @@ namespace GuildOfHeroes.Tests
 		}
 		
 		[Test]
-		public void getMaxSizeInPast_setSizeThirdGreater_returnGreater()
+		public void GetMaxSizeInPast_setSizeThirdGreater_returnGreater()
 		{
 			Settlement settlement = Settlement.Create("my settlement");
 			settlement.Size = 3;
@@ -142,7 +142,7 @@ namespace GuildOfHeroes.Tests
 
 		
 		[Test]
-		public void getRaceWeight_createNewSettlement_throwsException()
+		public void GetRaceWeight_createNewSettlement_throwsException()
 		{
 			Settlement settlement = Settlement.Create("my settlement");
 			var exc = Assert.Throws<InvalidOperationException>(
@@ -156,7 +156,7 @@ namespace GuildOfHeroes.Tests
 		}
 		
 		[Test]
-		public void setRaceWeight_setWeightForOneRace_getRaceWeightReturnOk()
+		public void SetRaceWeight_setWeightForOneRace_getRaceWeightReturnOk()
 		{
 			Settlement settlement = Settlement.Create("my settlement");
 			settlement.SetRaceWeight("human", 1000);
@@ -164,7 +164,7 @@ namespace GuildOfHeroes.Tests
 		}
 		
 		[Test]
-		public void getRaceWeight_getWeightUnexistingRace_returnZero()
+		public void GetRaceWeight_getWeightUnexistingRace_returnZero()
 		{
 			Settlement settlement = Settlement.Create("my settlement");
 			settlement.SetRaceWeight("human", 1000);
@@ -172,7 +172,7 @@ namespace GuildOfHeroes.Tests
 		}
 		
 		[Test]
-		public void getRaceWeight_setWeightExistingRace_returnNewValue()
+		public void GetRaceWeight_setWeightExistingRace_returnNewValue()
 		{
 			Settlement settlement = Settlement.Create("my settlement");
 			settlement.SetRaceWeight("human", 1000);
@@ -181,7 +181,7 @@ namespace GuildOfHeroes.Tests
 		}
 		
 		[Test]
-		public void setRaceWeight_setNegativeWeight_throwsException()
+		public void SetRaceWeight_setNegativeWeight_throwsException()
 		{
 			Settlement settlement = Settlement.Create("my settlement");
 			var exc = Assert.Throws<ArgumentException>(
@@ -195,7 +195,7 @@ namespace GuildOfHeroes.Tests
 		}
 		
 		[Test]
-		public void setRaceWeight_existTwoRacesSetZeroWeightOne_isOk()
+		public void SetRaceWeight_existTwoRacesSetZeroWeightOne_isOk()
 		{
 			Settlement settlement = Settlement.Create("my settlement");
 			settlement.SetRaceWeight("human", 1000);
@@ -206,7 +206,7 @@ namespace GuildOfHeroes.Tests
 		}
 		
 		[Test]
-		public void setRaceWeight_existTwoRacesSetZeroBoth_throwsException()
+		public void SetRaceWeight_existTwoRacesSetZeroBoth_throwsException()
 		{
 			Settlement settlement = Settlement.Create("my settlement");
 			settlement.SetRaceWeight("human", 1000);
@@ -223,7 +223,7 @@ namespace GuildOfHeroes.Tests
 		}
 		
 		[Test]
-		public void setRaceWeight_setOneRaceWeightToZero_throwsException()
+		public void SetRaceWeight_setOneRaceWeightToZero_throwsException()
 		{
 			Settlement settlement = Settlement.Create("my settlement");
 			settlement.SetRaceWeight("human", 0);
@@ -238,7 +238,7 @@ namespace GuildOfHeroes.Tests
 		}
 		
 		[Test]
-		public void setRaceWeight_raceNameIsEmpty_throwsException()
+		public void SetRaceWeight_raceNameIsEmpty_throwsException()
 		{
 			Settlement settlement = Settlement.Create("my settlement");
 			var exc = Assert.Throws<ArgumentException>(
@@ -252,7 +252,7 @@ namespace GuildOfHeroes.Tests
 		}
 		
 		[Test]
-		public void getRaceWeight_raceNameIsEmpty_throwsException()
+		public void GetRaceWeight_raceNameIsEmpty_throwsException()
 		{
 			Settlement settlement = Settlement.Create("my settlement");
 			settlement.SetRaceWeight("human", 1000);
@@ -268,20 +268,20 @@ namespace GuildOfHeroes.Tests
 
 
 		[Test]
-		public void getRacePercent_getPercentForNewSettlement_returnZero()
+		public void GetRacePercent_getPercentForNewSettlement_returnZero()
 		{
 			Settlement settlement = Settlement.Create("my settlement");
 			Assert.AreEqual(0, settlement.GetRacePercent("human"));
 		}
 		[Test]
-		public void getRacePercent_getPercentForExistingUniqueRace_return1000000()
+		public void GetRacePercent_getPercentForExistingUniqueRace_return1000000()
 		{
 			Settlement settlement = Settlement.Create("my settlement");
 			settlement.SetRaceWeight("human", 1000);
 			Assert.AreEqual(1000000, settlement.GetRacePercent("human"));
 		}
 		[Test]
-		public void getRacePercent_existTwoEqualRaces_return500000forBoth()
+		public void GetRacePercent_existTwoEqualRaces_return500000forBoth()
 		{
 			Settlement settlement = Settlement.Create("my settlement");
 			settlement.SetRaceWeight("human", 1000);
@@ -290,7 +290,7 @@ namespace GuildOfHeroes.Tests
 			Assert.AreEqual(500000, settlement.GetRacePercent("orc"));
 		}
 		[Test]
-		public void getRacePercent_addTwoRacesThenRemoveOne_return1000000forRest()
+		public void GetRacePercent_addTwoRacesThenRemoveOne_return1000000forRest()
 		{
 			Settlement settlement = Settlement.Create("my settlement");
 			settlement.SetRaceWeight("human", 1000);
@@ -300,7 +300,7 @@ namespace GuildOfHeroes.Tests
 			Assert.AreEqual(0, settlement.GetRacePercent("orc"));
 		}
 		[Test]
-		public void getRacePercent_raceNameIsEmpty_throwsException()
+		public void GetRacePercent_raceNameIsEmpty_throwsException()
 		{
 			Settlement settlement = Settlement.Create("my settlement");
 			settlement.SetRaceWeight("human", 1000);
@@ -314,7 +314,7 @@ namespace GuildOfHeroes.Tests
 			);
 		}
 		[Test]
-		public void getRacePercent_addTwoRaces100and200_return333333and666667()
+		public void GetRacePercent_addTwoRaces100and200_return333333and666667()
 		{
 			Settlement settlement = Settlement.Create("my settlement");
 			settlement.SetRaceWeight("human", 100);
@@ -324,14 +324,14 @@ namespace GuildOfHeroes.Tests
 		}
 
 		[Test]
-		public void getRacePercents_newSettlement_returnEmptyDict()
+		public void GetRacePercents_newSettlement_returnEmptyDict()
 		{
 			Settlement settlement = Settlement.Create("my settlement");
 			var percents = settlement.GetRacePercents();
 			Assert.AreEqual(0, percents.Count);
 		}
 		[Test]
-		public void getRacePercents_addOneRace_returnCorrectDict()
+		public void GetRacePercents_addOneRace_returnCorrectDict()
 		{
 			Settlement settlement = Settlement.Create("my settlement");
 			settlement.SetRaceWeight("human", 100);
@@ -340,7 +340,7 @@ namespace GuildOfHeroes.Tests
 			Assert.AreEqual(1000000, percents["human"]);
 		}
 		[Test]
-		public void getRacePercents_addTwoRace_returnCorrectDict()
+		public void GetRacePercents_addTwoRace_returnCorrectDict()
 		{
 			Settlement settlement = Settlement.Create("my settlement");
 			settlement.SetRaceWeight("human", 100);
