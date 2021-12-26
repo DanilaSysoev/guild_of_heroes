@@ -265,5 +265,13 @@ namespace GuildOfHeroes.Tests
 				)
 			);
 		}
+
+
+		[Test]
+		public void getRacePercent_getPercentForNewSettlement_returnZero()
+		{
+			Settlement settlement = Settlement.Create("my settlement");
+			Assert.AreEqual(0, settlement.GetRacePercent("human"));
+		}
 	}
 }
