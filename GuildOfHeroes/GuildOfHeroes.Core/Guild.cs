@@ -28,6 +28,10 @@ namespace GuildOfHeroes.Core
                     "Attempt to delete non-existent hero"
                 );
         }
+        public void AddResource(string name, int count)
+        {
+
+        }
         public int GetResourcesTypesCount()
         {
             return 0;
