@@ -313,5 +313,14 @@ namespace GuildOfHeroes.Tests
 				)
 			);
 		}
+		[Test]
+		public void getRacePercent_addTwoRaces100and200_return333333and666667()
+		{
+			Settlement settlement = Settlement.Create("my settlement");
+			settlement.SetRaceWeight("human", 100);
+			settlement.SetRaceWeight("orc", 200);
+			Assert.AreEqual(333333, settlement.GetRacePercent("human"));
+			Assert.AreEqual(666667, settlement.GetRacePercent("orc"));
+		}
 	}
 }
