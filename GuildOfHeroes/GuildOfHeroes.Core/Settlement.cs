@@ -86,6 +86,10 @@ namespace GuildOfHeroes.Core
         }
         public IReadOnlyDictionary<string, int> GetRaceWeights()
         {
+            if (RacesNotSetupped())
+                throw new InvalidOperationException(
+                    "Settlement state error: races not setupped"
+                );
             return racesWeights;
         }
 

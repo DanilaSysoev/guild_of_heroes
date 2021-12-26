@@ -366,7 +366,7 @@ namespace GuildOfHeroes.Tests
 		public void GetRaceWeightns_newSettlement_throwsException()
 		{
 			Settlement settlement = Settlement.Create("my settlement");
-			var exc = Assert.Throws<ArgumentException>(
+			var exc = Assert.Throws<InvalidOperationException>(
 				() => settlement.GetRaceWeights()
 			);
 			Assert.IsTrue(
