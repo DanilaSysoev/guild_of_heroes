@@ -42,20 +42,9 @@ namespace GuildOfHeroes.Core
                 throw new ArgumentException("Race name can not be empty");
 
             if (weight == 0 && RaceExist(race))
-            {
-                if (MonoRacial)
-                    throw new InvalidOperationException("Impossible remove last race");
-                racesTotalWeights -= racesWeights[race];
-                racesWeights.Remove(race);
-            }
+                RemoveRace(race);
             else if (weight != 0)
-            {
-                if (RaceNotExist(race))
-                    racesWeights.Add(race, 0);
-                racesTotalWeights -= racesWeights[race];
-                racesWeights[race] = weight;
-                racesTotalWeights += racesWeights[race];
-            }
+                SetOrUpdateRaceWeight(race, weight);
         }
         public bool   RaceExist(string race)
         {
@@ -67,11 +56,13 @@ namespace GuildOfHeroes.Core
         }
         public int    GetRacePercent(string race)
         {
-            int weight = 0;
+            if (race.Length == 0)
+                throw new ArgumentException("Race name can not be empty");
             if (RacesNotSetupped())
                 return 0;
-            if (RaceExist(race))
-                weight = racesWeights[race];
+
+            int weight = RaceExist(race) ? racesWeights[race] : 0;
+
             long res = 10000000L * weight / racesTotalWeights;
             if (res % 10 >= 5)
                 return (int)(res / 10) + 1;
@@ -102,6 +93,22 @@ namespace GuildOfHeroes.Core
             size = 1;
             racesWeights = new Dictionary<string, int>();
             racesTotalWeights = 0;
+        }
+
+        private void SetOrUpdateRaceWeight(string race, int weight)
+        {
+            if (RaceNotExist(race))
+                racesWeights.Add(race, 0);
+            racesTotalWeights -= racesWeights[race];
+            racesWeights[race] = weight;
+            racesTotalWeights += racesWeights[race];
+        }
+        private void RemoveRace(string race)
+        {
+            if (MonoRacial)
+                throw new InvalidOperationException("Impossible remove last race");
+            racesTotalWeights -= racesWeights[race];
+            racesWeights.Remove(race);
         }
 
         private int size;

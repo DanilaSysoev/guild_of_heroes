@@ -305,7 +305,7 @@ namespace GuildOfHeroes.Tests
 			Settlement settlement = Settlement.Create("my settlement");
 			settlement.SetRaceWeight("human", 1000);
 			var exc = Assert.Throws<ArgumentException>(
-				() => settlement.GetRaceWeight("")
+				() => settlement.GetRacePercent("")
 			);
 			Assert.IsTrue(
 				exc.Message.ToLower().Contains(
