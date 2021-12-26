@@ -350,5 +350,16 @@ namespace GuildOfHeroes.Tests
 			Assert.AreEqual(333333, percents["human"]);
 			Assert.AreEqual(666667, percents["orc"]);
 		}
+		[Test]
+		public void GetRacePercents_addThenRemove_returnCorrectDict()
+		{
+			Settlement settlement = Settlement.Create("my settlement");
+			settlement.SetRaceWeight("human", 100);
+			settlement.SetRaceWeight("orc", 200);
+			settlement.SetRaceWeight("orc", 0);
+			var percents = settlement.GetRacePercents();
+			Assert.AreEqual(1, percents.Count);
+			Assert.AreEqual(1000000, percents["human"]);
+		}
 	}
 }
