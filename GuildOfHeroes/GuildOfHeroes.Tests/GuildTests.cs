@@ -167,5 +167,12 @@ namespace GuildOfHeroes.Tests
 
 			Assert.AreEqual(30, guild.HeroesDailyPayment);
 		}
+
+		[Test]
+		public void GetResourcesTypesCount_createNewGuild_returnZero()
+        {
+			Guild guild = Guild.Create("my guild");
+			Assert.AreEqual(0, guild.GetResourcesTypesCount());
+		}
 	}
 }
