@@ -65,14 +65,17 @@ namespace GuildOfHeroes.Core
         {
             return !racesWeights.ContainsKey(race);
         }
-        public double GetRacePercent(string race)
+        public int    GetRacePercent(string race)
         {
             int weight = 0;
             if (RacesNotSetupped())
                 return 0;
             if (RaceExist(race))
                 weight = racesWeights[race];
-            return 100.0 * weight / racesTotalWeights;
+            long res = 10000000L * weight / racesTotalWeights;
+            if (res % 10 >= 5)
+                return (int)(res / 10) + 1;
+            return (int)(res / 10);
         }
         public bool   RacesNotSetupped()
         {

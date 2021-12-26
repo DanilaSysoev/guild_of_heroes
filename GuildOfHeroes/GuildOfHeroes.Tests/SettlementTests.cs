@@ -274,20 +274,30 @@ namespace GuildOfHeroes.Tests
 			Assert.AreEqual(0, settlement.GetRacePercent("human"));
 		}
 		[Test]
-		public void getRacePercent_getPercentForExistingUniqueRace_return100()
+		public void getRacePercent_getPercentForExistingUniqueRace_return1000000()
 		{
 			Settlement settlement = Settlement.Create("my settlement");
 			settlement.SetRaceWeight("human", 1000);
-			Assert.AreEqual(100, settlement.GetRacePercent("human"));
+			Assert.AreEqual(1000000, settlement.GetRacePercent("human"));
 		}
 		[Test]
-		public void getRacePercent_existTwoEqualRaces_return50forBoth()
+		public void getRacePercent_existTwoEqualRaces_return500000forBoth()
 		{
 			Settlement settlement = Settlement.Create("my settlement");
 			settlement.SetRaceWeight("human", 1000);
 			settlement.SetRaceWeight("orc", 1000);
-			Assert.AreEqual(50, settlement.GetRacePercent("human"));
-			Assert.AreEqual(50, settlement.GetRacePercent("orc"));
+			Assert.AreEqual(500000, settlement.GetRacePercent("human"));
+			Assert.AreEqual(500000, settlement.GetRacePercent("orc"));
+		}
+		[Test]
+		public void getRacePercent_addTwoRacesThenRemoveOne_return1000000forRest()
+		{
+			Settlement settlement = Settlement.Create("my settlement");
+			settlement.SetRaceWeight("human", 1000);
+			settlement.SetRaceWeight("orc", 1000);
+			settlement.SetRaceWeight("orc", 0);
+			Assert.AreEqual(1000000, settlement.GetRacePercent("human"));
+			Assert.AreEqual(0, settlement.GetRacePercent("orc"));
 		}
 	}
 }
