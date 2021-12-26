@@ -299,5 +299,19 @@ namespace GuildOfHeroes.Tests
 			Assert.AreEqual(1000000, settlement.GetRacePercent("human"));
 			Assert.AreEqual(0, settlement.GetRacePercent("orc"));
 		}
+		[Test]
+		public void getRacePercent_raceNameIsEmpty_throwsException()
+		{
+			Settlement settlement = Settlement.Create("my settlement");
+			settlement.SetRaceWeight("human", 1000);
+			var exc = Assert.Throws<ArgumentException>(
+				() => settlement.GetRaceWeight("")
+			);
+			Assert.IsTrue(
+				exc.Message.ToLower().Contains(
+					"race name can not be empty"
+				)
+			);
+		}
 	}
 }
