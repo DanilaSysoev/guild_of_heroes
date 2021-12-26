@@ -361,5 +361,19 @@ namespace GuildOfHeroes.Tests
 			Assert.AreEqual(1, percents.Count);
 			Assert.AreEqual(1000000, percents["human"]);
 		}
+
+		[Test]
+		public void GetRaceWeightns_newSettlement_throwsException()
+		{
+			Settlement settlement = Settlement.Create("my settlement");
+			var exc = Assert.Throws<ArgumentException>(
+				() => settlement.GetRaceWeights()
+			);
+			Assert.IsTrue(
+				exc.Message.ToLower().Contains(
+					"settlement state error: races not setupped"
+				)
+			);
+		}
 	}
 }

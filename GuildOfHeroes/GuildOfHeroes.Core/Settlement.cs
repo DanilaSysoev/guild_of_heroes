@@ -84,6 +84,11 @@ namespace GuildOfHeroes.Core
                 result.Add(race, GetRacePercent(race));
             return result;
         }
+        public IReadOnlyDictionary<string, int> GetRaceWeights()
+        {
+            return racesWeights;
+        }
+
 
         public static Settlement Create(string name)
         {
