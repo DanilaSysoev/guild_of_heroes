@@ -203,5 +203,12 @@ namespace GuildOfHeroes.Tests
 			guild.AddResource("gold", 20);
 			Assert.AreEqual(220, guild.GetResource("gold"));
 		}
+		[Test]
+		public void GetResource_getNonExistentResource_returnZero()
+		{
+			Guild guild = Guild.Create("my guild");
+			guild.AddResource("gold", 200);
+			Assert.AreEqual(0, guild.GetResource("sword"));
+		}
 	}
 }
