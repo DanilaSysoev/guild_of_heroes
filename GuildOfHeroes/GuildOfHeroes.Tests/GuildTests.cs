@@ -172,36 +172,36 @@ namespace GuildOfHeroes.Tests
 		public void GetResourcesTypesCount_createNewGuild_returnZero()
         {
 			Guild guild = Guild.Create("my guild");
-			Assert.AreEqual(0, guild.GetResourcesTypesCount());
+			Assert.AreEqual(0, guild.ResourceTypesCount);
 		}
 		[Test]
 		public void GetResourcesTypesCount_addResources_countIncrease()
 		{
 			Guild guild = Guild.Create("my guild");
-			Assert.AreEqual(0, guild.GetResourcesTypesCount());
+			Assert.AreEqual(0, guild.ResourceTypesCount);
 			guild.AddResource("gold", 200);
-			Assert.AreEqual(1, guild.GetResourcesTypesCount());
+			Assert.AreEqual(1, guild.ResourceTypesCount);
 			guild.AddResource("sword", 20);
-			Assert.AreEqual(2, guild.GetResourcesTypesCount());
+			Assert.AreEqual(2, guild.ResourceTypesCount);
 		}
 		[Test]
-		public void GetResourcesTypesCount_addExistingResource_countNotChange()
+		public void GetResource_addExistingResource_countNotChange()
 		{
 			Guild guild = Guild.Create("my guild");
 			guild.AddResource("gold", 200);
-			Assert.AreEqual(1, guild.GetResourcesTypesCount());
+			Assert.AreEqual(1, guild.ResourceTypesCount);
 			guild.AddResource("gold", 20);
-			Assert.AreEqual(1, guild.GetResourcesTypesCount());
+			Assert.AreEqual(1, guild.ResourceTypesCount);
 		}
 
 		[Test]
-		public void GetResourcesCount_getExistingResource_returnCorrectValue()
+		public void GetResource_getExistingResource_returnCorrectValue()
 		{
 			Guild guild = Guild.Create("my guild");
 			guild.AddResource("gold", 200);
-			Assert.AreEqual(200, guild.GetResourcesCount("gold"));
+			Assert.AreEqual(200, guild.GetResource("gold"));
 			guild.AddResource("gold", 20);
-			Assert.AreEqual(220, guild.GetResourcesCount("gold"));
+			Assert.AreEqual(220, guild.GetResource("gold"));
 		}
 	}
 }

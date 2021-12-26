@@ -11,6 +11,7 @@ namespace GuildOfHeroes.Core
         public int HeroesCount => heroes.Count;
         public IReadOnlyList<Hero> Heroes => heroes;
         public int HeroesDailyPayment => heroes.Sum(h => h.DailyFee);
+        public int ResourceTypesCount => resources.Count;
 
         public void AddHero(Hero hero)
         {
@@ -33,10 +34,6 @@ namespace GuildOfHeroes.Core
             if (!resources.ContainsKey(name))
                 resources.Add(name, 0);
             resources[name] += count;
-        }
-        public int GetResourcesTypesCount()
-        {
-            return resources.Count;
         }
 
 
