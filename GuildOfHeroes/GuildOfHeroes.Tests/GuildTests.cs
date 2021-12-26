@@ -194,5 +194,14 @@ namespace GuildOfHeroes.Tests
 			Assert.AreEqual(1, guild.GetResourcesTypesCount());
 		}
 
+		[Test]
+		public void GetResourcesCount_getExistingResource_returnCorrectValue()
+		{
+			Guild guild = Guild.Create("my guild");
+			guild.AddResource("gold", 200);
+			Assert.AreEqual(200, guild.GetResourcesCount("gold"));
+			guild.AddResource("gold", 20);
+			Assert.AreEqual(220, guild.GetResourcesCount("gold"));
+		}
 	}
 }
