@@ -4,24 +4,21 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu
-    ( fileName = "NewRace"
-    , menuName = "ScriptableObjects/Race"
-    , order = 1)]
-public class Race : SerializedScriptableObject
+    ( fileName = "NewClass"
+    , menuName = "ScriptableObjects/Class"
+    , order = 2)]
+public class Class : SerializedScriptableObject
 {
     [SerializeField]
-    private string raceName;
+    private string className;
     [SerializeField]
     private Dictionary<string, int> skillModifiers;
-    [SerializeField]
-    private bool isEvil;
 
-    public string RaceName => raceName;
-    public bool IsEvil => isEvil;
+    public string RaceName => className;
 
     public int GetSkillModifier(string skillName)
     {
-        if(skillModifiers.ContainsKey(skillName))
+        if (skillModifiers.ContainsKey(skillName))
             return skillModifiers[skillName];
         return 0;
     }

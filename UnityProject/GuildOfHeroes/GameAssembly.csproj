@@ -56,12 +56,13 @@
     <Analyzer Include="D:\Danila\Programs\VisualStudio\Community\2019\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Code\Game\ScriptableObjects\Race.cs" />
-    <Compile Include="Assets\Code\Game\Core\Hero.cs" />
     <Compile Include="Assets\Code\Game\Core\Interfaces\INameable.cs" />
+    <Compile Include="Assets\Code\Game\ScriptableObjects\Race.cs" />
     <Compile Include="Assets\Code\Game\Core\Settlement.cs" />
-    <Compile Include="Assets\Code\Game\Core\Guild.cs" />
     <Compile Include="Assets\Code\Game\Core\Base\NameableBase.cs" />
+    <Compile Include="Assets\Code\Game\Core\Guild.cs" />
+    <Compile Include="Assets\Code\Game\Core\Hero.cs" />
+    <Compile Include="Assets\Code\Game\ScriptableObjects\Class.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Code\Game\GameAssembly.asmdef" />
