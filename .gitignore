@@ -336,7 +336,10 @@ ASALocalRun/
 
 *.png
 *.dll
-*.asset
+*.hash
 
 Plugins/
 Library/
+Temp/
+ProjectSettings/
+UserSettings/
