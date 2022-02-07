@@ -56,7 +56,9 @@
     <Analyzer Include="D:\Danila\Programs\VisualStudio\Community\2019\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Code\Tests\NewTestScript.cs" />
+    <Compile Include="Assets\Code\Tests\SettlementTests.cs" />
+    <Compile Include="Assets\Code\Tests\GuildTests.cs" />
+    <Compile Include="Assets\Code\Tests\HeroTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Code\Tests\Tests.asmdef" />
@@ -655,6 +657,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="GameAssembly.csproj">
+      <Project>{EAD28273-B242-EFF3-D1BE-C0808FD8F270}</Project>
+      <Name>GameAssembly</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
