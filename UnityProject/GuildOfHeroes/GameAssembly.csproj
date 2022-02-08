@@ -63,6 +63,8 @@
     <Compile Include="Assets\Code\Game\Core\Guild.cs" />
     <Compile Include="Assets\Code\Game\Core\Hero.cs" />
     <Compile Include="Assets\Code\Game\ScriptableObjects\Class.cs" />
+    <Compile Include="Assets\Code\Game\ScriptableObjects\Skill.cs" />
+    <Compile Include="Assets\Code\Game\ScriptableObjects\Resource.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Code\Game\GameAssembly.asmdef" />
