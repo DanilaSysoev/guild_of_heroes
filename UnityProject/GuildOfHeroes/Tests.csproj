@@ -59,6 +59,7 @@
     <Compile Include="Assets\Code\Tests\GuildTests.cs" />
     <Compile Include="Assets\Code\Tests\SettlementTests.cs" />
     <Compile Include="Assets\Code\Tests\HeroTests.cs" />
+    <Compile Include="Assets\Code\Tests\DiamondSquareTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Code\Tests\Tests.asmdef" />

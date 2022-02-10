@@ -58,13 +58,14 @@
   <ItemGroup>
     <Compile Include="Assets\Code\Game\Core\Interfaces\INameable.cs" />
     <Compile Include="Assets\Code\Game\ScriptableObjects\Race.cs" />
+    <Compile Include="Assets\Code\Game\ScriptableObjects\Skill.cs" />
     <Compile Include="Assets\Code\Game\Core\Settlement.cs" />
     <Compile Include="Assets\Code\Game\Core\Base\NameableBase.cs" />
     <Compile Include="Assets\Code\Game\Core\Guild.cs" />
     <Compile Include="Assets\Code\Game\Core\Hero.cs" />
     <Compile Include="Assets\Code\Game\ScriptableObjects\Class.cs" />
-    <Compile Include="Assets\Code\Game\ScriptableObjects\Skill.cs" />
     <Compile Include="Assets\Code\Game\ScriptableObjects\Resource.cs" />
+    <Compile Include="Assets\Code\Game\Algorithms\DiamondSquare.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Code\Game\GameAssembly.asmdef" />
