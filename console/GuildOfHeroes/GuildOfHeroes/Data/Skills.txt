@@ -1,0 +1,25 @@
+﻿Management
+Trading
+Leadership
+Diplomacy
+Alchemist
+Mason
+Weaponsmith
+Bow Master
+Armorsmith
+Farmer
+Hunter
+Enchanter
+Jeweler
+Builder
+Stealth
+Mindfullness
+Melee combat
+Shoting
+Magic
+Divine power
+Light armor
+Medium armor
+Heavy armor
+Dodge
+Agility
