@@ -41,6 +41,10 @@ namespace GuildOfHeroes
         {
             return classes.Keys.ToList();
         }
+        public static List<Class> GetAll()
+        {
+            return classes.Values.ToList();
+        }
         public static void Load()
         {
             using(StreamReader reader = new StreamReader("Data/Classes.txt"))
@@ -70,14 +74,15 @@ namespace GuildOfHeroes
             foreach(var token in tokens)
             {
                 var keyValue = token.Split(':');
-                if(keyValue[0] == "name")
+                switch(keyValue[0].Trim().ToLower())
                 {
-                    name = token.Split(':')[1];
-                }
-                else if (keyValue[0] == "skill")
-                {
-                    var nameValue = keyValue[1].Split('=');
-                    modifiers.Add(Skill.Get(nameValue[0]), int.Parse(nameValue[1]));
+                    case "name":
+                        name = keyValue[1].Trim();
+                        break;
+                    case "skill":
+                        var nameValue = keyValue[1].Trim().Split(',');
+                        modifiers.Add(Skill.Get(nameValue[0].Trim()), int.Parse(nameValue[1]));
+                        break;
                 }
             }
             return new Class(name, modifiers);

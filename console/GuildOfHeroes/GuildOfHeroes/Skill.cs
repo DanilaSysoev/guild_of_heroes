@@ -30,6 +30,10 @@ namespace GuildOfHeroes
         {
             return skills.Keys.ToList();
         }
+        public static List<Skill> GetAll()
+        {
+            return skills.Values.ToList();
+        }
         public static void Load()
         {
             skills = new Dictionary<string, Skill>();

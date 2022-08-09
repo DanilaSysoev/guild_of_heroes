@@ -1,9 +1,9 @@
-﻿name:Warrior
-skill:Melee combat=2
-skill:Shoting=-1
-skill:Heavy armor=2
+﻿name: Warrior
+skill: Melee combat, 2
+skill: Shoting, -1
+skill: Heavy armor, 2
 
-name:Archer
-skill:Melee combat=-1
-skill:Shoting=2
-skill:Light armor=2
+name: Archer
+skill: Melee combat, -1
+skill: Shoting, 2
+skill: Light armor, 2

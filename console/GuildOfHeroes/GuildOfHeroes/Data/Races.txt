@@ -1,10 +1,10 @@
-﻿name:Human
-skill:Farmer=1
-skill:Trading=1
-skill:Management=1
+﻿name: Human
+skill: Farmer, 1
+skill: Trading, 1
+skill: Management, 1
 
-name:Dwarf
-skill:Mason=2
-skill:Weaponsmith=2
-skill:Armorsmith=2
-skill:Dodge=-1
+name: Dwarf
+skill: Mason, 2
+skill: Weaponsmith, 2
+skill: Armorsmith, 2
+skill: Dodge, -1

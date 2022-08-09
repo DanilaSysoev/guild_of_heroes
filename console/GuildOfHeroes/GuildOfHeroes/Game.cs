@@ -21,6 +21,7 @@ namespace GuildOfHeroes
             Skill.Load();
             Race.Load();
             Class.Load();
+            HeroGeneratorPattern.Load();
         }
     }
 }
