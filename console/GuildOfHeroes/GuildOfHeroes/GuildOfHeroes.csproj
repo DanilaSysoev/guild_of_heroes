@@ -42,19 +42,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChangeSelectionAction.cs" />
+    <Compile Include="ChangeSelectionDirection.cs" />
     <Compile Include="Class.cs" />
     <None Include="Data\HeroPatterns.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Compile Include="ConsoleInputManager.cs" />
+    <Compile Include="DrawStateBasedOnSelectionUnit.cs" />
+    <Compile Include="DrawStateBuilders\IDrawStateBuilder.cs" />
+    <Compile Include="DrawStateBuilders\MainMenuDrawStateBuilder.cs" />
+    <Compile Include="IDrawStateSelectionUnit.cs" />
     <Compile Include="Game.cs" />
+    <Compile Include="GameDrawBase.cs" />
+    <Compile Include="IGameDrawState.cs" />
     <Compile Include="Hero.cs" />
     <Compile Include="HeroGeneratorPattern.cs" />
+    <Compile Include="IGameDraw.cs" />
+    <Compile Include="IInputAction.cs" />
+    <Compile Include="IInputManager.cs" />
+    <Compile Include="MenuGameDraw.cs" />
+    <Compile Include="MenuItemSelectionUnit.cs" />
     <Compile Include="ObjectWithName.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Race.cs" />
     <Compile Include="RandomGlobal.cs" />
     <Compile Include="RandomRange.cs" />
+    <Compile Include="SelectAction.cs" />
     <Compile Include="Skill.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -70,6 +85,9 @@
     <None Include="Data\Skills.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Data\DrawStates\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
