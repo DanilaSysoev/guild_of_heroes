@@ -11,12 +11,14 @@ namespace GuildOfHeroes
         private IGameDraw gameDraw;
         private bool gameActive;
 
-        public Game()
+        public Game(int winWidth, int winHeight)
         {
             Instance = this;
             gameActive = true;
-            gameDraw = new MenuGameDraw(
-                new MainMenuDrawStateBuilder().Build()
+            gameDraw = new GameDraw(
+                new MainMenuDrawStateBuilder().Build(),
+                winWidth,
+                winHeight
             );
             inputManager = new ConsoleInputManager();
         }
@@ -38,6 +40,7 @@ namespace GuildOfHeroes
 
         private void Load()
         {
+            ArtProvider.Load();
             Skill.Load();
             Race.Load();
             Class.Load();

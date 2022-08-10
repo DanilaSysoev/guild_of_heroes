@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArtProvider.cs" />
     <Compile Include="ChangeSelectionAction.cs" />
     <Compile Include="ChangeSelectionDirection.cs" />
     <Compile Include="Class.cs" />
@@ -54,14 +55,14 @@
     <Compile Include="DrawStateBuilders\MainMenuDrawStateBuilder.cs" />
     <Compile Include="IDrawStateSelectionUnit.cs" />
     <Compile Include="Game.cs" />
-    <Compile Include="GameDrawBase.cs" />
+    <Compile Include="GameDraw.cs" />
     <Compile Include="IGameDrawState.cs" />
     <Compile Include="Hero.cs" />
     <Compile Include="HeroGeneratorPattern.cs" />
     <Compile Include="IGameDraw.cs" />
     <Compile Include="IInputAction.cs" />
     <Compile Include="IInputManager.cs" />
-    <Compile Include="MenuGameDraw.cs" />
+    <Compile Include="MainMenuDrawState.cs" />
     <Compile Include="MenuItemSelectionUnit.cs" />
     <Compile Include="ObjectWithName.cs" />
     <Compile Include="Program.cs" />
@@ -86,8 +87,11 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Data\DrawStates\" />
+    <None Include="Data\Art\Title.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

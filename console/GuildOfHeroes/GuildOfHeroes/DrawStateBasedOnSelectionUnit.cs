@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GuildOfHeroes
 {
-    public class DrawStateBasedOnSelectionUnit : IGameDrawState
+    public abstract class DrawStateBasedOnSelectionUnit : IGameDrawState
     {
         public IDrawStateSelectionUnit 
         CurrentSelectionUnit { get; private set; }
@@ -35,5 +35,7 @@ namespace GuildOfHeroes
             CurrentSelectionUnit = StartSelectionUnit;
             return CurrentSelectionUnit.GetNextState();
         }
+
+        public abstract void Draw();        
     }
 }

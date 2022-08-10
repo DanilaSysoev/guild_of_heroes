@@ -35,7 +35,7 @@ namespace GuildOfHeroes.DrawStateBuilders
             exitMenuItem.
                 Neighbors[ChangeSelectionDirection.Down] = startMenuItem;
 
-            DrawStateBasedOnSelectionUnit drawState = new DrawStateBasedOnSelectionUnit(startMenuItem);
+            MainMenuDrawState drawState = new MainMenuDrawState(startMenuItem);
             startMenuItem.NextState = drawState;
             continueMenuItem.NextState = drawState;
             optionsMenuItem.NextState = drawState;

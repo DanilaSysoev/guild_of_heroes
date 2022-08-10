@@ -6,12 +6,18 @@ using System.Threading.Tasks;
 
 namespace GuildOfHeroes
 {
-    public abstract class GameDrawBase : IGameDraw
+    public class GameDraw : IGameDraw
     {
         public IGameDrawState CurrentState { get; private set; }
 
-        public GameDrawBase(IGameDrawState startState)
+        public GameDraw(
+            IGameDrawState startState,
+            int winWidth, 
+            int winHeight
+        )
         {
+            Console.SetWindowSize(winWidth, winHeight);
+            Console.SetBufferSize(winWidth, winHeight);
             CurrentState = startState;
         }
 
@@ -20,6 +26,9 @@ namespace GuildOfHeroes
             CurrentState = inputAction.ApplyThis(CurrentState);
         }
 
-        public abstract void Redraw();
+        public void Redraw()
+        {
+            CurrentState.Draw();
+        }
     }
 }

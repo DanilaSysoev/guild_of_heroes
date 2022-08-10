@@ -13,5 +13,7 @@ namespace GuildOfHeroes
 
         IGameDrawState
         ApplySelectAction(SelectAction action);
+
+        void Draw();
     }
 }
