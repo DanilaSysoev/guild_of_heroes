@@ -8,6 +8,10 @@ namespace GuildOfHeroes
 {
     public class Hero
     {
+        public const int BASE_LOYALTY = 0;
+
+        public string Name { get; private set; }
+
         public int Level { get; private set; }
         public int Experience { get; private set; }
 
@@ -16,7 +20,18 @@ namespace GuildOfHeroes
         public Dictionary<Skill, int> Skills { get; private set; }
 
         public int Payment { get; private set; }
-        
+
+        public int AccumulatedLoyalty { get; private set; }
+        public int Loyalty
+        {
+            get
+            {
+                return BASE_LOYALTY + 
+                       AccumulatedLoyalty + 
+                       Race.LoyaltyModifier + 
+                       Class.LoyaltyModifier;
+            }
+        }
 
         public int GetSkill(Skill skill)
         {
@@ -30,6 +45,7 @@ namespace GuildOfHeroes
         {
             Level = 1;
             Experience = 0;
+            AccumulatedLoyalty = 0;
             Skills = new Dictionary<Skill, int>();
         }
 
@@ -47,6 +63,8 @@ namespace GuildOfHeroes
                     hero.Skills.Add(skill, pattern.BaseSkillsRange.Get());
             }
             hero.Payment = pattern.PaymentRange.Get();
+
+            hero.Name = NameGenerator.Generate(hero);
 
             return hero;
         }

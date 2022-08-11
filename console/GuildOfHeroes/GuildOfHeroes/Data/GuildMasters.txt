@@ -1,0 +1,7 @@
+﻿name: Byorn Iron
+race: Human
+class: Warrior
+sameClassLoyalty: 3
+sameRaceLoyalty: 0
+classLoyalty: Rogue, -3
+history: Retired soldier. He founded a guild with the capital accumulated during his service to serve the people.

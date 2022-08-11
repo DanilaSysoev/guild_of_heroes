@@ -53,6 +53,7 @@
     <Compile Include="DrawStateBasedOnSelectionUnit.cs" />
     <Compile Include="DrawStateBuilders\IDrawStateBuilder.cs" />
     <Compile Include="DrawStateBuilders\MainMenuDrawStateBuilder.cs" />
+    <Compile Include="GuildMaster.cs" />
     <Compile Include="IDrawStateSelectionUnit.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="GameDraw.cs" />
@@ -64,6 +65,7 @@
     <Compile Include="IInputManager.cs" />
     <Compile Include="MainMenuDrawState.cs" />
     <Compile Include="MenuItemSelectionUnit.cs" />
+    <Compile Include="NameGenerator.cs" />
     <Compile Include="ObjectWithName.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -71,6 +73,7 @@
     <Compile Include="RandomGlobal.cs" />
     <Compile Include="RandomRange.cs" />
     <Compile Include="SelectAction.cs" />
+    <Compile Include="Service\AttributeCollection.cs" />
     <Compile Include="Skill.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -87,7 +90,11 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Data\GuildMasters.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
   <ItemGroup>
     <None Include="Data\Art\Title.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

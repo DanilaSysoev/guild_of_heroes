@@ -44,6 +44,8 @@ namespace GuildOfHeroes
             Skill.Load();
             Race.Load();
             Class.Load();
+            NameGenerator.Load();
+            GuildMaster.Load();
             HeroGeneratorPattern.Load();
         }
     }

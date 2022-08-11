@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GuildOfHeroes.Service;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -8,11 +9,17 @@ namespace GuildOfHeroes
     public class Race : ObjectWithName
     {
         private Dictionary<Skill, int> skillModifiers;
+        public int LoyaltyModifier { get; private set; }
 
-        private Race(string name, Dictionary<Skill, int> skillModifiers)
+        private Race(
+            string name,
+            int loyaltyModifier,
+            Dictionary<Skill, int> skillModifiers
+        )
             : base(name)
         {
             this.skillModifiers = skillModifiers;
+            LoyaltyModifier = loyaltyModifier;
         }
 
         public int GetSkillModifier(Skill skill)
@@ -69,23 +76,42 @@ namespace GuildOfHeroes
                 new string[] { "\r\n" },
                 StringSplitOptions.RemoveEmptyEntries
             );
-            Dictionary<Skill, int> modifiers = new Dictionary<Skill, int>();
-            string name = "";
-            foreach (var token in tokens)
+
+            var attributes = new AttributeCollection();
+            attributes.Add("modifiers", new Dictionary<Skill, int>());
+            foreach (var attributeDeskription in tokens)
+                ParseAttribute(attributeDeskription, attributes);
+
+            return new Race(
+                attributes.Get<string>("name"),
+                attributes.Get<int>("loyalty"),
+                attributes.Get<Dictionary<Skill, int>>("modifiers")
+            );
+        }
+
+        private static void ParseAttribute(
+            string attributeDeskription,
+            AttributeCollection attributes
+        )
+        {
+            var keyValue = attributeDeskription.Split(':');
+            switch (keyValue[0].Trim().ToLower())
             {
-                var keyValue = token.Split(':');
-                switch (keyValue[0].Trim().ToLower())
-                {
-                    case "name":
-                        name = keyValue[1].Trim();
-                        break;
-                    case "skill":
-                        var nameValue = keyValue[1].Trim().Split(',');
-                        modifiers.Add(Skill.Get(nameValue[0].Trim()), int.Parse(nameValue[1]));
-                        break;
-                }
+                case "name":
+                    attributes.Add("name", keyValue[1].Trim());
+                    break;
+                case "skill":
+                    var nameValue = keyValue[1].Trim().Split(',');
+                    attributes.Get<Dictionary<Skill, int>>("modifiers").
+                        Add(
+                            Skill.Get(nameValue[0].Trim()),
+                            int.Parse(nameValue[1])
+                        );
+                    break;
+                case "loyalty":
+                    attributes.Add("loyalty", int.Parse(keyValue[1]));
+                    break;
             }
-            return new Race(name, modifiers);
         }
     }
 }
