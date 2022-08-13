@@ -1,4 +1,5 @@
 ﻿using GuildOfHeroes.Service;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -54,64 +55,28 @@ namespace GuildOfHeroes
         }
         public static void Load()
         {
-            using (StreamReader reader = new StreamReader("Data/Races.txt"))
-            {
-                var racesTexts =
-                    reader.ReadToEnd().Split(
-                        new string[] { "\r\n\r\n" },
-                        StringSplitOptions.RemoveEmptyEntries
-                    );
+            JArray racesData = null;
+            using (var reader = new StreamReader("Data/Races.json"))
+                racesData = JArray.Parse(reader.ReadToEnd());
 
-                races = new Dictionary<string, Race>();
-                foreach (var text in racesTexts)
-                {
-                    var race = FromText(text);
-                    races.Add(race.Name, race);
-                }
-            }
-        }
-        private static Race FromText(string text)
-        {
-            var tokens = text.Split(
-                new string[] { "\r\n" },
-                StringSplitOptions.RemoveEmptyEntries
+            races = JsonBuilder.BuildKeyValueDictionary(
+                racesData,
+                nameData => nameData.Value<string>("name"),
+                BuildRace
             );
+        }
 
-            var attributes = new AttributeCollection();
-            attributes.Add("modifiers", new Dictionary<Skill, int>());
-            foreach (var attributeDeskription in tokens)
-                ParseAttribute(attributeDeskription, attributes);
-
+        private static Race BuildRace(JToken data)
+        {
             return new Race(
-                attributes.Get<string>("name"),
-                attributes.Get<int>("loyalty"),
-                attributes.Get<Dictionary<Skill, int>>("modifiers")
+                data.Value<string>("name"),
+                data.Value<int>("loyalty"),
+                JsonBuilder.BuildKeyValueDictionary(
+                    data["skillModifiers"],
+                    nameData => Skill.Get(nameData.Value<string>("name")),
+                    token => token.Value<int>("value")
+                )
             );
-        }
-
-        private static void ParseAttribute(
-            string attributeDeskription,
-            AttributeCollection attributes
-        )
-        {
-            var keyValue = attributeDeskription.Split(':');
-            switch (keyValue[0].Trim().ToLower())
-            {
-                case "name":
-                    attributes.Add("name", keyValue[1].Trim());
-                    break;
-                case "skill":
-                    var nameValue = keyValue[1].Trim().Split(',');
-                    attributes.Get<Dictionary<Skill, int>>("modifiers").
-                        Add(
-                            Skill.Get(nameValue[0].Trim()),
-                            int.Parse(nameValue[1])
-                        );
-                    break;
-                case "loyalty":
-                    attributes.Add("loyalty", int.Parse(keyValue[1]));
-                    break;
-            }
         }
     }
 }

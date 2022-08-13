@@ -1,0 +1,17 @@
+﻿[
+  {
+    "name": "Byorn Iron",
+    "race": "Human",
+    "class": "Warrior",
+    "sameClassLoyalty": 3,
+    "sameRaceLoyalty": 0,
+    "classesLoyalties": [
+      {
+        "name": "Rogue",
+        "value": -3
+      }
+    ],
+    "racesLoyalties": [],
+    "history": "Retired soldier. He founded a guild with the capital accumulated during his service to serve the people."
+  }
+]

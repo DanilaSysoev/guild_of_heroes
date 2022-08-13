@@ -1,4 +1,5 @@
 ﻿using GuildOfHeroes.Service;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -12,7 +13,7 @@ namespace GuildOfHeroes
     {
         public Race Race { get; private set; }
         public Class Class { get; private set; }
-        public string Hystory { get; private set; }
+        public string History { get; private set; }
 
         public int SameRaceLoyaltyModifier { get; private set; }
         public int SameClassLoyaltyModifier { get; private set; }
@@ -22,11 +23,25 @@ namespace GuildOfHeroes
         public IReadOnlyDictionary<Class, int> 
         ClassLoyaltyModifiers { get; private set; }
 
-        private GuildMaster(string name)
+        private GuildMaster(
+            string name,
+            Race race,
+            Class clas,
+            string history,
+            int sameRaceLoyaltyModifier,
+            int sameClassLoyaltyModifier,
+            IReadOnlyDictionary<Race, int> raceLoyaltyModifiers,
+            IReadOnlyDictionary<Class, int> classLoyaltyModifiers
+        )
             : base(name)
         {
-            SameClassLoyaltyModifier = 0;
-            SameRaceLoyaltyModifier = 0;            
+            Race = race;
+            Class = clas;
+            History = history;
+            SameRaceLoyaltyModifier = sameRaceLoyaltyModifier;
+            SameClassLoyaltyModifier = sameClassLoyaltyModifier;
+            RaceLoyaltyModifiers = raceLoyaltyModifiers;
+            ClassLoyaltyModifiers = classLoyaltyModifiers;
         }
 
 
@@ -37,117 +52,41 @@ namespace GuildOfHeroes
             Selected = guildMasters[name];
         }
 
+
         public static void Load()
         {
-            using (StreamReader reader = new StreamReader("Data/GuildMasters.txt"))
-            {
-                var guildMastersTexts =
-                    reader.ReadToEnd().Split(
-                        new string[] { "\r\n\r\n" },
-                        StringSplitOptions.RemoveEmptyEntries
-                    );
+            JArray guildMastersData = null;
+            using (var reader = new StreamReader("Data/GuildMasters.json"))
+                guildMastersData = JArray.Parse(reader.ReadToEnd());
 
-                guildMasters = new Dictionary<string, GuildMaster>();
-                foreach (var text in guildMastersTexts)
-                {
-                    var guildMaster = FromText(text);
-                    guildMasters.Add(guildMaster.Name, guildMaster);
-                }
-            }
-        }
-
-        private static GuildMaster FromText(string text)
-        {
-            var tokens = text.Split(
-                new string[] { "\r\n" },
-                StringSplitOptions.RemoveEmptyEntries
+            guildMasters = JsonBuilder.BuildKeyValueDictionary(
+                guildMastersData,
+                nameData => nameData.Value<string>("name"),
+                BuildGuildMaster
             );
-
-            var attributes = new AttributeCollection();
-            attributes.Add("classloyalty", new Dictionary<Class, int>());
-            attributes.Add("raceloyalty", new Dictionary<Race, int>());
-            foreach (var attributeDeskription in tokens)
-                ParseAttribute(attributeDeskription, attributes);
-
-            return BuildGuildMasterFromAttributes(attributes);
-
         }
 
-        private static GuildMaster BuildGuildMasterFromAttributes(AttributeCollection attributes)
+        private static GuildMaster BuildGuildMaster(JToken guildMasterData)
         {
-            var guildMaster = new GuildMaster(
-                attributes.Get<string>("name")
+            return new GuildMaster(
+                guildMasterData.Value<string>("name"),
+                Race.Get(guildMasterData.Value<string>("race")),
+                Class.Get(guildMasterData.Value<string>("class")),
+                guildMasterData.Value<string>("history"),
+                guildMasterData.Value<int>("sameRaceLoyalty"),
+                guildMasterData.Value<int>("sameClassLoyalty"),
+                JsonBuilder.BuildKeyValueDictionary(
+                    guildMasterData["racesLoyalties"],
+                    nameData => Race.Get(nameData.Value<string>("name")),
+                    token => token.Value<int>("value")
+                ),
+                JsonBuilder.BuildKeyValueDictionary(
+                    guildMasterData["classesLoyalties"],
+                    nameData => Class.Get(nameData.Value<string>("name")),
+                    token => token.Value<int>("value")
+                )
             );
-
-            guildMaster.SameClassLoyaltyModifier =
-                attributes.Get<int>("sameclassloyalty");
-            guildMaster.SameRaceLoyaltyModifier =
-                attributes.Get<int>("sameraceloyalty");
-            guildMaster.Hystory =
-                attributes.Get<string>("history");
-            guildMaster.Race =
-                attributes.Get<Race>("race");
-            guildMaster.Class =
-                attributes.Get<Class>("class");
-            guildMaster.RaceLoyaltyModifiers =
-                attributes.Get<Dictionary<Race, int>>("raceloyalty");
-            guildMaster.ClassLoyaltyModifiers =
-                attributes.Get<Dictionary<Class, int>>("classloyalty");
-
-
-            return guildMaster;
-        }
-
-        private static void ParseAttribute(
-            string attributeDeskription,
-            AttributeCollection attributes
-        )
-        {
-            var keyValue = attributeDeskription.Split(':');
-            switch (keyValue[0].Trim().ToLower())
-            {
-                case "name":
-                    attributes.Add("name", keyValue[1].Trim());
-                    break;
-                case "race":
-                    attributes.Add("race", Race.Get(keyValue[1].Trim()));
-                    break;
-                case "class":
-                    attributes.Add("class", Class.Get(keyValue[1].Trim()));
-                    break;
-                case "sameclassloyalty":
-                    attributes.Add(
-                        "sameclassloyalty", 
-                        int.Parse(keyValue[1])
-                    );
-                    break;
-                case "sameraceloyalty":
-                    attributes.Add(
-                        "sameraceloyalty",
-                        int.Parse(keyValue[1])
-                    );
-                    break;
-                case "classloyalty":
-                    var nameValue = keyValue[1].Trim().Split(',');
-                    attributes.Get<Dictionary<Class, int>>("classloyalty").
-                        Add(
-                            Class.Get(nameValue[0].Trim()),
-                            int.Parse(nameValue[1])
-                        );
-                    break;
-                case "raceloyalty":
-                    nameValue = keyValue[1].Trim().Split(',');
-                    attributes.Get<Dictionary<Race, int>>("raceloyalty").
-                        Add(
-                            Race.Get(nameValue[0].Trim()),
-                            int.Parse(nameValue[1])
-                        );
-                    break;
-                case "history":
-                    attributes.Add("history", keyValue[1].Trim());
-                    break;
-            }
-        }
+        }        
 
         private static Dictionary<string, GuildMaster> guildMasters;
     }

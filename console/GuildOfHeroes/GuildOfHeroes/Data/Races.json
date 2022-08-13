@@ -1,0 +1,42 @@
+﻿[
+  {
+    "name": "Human",
+    "skillModifiers": [
+      {
+        "name": "Farmer",
+        "value": 1
+      },
+      {
+        "name": "Trader",
+        "value": 1
+      },
+      {
+        "name": "Manager",
+        "value": 1
+      }
+    ],
+    "loyalty": 1
+  },
+  {
+    "name": "Dwarf",
+    "skillModifiers": [
+      {
+        "name": "Mason",
+        "value": 2
+      },
+      {
+        "name": "Weaponsmith",
+        "value": 2
+      },
+      {
+        "name": "Armorsmith",
+        "value": 2
+      },
+      {
+        "name": "Dodge",
+        "value": -1
+      }
+    ],
+    "loyalty": 0
+  }
+]

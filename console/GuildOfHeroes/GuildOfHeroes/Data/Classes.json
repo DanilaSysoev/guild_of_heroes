@@ -1,0 +1,64 @@
+﻿[
+  {
+    "name": "Warrior",
+    "skillModifiers": [
+      {
+        "name": "Melee combat",
+        "value": 2
+      },
+      {
+        "name": "Shoting",
+        "value": -1
+      },
+      {
+        "name": "Heavy armor",
+        "value": 2
+      }
+    ],
+    "loyalty": 2
+  },
+  {
+    "name": "Archer",
+    "skillModifiers": [
+      {
+        "name": "Melee combat",
+        "value": -1
+      },
+      {
+        "name": "Shoting",
+        "value": 2
+      },
+      {
+        "name": "Light armor",
+        "value": 2
+      }
+    ],
+    "loyalty": 1
+  },
+  {
+    "name": "Rogue",
+    "skillModifiers": [
+      {
+        "name": "Dodge",
+        "value": 2
+      },
+      {
+        "name": "Agility",
+        "value": 2
+      },
+      {
+        "name": "Stealth",
+        "value": 3
+      },
+      {
+        "name": "Melee combat",
+        "value": -3
+      },
+      {
+        "name": "Heavy armor",
+        "value": -3
+      }
+    ],
+    "loyalty": -1
+  }
+]

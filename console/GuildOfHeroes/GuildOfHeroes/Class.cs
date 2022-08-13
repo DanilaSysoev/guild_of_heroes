@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace GuildOfHeroes
 {
@@ -36,6 +38,15 @@ namespace GuildOfHeroes
                 return false;
             return Name == cObj.Name;
         }
+        public override int GetHashCode()
+        {
+            int hashCode = -1300808280;
+            hashCode = hashCode * -1521134295 + base.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Name);
+            hashCode = hashCode * -1521134295 + EqualityComparer<Dictionary<Skill, int>>.Default.GetHashCode(skillModifiers);
+            hashCode = hashCode * -1521134295 + LoyaltyModifier.GetHashCode();
+            return hashCode;
+        }
 
 
         private static Dictionary<string, Class> classes;
@@ -54,64 +65,28 @@ namespace GuildOfHeroes
         }
         public static void Load()
         {
-            using(StreamReader reader = new StreamReader("Data/Classes.txt"))
-            {
-                var classesTexts =
-                    reader.ReadToEnd().Split(
-                        new string[] { "\r\n\r\n" },
-                        StringSplitOptions.RemoveEmptyEntries
-                    );
+            JArray classesData = null;
+            using (var reader = new StreamReader("Data/Classes.json"))
+                classesData = JArray.Parse(reader.ReadToEnd());
 
-                classes = new Dictionary<string, Class>();
-                foreach(var text in classesTexts)
-                {
-                    var c = FromText(text);
-                    classes.Add(c.Name, c);
-                }
-            }
-        }
-        private static Class FromText(string text)
-        {
-            var tokens = text.Split(
-                new string[] { "\r\n" },
-                StringSplitOptions.RemoveEmptyEntries
+            classes = JsonBuilder.BuildKeyValueDictionary(
+                classesData,
+                nameData => nameData.Value<string>("name"),
+                BuildCalss
             );
-            
-            var attributes = new AttributeCollection();
-            attributes.Add("modifiers", new Dictionary<Skill, int>());
-            foreach (var attributeDeskription in tokens)
-                ParseAttribute(attributeDeskription, attributes);
+        }
 
+        private static Class BuildCalss(JToken classData)
+        {
             return new Class(
-                attributes.Get<string>("name"),
-                attributes.Get<int>("loyalty"),
-                attributes.Get<Dictionary<Skill, int>>("modifiers")
+                classData.Value<string>("name"),
+                classData.Value<int>("loyalty"),
+                JsonBuilder.BuildKeyValueDictionary(
+                    classData["skillModifiers"],
+                    nameData => Skill.Get(nameData.Value<string>("name")),
+                    token => token.Value<int>("value")
+                )
             );
-        }
-
-        private static void ParseAttribute(
-            string attributeDeskription, 
-            AttributeCollection attributes
-        )
-        {
-            var keyValue = attributeDeskription.Split(':');
-            switch (keyValue[0].Trim().ToLower())
-            {
-                case "name":
-                    attributes.Add("name", keyValue[1].Trim());
-                    break;
-                case "skill":
-                    var nameValue = keyValue[1].Trim().Split(',');
-                    attributes.Get<Dictionary<Skill, int>>("modifiers").
-                        Add(
-                            Skill.Get(nameValue[0].Trim()),
-                            int.Parse(nameValue[1])
-                        );
-                    break;
-                case "loyalty":
-                    attributes.Add("loyalty", int.Parse(keyValue[1]));
-                    break;
-            }
         }
     }
 }

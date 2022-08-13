@@ -1,4 +1,6 @@
-﻿using System;
+﻿using GuildOfHeroes.Service;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -63,148 +65,48 @@ namespace GuildOfHeroes
 
         public static void Load()
         {
-            using (StreamReader reader = new StreamReader("Data/HeroPatterns.txt"))
-            {
-                var patternsTexts =
-                    reader.ReadToEnd().Split(
-                        new string[] { "\r\n\r\n" },
-                        StringSplitOptions.RemoveEmptyEntries
-                    );
+            JArray heroPatternsData = null;
+            using (var reader = new StreamReader("Data/HeroPatterns.json"))
+                heroPatternsData = JArray.Parse(reader.ReadToEnd());
 
-                patterns = new Dictionary<string, HeroGeneratorPattern>();
-                foreach (var text in patternsTexts)
-                {
-                    var pattern = FromText(text);
-                    patterns.Add(pattern.Name, pattern);
-                }
-            }
-        }
-        private static HeroGeneratorPattern FromText(string text)
-        {
-            RandomRange baseSkillRange = null;
-            RandomRange paymentRange = null;
-            var modifiers              = new Dictionary<Skill, int>();
-            var name                   = "";
-            var skillsRange            = new Dictionary<Skill, RandomRange>();
-            var racesWeights           = new Dictionary<Race, int>();
-            var classesWeights         = new Dictionary<Class, int>();
-
-            var tokens = text.Split(
-                new string[] { "\r\n" },
-                StringSplitOptions.RemoveEmptyEntries
+            patterns = JsonBuilder.BuildKeyValueDictionary(
+                heroPatternsData,
+                nameData => nameData.Value<string>("name"),
+                BuildHeroPattern
             );
+        }
 
-            foreach (var token in tokens)
-            {
-                var keyValue = token.Split(':');
-                ParseData(
-                    ref name, 
-                    ref baseSkillRange,
-                    ref paymentRange,
-                    skillsRange,
-                    racesWeights,
-                    classesWeights,
-                    keyValue
-                );
-            }
-
+        private static HeroGeneratorPattern BuildHeroPattern(JToken data)
+        {
             return new HeroGeneratorPattern(
-                name,
-                baseSkillRange,
-                paymentRange,
-                skillsRange,
-                racesWeights,
-                classesWeights
-            );
-        }
-
-        private static void ParseData(
-            ref string name, 
-            ref RandomRange baseSkillRange,
-            ref RandomRange paymentRange,
-            Dictionary<Skill, RandomRange> skillsRange,
-            Dictionary<Race, int> racesWeights, 
-            Dictionary<Class, int> classesWeights,
-            string[] keyValue)
-        {
-            switch (keyValue[0].Trim().ToLower())
-            {
-                case "name":
-                    name = ParseName(keyValue[1]);
-                    break;
-                case "baseskillrange":
-                    baseSkillRange = ParseRange(keyValue[1]);
-                    break;
-                case "paymentrange":
-                    paymentRange = ParseRange(keyValue[1]);
-                    break;
-                case "skill":
-                    ParseSkillRange(skillsRange, keyValue[1]);
-                    break;
-                case "class":
-                    ParseClassWeight(classesWeights, keyValue[1]);
-                    break;
-                case "race":
-                    ParseRaceWeight(racesWeights, keyValue[1]);
-                    break;
-            }
-        }
-
-        private static void ParseRaceWeight(
-            Dictionary<Race, int> racesWeights, 
-            string value
-        )
-        {
-            var nameValue = value.Trim().Split(',');
-            racesWeights.Add(
-                Race.Get(nameValue[0].Trim()),
-                int.Parse(nameValue[1])
-            );
-        }
-
-        private static void ParseClassWeight(
-            Dictionary<Class, int> classesWeights,
-            string value
-        )
-        {
-            var nameValue = value.Trim().Split(',');
-            classesWeights.Add(
-                Class.Get(nameValue[0].Trim()),
-                int.Parse(nameValue[1])
-            );
-        }
-
-        private static void ParseSkillRange(
-            Dictionary<Skill, RandomRange> skillsRange,
-            string value
-        )
-        {
-            var nameValues = value.Trim().Split(',');
-            skillsRange.Add(
-                Skill.Get(nameValues[0].Trim()),
+                data.Value<string>("name"),
                 new RandomRange(
-                    int.Parse(nameValues[1]),
-                    int.Parse(nameValues[2])
+                    data["baseSkillRange"].Value<int>("min"),
+                    data["baseSkillRange"].Value<int>("max")
+                ),
+                new RandomRange(
+                    data["paymentRange"].Value<int>("min"),
+                    data["paymentRange"].Value<int>("max")
+                ),
+                JsonBuilder.BuildKeyValueDictionary(
+                    data["skillModifiers"],
+                    nameData => Skill.Get(nameData.Value<string>("name")),
+                    valueData => new RandomRange(
+                        valueData["value"].Value<int>("min"),
+                        valueData["value"].Value<int>("max")
+                    )
+                ),
+                JsonBuilder.BuildKeyValueDictionary(
+                    data["raceWeights"],
+                    nameData => Race.Get(nameData.Value<string>("name")),
+                    valueData => valueData.Value<int>("value")
+                ),
+                JsonBuilder.BuildKeyValueDictionary(
+                    data["classWeights"],
+                    nameData => Class.Get(nameData.Value<string>("name")),
+                    valueData => valueData.Value<int>("value")
                 )
             );
-        }
-
-        private static RandomRange ParseRange(
-            string value            
-        )
-        {
-            var minMax = value.Trim().Split(',');
-            return new RandomRange(
-                int.Parse(minMax[0]),
-                int.Parse(minMax[1])
-            );
-        }
-
-        private static string ParseName(
-            string value
-        )
-        {
-            return value.Trim();
         }
     }
 }

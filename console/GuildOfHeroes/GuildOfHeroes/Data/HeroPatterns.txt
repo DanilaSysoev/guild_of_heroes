@@ -1,5 +1,0 @@
-﻿name: Trader
-skill: Trading, 5, 8
-baseSkillRange: 1, 3
-paymentRange: 150, 200
-race: Human, 1

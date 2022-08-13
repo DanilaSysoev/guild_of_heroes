@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using GuildOfHeroes.Service;
+using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
@@ -36,15 +38,15 @@ namespace GuildOfHeroes
         }
         public static void Load()
         {
-            skills = new Dictionary<string, Skill>();
-            using (StreamReader reader = new StreamReader("Data/Skills.txt"))
-            {
-                while (!reader.EndOfStream)
-                {
-                    var name = reader.ReadLine();
-                    skills.Add(name, new Skill(name));
-                }
-            }
+            JArray skillsData = null;
+            using (var reader = new StreamReader("Data/Skills.json"))
+                skillsData = JArray.Parse(reader.ReadToEnd());
+
+            skills = JsonBuilder.BuildKeyValueDictionary(
+                skillsData,
+                keyData => keyData.Value<string>(),
+                valueData => new Skill(valueData.Value<string>())
+            );
         }
     }
 }
