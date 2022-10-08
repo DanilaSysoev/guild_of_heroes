@@ -31,7 +31,15 @@ namespace GuildOfHeroes
                 case ConsoleKey.DownArrow:
                     return ChangeSelectionAction.DownAction;
                 case ConsoleKey.Enter:
-                    return SelectAction.Instance;                
+                    return SelectAction.Instance;
+                case ConsoleKey.PageUp:
+                    return ChangePageAction.UpAction;
+                case ConsoleKey.PageDown:
+                    return ChangePageAction.DownAction;
+                case ConsoleKey.Home:
+                    return ChangePageAction.LeftAction;
+                case ConsoleKey.End:
+                    return ChangePageAction.RightAction;
             }
 
             throw new NotImplementedException("Impossible code");
@@ -43,7 +51,11 @@ namespace GuildOfHeroes
                    key != ConsoleKey.RightArrow &&
                    key != ConsoleKey.DownArrow &&
                    key != ConsoleKey.UpArrow &&
-                   key != ConsoleKey.Enter;
+                   key != ConsoleKey.Enter &&
+                   key != ConsoleKey.PageDown &&
+                   key != ConsoleKey.PageUp &&
+                   key != ConsoleKey.Home &&
+                   key != ConsoleKey.End;
         }
     }
 }

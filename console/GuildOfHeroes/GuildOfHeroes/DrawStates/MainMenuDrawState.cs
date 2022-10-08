@@ -12,8 +12,9 @@ namespace GuildOfHeroes
         private const ConsoleColor SELECTED_FG_COLOR = ConsoleColor.Green;
         private List<string> menuTexts;
 
-        public MainMenuDrawState(IDrawStateSelectionUnit startSelectionUnit)
-            : base(startSelectionUnit)
+        public MainMenuDrawState(
+            List<List<ISelectionUnit>> selectionUnits
+        ) : base(selectionUnits)
         {
             menuTexts = ExtractTexts();
         }
@@ -23,11 +24,10 @@ namespace GuildOfHeroes
             Console.Clear();
 
             DrawTitle();
-
-            int selectedIndex = ExtractSelectedIndex();
+                        
             int startLine = CalcStartLine();
-            DrawMenu(selectedIndex, startLine);
-            DrawSelectors(selectedIndex, startLine);
+            DrawMenu(startLine);
+            DrawSelectors(startLine);
         }
 
         private void DrawTitle()
@@ -41,24 +41,24 @@ namespace GuildOfHeroes
             }
         }
 
-        private void DrawMenu(int selectedIndex, int startLine)
+        private void DrawMenu(int startLine)
         {
             for (int i = 0, line = startLine; i < menuTexts.Count; ++i, ++line)
             {
                 int column = (Console.WindowWidth - menuTexts[i].Length) / 2;
                 Console.SetCursorPosition(column, line);
-                if (i == selectedIndex)
+                if (i == SelectionLine)
                     Console.ForegroundColor = SELECTED_FG_COLOR;
                 Console.Write(menuTexts[i]);
                 Console.ResetColor();
             }
         }
-        private void DrawSelectors(int selectedIndex, int startLine)
+        private void DrawSelectors(int startLine)
         {
             int minColumn = menuTexts.Min(text => (Console.WindowWidth - text.Length) / 2);
-            Console.SetCursorPosition(minColumn - 5, startLine + selectedIndex);
+            Console.SetCursorPosition(minColumn - 5, startLine + SelectionLine);
             Console.Write('[');
-            Console.SetCursorPosition(Console.WindowWidth - minColumn + 5, startLine + selectedIndex);
+            Console.SetCursorPosition(Console.WindowWidth - minColumn + 5, startLine + SelectionLine);
             Console.Write(']');
         }
         private int CalcStartLine()
@@ -68,27 +68,18 @@ namespace GuildOfHeroes
                          - ArtProvider.Title.Count;
             return freeSpace / 2 + ArtProvider.Title.Count + TOP_BORDER;
         }
-        private int ExtractSelectedIndex()
-        {
-            var curItem = StartSelectionUnit;
-            int selected = 0;
-            while (curItem != CurrentSelectionUnit)
-            {
-                selected++;
-                curItem = curItem.GetNeighbor(ChangeSelectionDirection.Down);
-            }
-            return selected;
-        }
         private List<string> ExtractTexts()
         {
             var items = new List<string>();
-            var curItem = StartSelectionUnit;
-            do
-            {
-                items.Add(curItem.Text);
-                curItem = curItem.GetNeighbor(ChangeSelectionDirection.Down);
-            } while (curItem != StartSelectionUnit);
+            for(int i = 0; i < SelectionUnits.Count; ++i)
+                items.Add(SelectionUnits[i][0].Text);
             return items;
+        }
+
+        public override IGameDrawState 
+        ApplyChangePageAction(ChangePageAction action)
+        {
+            return this;
         }
     }
 }

@@ -6,36 +6,19 @@ using System.Threading.Tasks;
 
 namespace GuildOfHeroes
 {
-    public class MenuItemSelectionUnit : IDrawStateSelectionUnit
+    public class MenuItemSelectionUnit : SelectionUnitBase
     {
-        public IGameDrawState NextState { get; set; }
-        public Dictionary<ChangeSelectionDirection, IDrawStateSelectionUnit>
-        Neighbors { get; private set; }
-
-        public string Text { get; set; }
+        private string text;
+        public override string Text => text;
 
         public MenuItemSelectionUnit(string text)
         {
-            Neighbors = 
-                new Dictionary<
-                    ChangeSelectionDirection, IDrawStateSelectionUnit
-                >();
-            Neighbors.Add(ChangeSelectionDirection.Up, this);
-            Neighbors.Add(ChangeSelectionDirection.Right, this);
-            Neighbors.Add(ChangeSelectionDirection.Down, this);
-            Neighbors.Add(ChangeSelectionDirection.Left, this);
-            Text = text;
+            this.text = text;
         }
 
-        public IDrawStateSelectionUnit 
-        GetNeighbor(ChangeSelectionDirection direction)
+        public override T GetData<T>()
         {
-            return Neighbors[direction];
-        }
-
-        public IGameDrawState GetNextState()
-        {
-            return NextState;
+            return default(T);
         }
     }
 }

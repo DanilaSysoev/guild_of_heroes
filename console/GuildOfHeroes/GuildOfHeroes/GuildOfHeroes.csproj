@@ -46,24 +46,29 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArtProvider.cs" />
+    <Compile Include="ChangePageAction.cs" />
     <Compile Include="ChangeSelectionAction.cs" />
-    <Compile Include="ChangeSelectionDirection.cs" />
+    <Compile Include="Direction.cs" />
     <Compile Include="Class.cs" />
     <Compile Include="ConsoleInputManager.cs" />
-    <Compile Include="DrawStateBasedOnSelectionUnit.cs" />
+    <Compile Include="DrawState.cs" />
+    <Compile Include="DrawStates\DrawStateBasedOnSelectionUnit.cs" />
     <Compile Include="DrawStateBuilders\IDrawStateBuilder.cs" />
     <Compile Include="DrawStateBuilders\MainMenuDrawStateBuilder.cs" />
+    <Compile Include="DrawStates\ExitDrawState.cs" />
+    <Compile Include="DrawStates\SelectGuildMasterDrawState.cs" />
+    <Compile Include="EntityBasedSelectionUnit.cs" />
     <Compile Include="GuildMaster.cs" />
-    <Compile Include="IDrawStateSelectionUnit.cs" />
+    <Compile Include="ISelectionUnit.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="GameDraw.cs" />
-    <Compile Include="IGameDrawState.cs" />
+    <Compile Include="DrawStates\IGameDrawState.cs" />
     <Compile Include="Hero.cs" />
     <Compile Include="HeroGeneratorPattern.cs" />
     <Compile Include="IGameDraw.cs" />
     <Compile Include="IInputAction.cs" />
     <Compile Include="IInputManager.cs" />
-    <Compile Include="MainMenuDrawState.cs" />
+    <Compile Include="DrawStates\MainMenuDrawState.cs" />
     <Compile Include="MenuItemSelectionUnit.cs" />
     <Compile Include="NameGenerator.cs" />
     <Compile Include="ObjectWithName.cs" />
@@ -73,6 +78,7 @@
     <Compile Include="RandomGlobal.cs" />
     <Compile Include="RandomRange.cs" />
     <Compile Include="SelectAction.cs" />
+    <Compile Include="SelectionUnitBase.cs" />
     <Compile Include="Service\AttributeCollection.cs" />
     <Compile Include="Service\JsonBuilder.cs" />
     <Compile Include="Skill.cs" />

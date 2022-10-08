@@ -6,13 +6,12 @@ using System.Threading.Tasks;
 
 namespace GuildOfHeroes
 {
-    public interface IDrawStateSelectionUnit
+    public interface ISelectionUnit
     {
-        IDrawStateSelectionUnit 
-        GetNeighbor(ChangeSelectionDirection direction);
-
         IGameDrawState GetNextState();
 
         string Text { get; }
+
+        T GetData<T>();
     }
 }

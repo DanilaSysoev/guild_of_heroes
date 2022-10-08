@@ -23,7 +23,12 @@ namespace GuildOfHeroes
 
         public void ChangeState(IInputAction inputAction)
         {
-            CurrentState = inputAction.ApplyThis(CurrentState);
+            var newState = inputAction.ApplyThis(CurrentState);
+            if (newState != CurrentState) {
+                CurrentState.OnExit();
+                CurrentState = newState;
+                CurrentState.OnEnter();
+            }
         }
 
         public void Redraw()

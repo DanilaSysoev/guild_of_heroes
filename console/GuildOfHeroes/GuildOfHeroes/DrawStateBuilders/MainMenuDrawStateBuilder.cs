@@ -15,31 +15,17 @@ namespace GuildOfHeroes.DrawStateBuilders
             var optionsMenuItem = new MenuItemSelectionUnit("Options");
             var exitMenuItem = new MenuItemSelectionUnit("Exit");
 
-            startMenuItem.
-                Neighbors[ChangeSelectionDirection.Up] = exitMenuItem;
-            startMenuItem.
-                Neighbors[ChangeSelectionDirection.Down] = continueMenuItem;
+            List<List<ISelectionUnit>> units = new List<List<ISelectionUnit>>();
+            units.Add(new List<ISelectionUnit> { startMenuItem });
+            units.Add(new List<ISelectionUnit> { continueMenuItem });
+            units.Add(new List<ISelectionUnit> { optionsMenuItem });
+            units.Add(new List<ISelectionUnit> { exitMenuItem });
 
-            continueMenuItem.
-                Neighbors[ChangeSelectionDirection.Up] = startMenuItem;
-            continueMenuItem.
-                Neighbors[ChangeSelectionDirection.Down] = optionsMenuItem;
-
-            optionsMenuItem.
-                Neighbors[ChangeSelectionDirection.Up] = continueMenuItem;
-            optionsMenuItem.
-                Neighbors[ChangeSelectionDirection.Down] = exitMenuItem;
-
-            exitMenuItem.
-                Neighbors[ChangeSelectionDirection.Up] = optionsMenuItem;
-            exitMenuItem.
-                Neighbors[ChangeSelectionDirection.Down] = startMenuItem;
-
-            MainMenuDrawState drawState = new MainMenuDrawState(startMenuItem);
+            MainMenuDrawState drawState = new MainMenuDrawState(units);
             startMenuItem.NextState = drawState;
             continueMenuItem.NextState = drawState;
             optionsMenuItem.NextState = drawState;
-            exitMenuItem.NextState = drawState;
+            exitMenuItem.NextState = ExitDrawState.Instance;
 
             return drawState;
         }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GuildOfHeroes
 {
-    public enum ChangeSelectionDirection
+    public enum Direction
     {
         Up,
         Right,

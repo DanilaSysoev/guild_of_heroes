@@ -8,9 +8,9 @@ namespace GuildOfHeroes
 {
     public class ChangeSelectionAction : IInputAction
     {
-        public ChangeSelectionDirection Direction { get; private set; }
+        public Direction Direction { get; private set; }
 
-        private ChangeSelectionAction(ChangeSelectionDirection direction)
+        private ChangeSelectionAction(Direction direction)
         {
             Direction = direction;
         }
@@ -22,12 +22,12 @@ namespace GuildOfHeroes
 
 
         public static readonly ChangeSelectionAction UpAction =
-            new ChangeSelectionAction(ChangeSelectionDirection.Up);
+            new ChangeSelectionAction(Direction.Up);
         public static readonly ChangeSelectionAction RightAction =
-            new ChangeSelectionAction(ChangeSelectionDirection.Right);
+            new ChangeSelectionAction(Direction.Right);
         public static readonly ChangeSelectionAction DownAction =
-            new ChangeSelectionAction(ChangeSelectionDirection.Down);
+            new ChangeSelectionAction(Direction.Down);
         public static readonly ChangeSelectionAction LeftAction =
-            new ChangeSelectionAction(ChangeSelectionDirection.Left);
+            new ChangeSelectionAction(Direction.Left);
     }
 }

@@ -10,9 +10,13 @@ namespace GuildOfHeroes
     {
         IGameDrawState 
         ApplyChangeSelectionAction(ChangeSelectionAction action);
-
         IGameDrawState
         ApplySelectAction(SelectAction action);
+        IGameDrawState
+        ApplyChangePageAction(ChangePageAction action);
+
+        void OnEnter();
+        void OnExit();
 
         void Draw();
     }
