@@ -6,9 +6,10 @@ namespace ConsoleExtension.Widgets
 {
     public interface IParent
     {
-        IReadOnlyList<IPanel> Children { get; }
+        IReadOnlyList<IWidget> Children { get; }
 
-        void AddChild(IPanel child);
-        bool RemoveChild(IPanel child);
+        void AddChild(IWidget child);
+        bool RemoveChild(IWidget child);
+        void Clear();
     }
 }

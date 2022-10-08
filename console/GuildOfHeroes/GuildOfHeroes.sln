@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuildOfHeroes", "GuildOfHer
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleExtension", "ConsoleExtension\ConsoleExtension.csproj", "{42D35D84-4CC2-4D81-B88E-CB8A7CED1AC3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleExtensionTests", "ConsoleExtensionTests\ConsoleExtensionTests.csproj", "{E24579E6-4B9C-4B03-B325-A75A5A80403E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{42D35D84-4CC2-4D81-B88E-CB8A7CED1AC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{42D35D84-4CC2-4D81-B88E-CB8A7CED1AC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{42D35D84-4CC2-4D81-B88E-CB8A7CED1AC3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E24579E6-4B9C-4B03-B325-A75A5A80403E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E24579E6-4B9C-4B03-B325-A75A5A80403E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E24579E6-4B9C-4B03-B325-A75A5A80403E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E24579E6-4B9C-4B03-B325-A75A5A80403E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

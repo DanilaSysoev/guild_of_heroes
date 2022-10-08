@@ -9,8 +9,6 @@ namespace ConsoleExtension.Draw
 {
     public interface IDrawer
     {
-        IDrawer Parent { get; }
-
         void Draw();
     }
 }

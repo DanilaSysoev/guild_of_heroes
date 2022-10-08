@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleExtension.Draw
+namespace ConsoleExtension.Widgets
 {
-    public interface IDrawerProvider
+    public interface IAlign
     {
-        IDrawer Get();
+        Alignment Alignment { get; set; }
     }
 }

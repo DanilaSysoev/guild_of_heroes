@@ -6,12 +6,9 @@ using System.Threading.Tasks;
 
 namespace ConsoleExtension.Widgets
 {
-    public interface IPanel
+    public interface IColor
     {
-        int Line { get; set; }
-        int Column { get; set; }
-
-        int Width { get; set; }
-        int Height { get; set; }
+        ConsoleColor BackgroundColor { get; set; }
+        ConsoleColor ForegroundColor { get; set; }
     }
 }

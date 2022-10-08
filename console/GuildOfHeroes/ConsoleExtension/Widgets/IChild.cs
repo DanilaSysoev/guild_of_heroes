@@ -6,6 +6,6 @@ namespace ConsoleExtension.Widgets
 {
     public interface IChild
     {
-        IPanel Parent { get; }
+        IWidget Parent { get; set; }
     }
 }
