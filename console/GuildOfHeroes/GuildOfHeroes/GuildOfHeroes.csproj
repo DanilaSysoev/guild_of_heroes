@@ -117,5 +117,11 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ConsoleExtension\ConsoleExtension.csproj">
+      <Project>{42d35d84-4cc2-4d81-b88e-cb8a7ced1ac3}</Project>
+      <Name>ConsoleExtension</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
