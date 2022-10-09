@@ -47,11 +47,13 @@
     <Compile Include="Widgets\IAlign.cs" />
     <Compile Include="Widgets\IChild.cs" />
     <Compile Include="Widgets\IColor.cs" />
+    <Compile Include="Widgets\IEnable.cs" />
     <Compile Include="Widgets\IPanel.cs" />
     <Compile Include="Widgets\IParent.cs" />
     <Compile Include="Widgets\IText.cs" />
     <Compile Include="Widgets\ITitled.cs" />
     <Compile Include="Widgets\IWidget.cs" />
+    <Compile Include="Widgets\Rectangle.cs" />
     <Compile Include="Widgets\TextLine.cs" />
     <Compile Include="Widgets\Widget.cs" />
   </ItemGroup>

@@ -8,9 +8,6 @@ namespace ConsoleExtension.Widgets
 {
     public class TextLine : Widget, IText, IAlign, IColor
     {
-        public static ConsoleColor DefaultBackgroundColor = ConsoleColor.Black;
-        public static ConsoleColor DefaultForegroundColor = ConsoleColor.Gray;
-
         public string Text { get; set; }
         public Alignment Alignment { get; set; }
         public override int Height 
@@ -19,36 +16,30 @@ namespace ConsoleExtension.Widgets
             set { }
         }
 
-        public ConsoleColor BackgroundColor { get; set; }
-        public ConsoleColor ForegroundColor { get; set; }
-
         public TextLine(
-            IWidget parent = null,
             int line = 0,
             int column = 0,
             int width = 0, 
-            int height = 0
-        ) : base(parent, line, column, width, height)
+            int height = 0,
+            IWidget parent = null
+        ) : base(line, column, width, height, parent)
         {
-            BackgroundColor = DefaultBackgroundColor;
-            ForegroundColor = DefaultForegroundColor;
         }
 
         protected override void DrawOwn()
         {
             PrepareTextLenAndOffsetPosition();
+
             int startPos = CalculateStartDrawPosition();
             int endPos = CalculateEndDrawPosition();
             int symPos = CalculateStartSymbolPosition();
 
-            Console.SetCursorPosition(startPos, ConsoleLine());
-            Console.ForegroundColor = ForegroundColor;
-            Console.BackgroundColor = BackgroundColor;
-
-            for(int i = startPos; i < endPos; ++i, ++symPos)
-                Console.Write(Text[symPos]);
-
-            Console.ResetColor();
+            if (LineInsideParent(ConsoleLine()))
+            {
+                Console.SetCursorPosition(startPos, ConsoleLine());
+                for (int i = startPos; i < endPos; ++i, ++symPos)
+                    Console.Write(Text[symPos]);
+            }
         }
 
         private void PrepareTextLenAndOffsetPosition()
@@ -59,23 +50,24 @@ namespace ConsoleExtension.Widgets
 
         private int CalculateStartSymbolPosition()
         {
-            int startDrawPosition = ConsoleColumn();
+            int startDrawPosition = ConsoleColumn() - ParentConsoleColumn();
             startDrawPosition += offsetPosition;
-            return startDrawPosition < 0 ? -startDrawPosition : 0;
+            return Math.Max(0, -startDrawPosition);
         }
 
         private int CalculateEndDrawPosition()
         {
             int endDrawPosition = ConsoleColumn() + textLength;
             endDrawPosition += offsetPosition;
-            return endDrawPosition >= 0 ? endDrawPosition : 0;
+            endDrawPosition = Math.Min(endDrawPosition, ParentConsoleRight());
+            return Math.Max(ParentConsoleColumn(), endDrawPosition);
         }
 
         private int CalculateStartDrawPosition()
         {            
             int startDrawPosition = ConsoleColumn();
             startDrawPosition += offsetPosition;
-            return startDrawPosition >= 0 ? startDrawPosition : 0;
+            return Math.Max(ParentConsoleColumn(), startDrawPosition);
         }
 
         private int OffsetDrawPosition()
