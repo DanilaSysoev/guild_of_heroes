@@ -26,7 +26,7 @@ namespace ConsoleExtension.Widgets
         {
         }
 
-        protected override void DrawOwn()
+        protected override void DrawOwnAfterChildren()
         {
             PrepareTextLenAndOffsetPosition();
 

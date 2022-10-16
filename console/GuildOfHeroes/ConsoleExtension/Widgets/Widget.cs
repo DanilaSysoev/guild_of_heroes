@@ -70,21 +70,25 @@ namespace ConsoleExtension.Widgets
             if (!Enable)
                 return;
 
+            SetupConsole();
+            DrawOwnBeforeChildren();
+            ResetConsole();
+
             foreach (var child in Children)
                 child.Draw();
 
             SetupConsole();
-            DrawOwn();
+            DrawOwnAfterChildren();
             ResetConsole();
         }
 
-        public int ConsoleLine() 
+        public virtual int ConsoleLine() 
         {
             if (Parent == null)
                 return Line;
             return Parent.ConsoleLine() + Line;
         }
-        public int ConsoleColumn() 
+        public virtual int ConsoleColumn() 
         {
             if (Parent == null)
                 return Column;
@@ -154,7 +158,8 @@ namespace ConsoleExtension.Widgets
             Console.ResetColor();
         }
 
-        protected abstract void DrawOwn();
+        protected virtual void DrawOwnBeforeChildren() { }
+        protected virtual void DrawOwnAfterChildren() { }
 
         private List<IWidget> children;
     }

@@ -37,7 +37,8 @@ namespace ConsoleExtensionTests
 
             Rectangle r1 = new Rectangle(5, 8, 20, 10);
             Rectangle r2 = new Rectangle(3, 3, 5, 20);
-            //r1.Filled = true;
+            r1.Filled = true;
+
 
             TextLine wL = new TextLine();
             wL.Alignment = Alignment.TopLeft;

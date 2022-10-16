@@ -10,6 +10,8 @@ namespace ConsoleExtension.Widgets
     {
         public bool Filled { get; set; }
 
+        public bool Bordered { get; set; }
+
         public char TopLeftSymbol     { get; set; }
         public char TopRightSymbol    { get; set; }
         public char BottomLeftSymbol  { get; set; }
@@ -31,15 +33,23 @@ namespace ConsoleExtension.Widgets
             BottomRightSymbol = DefaultBottomRightSymbol;
             HorizontalSymbol  = DefaultHorizontalSymbol;
             VerticalSymbol    = DefaultVerticalSymbol;
+
+            Bordered = true;
         }
 
-        protected override void DrawOwn()
+        protected override void DrawOwnBeforeChildren()
         {
-            DrawCorners();
-            DrawHorizontals();
-            DrawVerticals();
             if (Filled)
                 Fill();
+        }
+        protected override void DrawOwnAfterChildren()
+        {
+            if (Bordered)
+            {
+                DrawCorners();
+                DrawHorizontals();
+                DrawVerticals();
+            }
         }
 
         private void DrawCorners()
@@ -99,10 +109,12 @@ namespace ConsoleExtension.Widgets
 
         private void Fill()
         {
-            int startLine = Math.Max(ConsoleLine() + 1, ParentConsoleLine());
-            int endLine = Math.Min(ConsoleLine() + Height - 1, ParentConsoleBottom());
-            int startColumn = Math.Max(ConsoleColumn() + 1, ParentConsoleColumn());
-            int endColumn = Math.Min(ConsoleColumn() + Width - 1, ParentConsoleRight());
+            int fillBorder = Bordered ? 0 : 1;
+
+            int startLine = Math.Max(ConsoleLine() + 1, ParentConsoleLine()) - fillBorder;
+            int endLine = Math.Min(ConsoleLine() + Height - 1, ParentConsoleBottom()) + fillBorder;
+            int startColumn = Math.Max(ConsoleColumn() + 1, ParentConsoleColumn()) - fillBorder;
+            int endColumn = Math.Min(ConsoleColumn() + Width - 1, ParentConsoleRight()) + fillBorder;
 
             for(int line = startLine; line < endLine; ++line)
             {
