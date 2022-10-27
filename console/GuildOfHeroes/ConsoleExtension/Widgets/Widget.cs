@@ -60,7 +60,7 @@ namespace ConsoleExtension.Widgets
             return exist;
         }
 
-        public void Clear()
+        public virtual void Clear()
         {
             children.Clear();
         }

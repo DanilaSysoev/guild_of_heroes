@@ -19,10 +19,9 @@ namespace ConsoleExtension.Widgets
         public TextLine(
             int line = 0,
             int column = 0,
-            int width = 0, 
-            int height = 0,
+            int width = 0,
             IWidget parent = null
-        ) : base(line, column, width, height, parent)
+        ) : base(line, column, width, 1, parent)
         {
         }
 

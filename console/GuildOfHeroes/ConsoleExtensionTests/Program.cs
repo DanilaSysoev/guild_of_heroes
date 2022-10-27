@@ -35,26 +35,52 @@ namespace ConsoleExtensionTests
             //wC.Draw();
             //wR.Draw();
 
-            Rectangle r1 = new Rectangle(5, 8, 20, 10);
-            Rectangle r2 = new Rectangle(3, 3, 5, 20);
-            r1.Filled = true;
+            //Rectangle r1 = new Rectangle(5, 8, 20, 10);
+            //Rectangle r2 = new Rectangle(3, 3, 5, 20);
+            //r1.Filled = true;
 
 
-            TextLine wL = new TextLine();
-            wL.Alignment = Alignment.TopLeft;
-            wL.Line = 4;
-            wL.Column = 5;
-            wL.Width = 20;
-            wL.Text = "Left Alighnment";
-            wL.BackgroundColor = ConsoleColor.Gray;
-            wL.ForegroundColor = ConsoleColor.Black;
-            r1.AddChild(wL);
-            r1.AddChild(r2);
+            //TextLine wL = new TextLine();
+            //wL.Alignment = Alignment.TopLeft;
+            //wL.Line = 4;
+            //wL.Column = 5;
+            //wL.Width = 20;
+            //wL.Text = "Left Alighnment";
+            //wL.BackgroundColor = ConsoleColor.Gray;
+            //wL.ForegroundColor = ConsoleColor.Black;
+            //r1.AddChild(wL);
+            //r1.AddChild(r2);
 
-            r1.Draw();
+            //r1.Draw();
 
-            Console.WriteLine();
-            Console.ReadKey();
+            //Console.WriteLine();
+            //Console.ReadKey();
+
+            SelectList<string> list = new SelectList<string>(
+                0, 0, 15, 3
+            );
+            list.AddItem("Первый");
+            list.AddItem("Второй");
+            list.AddItem("Третий");
+            list.AddItem("Четвертый");
+            list.AddItem("Пятый");
+            list.AddItem("123456789012345");
+            list.ItemsAlignment = Alignment.BottomRight;
+            list.SelectionForegroundColor = ConsoleColor.Yellow;
+            list.SelectionBackgroundColor = ConsoleColor.Blue;
+
+            list.Draw();
+            var key = Console.ReadKey();
+            while(key.KeyChar != 'q')
+            {
+                if (key.Key == ConsoleKey.DownArrow)
+                    list.MoveSelectionOnNext();
+                if (key.Key == ConsoleKey.UpArrow)
+                    list.MoveSelectionOnPrevious();
+                Console.Clear();
+                list.Draw();
+                key = Console.ReadKey();
+            }
         }
     }
 }
