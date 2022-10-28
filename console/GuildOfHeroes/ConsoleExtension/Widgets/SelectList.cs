@@ -13,6 +13,8 @@ namespace ConsoleExtension.Widgets
         public int SelectedIndex { get { return selectedIndex; } }
         public ConsoleColor SelectionBackgroundColor { get; set; } 
         public ConsoleColor SelectionForegroundColor { get; set; }
+        public bool SelectedNumberDisplay { get; set; }
+
         public Alignment ItemsAlignment 
         {
             get { return itemsAlignment; }
@@ -41,11 +43,13 @@ namespace ConsoleExtension.Widgets
 
             visibleAreaBeginLine = 0;
             visibleAreaEndLine = 0;
+
+            SelectedNumberDisplay = false;
         }
 
         public void AddItem(T item) 
         {
-            var newTextLine = new TextLine(items.Count, 1, Width - 2);
+            var newTextLine = new TextLine(items.Count, 1, Width - 2, this);
             newTextLine.Text = item.ToString();
             newTextLine.Alignment = ItemsAlignment;
             lines.Add(newTextLine);
@@ -99,7 +103,6 @@ namespace ConsoleExtension.Widgets
                 RemoveSelection();
                 SetSelection(newSelected);
             }
-
         }
         public void MoveSelectionOnPrevious()
         {
@@ -132,6 +135,8 @@ namespace ConsoleExtension.Widgets
                 lines[i].Draw();
                 lines[i].Line += visibleAreaBeginLine;
             }
+            if (SelectedNumberDisplay && SelectedIndex >= 0)
+                DrawSelectedNumber();
         }
 
         private List<T> items;
@@ -159,6 +164,7 @@ namespace ConsoleExtension.Widgets
             lines[SelectedIndex] = decorator.Children[0];
             decorator.RemoveChild(lines[SelectedIndex]);
             lines[SelectedIndex].Line = decorator.Line;
+            lines[SelectedIndex].Parent = this;
             decorator.Clear();
             selectedIndex = -1;
         }
@@ -173,37 +179,66 @@ namespace ConsoleExtension.Widgets
             selectedIndex = index;
             SetupVisibleArea();
         }
-
         private void SetupVisibleArea()
         {
+            int additionalOffset = SelectedNumberDisplay ? 1 : 0;
+
             if (SelectedIndex < 0)
                 return;
-            if(SelectedIndex < visibleAreaBeginLine)
-            {
-                visibleAreaBeginLine = SelectedIndex;
-                visibleAreaEndLine =
-                    Math.Min(visibleAreaBeginLine + Height, lines.Count);
-            }
-            else if(SelectedIndex >= visibleAreaEndLine)
-            {
-                visibleAreaEndLine = SelectedIndex + 1;
-                visibleAreaBeginLine =
-                    Math.Max(visibleAreaEndLine - Height, 0);
-            }
+            if (SelectedIndex < visibleAreaBeginLine)
+                MoveUpToSelected(additionalOffset);
+            else if (SelectedIndex >= visibleAreaEndLine)
+                MovedownToSelected(additionalOffset);
+            else
+                CorrectionWithSelectedVisual();
         }
 
+        private void CorrectionWithSelectedVisual()
+        {
+            if(SelectedNumberDisplay &&
+               visibleAreaEndLine - visibleAreaBeginLine == Height)
+                --visibleAreaEndLine;
+        }
+
+        private void MovedownToSelected(int additionalOffset)
+        {
+            visibleAreaEndLine = SelectedIndex + 1;
+            visibleAreaBeginLine =
+                Math.Max(visibleAreaEndLine - Height + additionalOffset,
+                0
+            );
+        }
+        private void MoveUpToSelected(int additionalOffset)
+        {
+            visibleAreaBeginLine = SelectedIndex;
+            visibleAreaEndLine =
+                Math.Min(
+                    visibleAreaBeginLine + Height - additionalOffset,
+                    lines.Count
+                );
+        }
         private LineBorderDecorator BuildDecorator(IWidget line)
         {
             var decorator =
                 new LineBorderDecorator(
                     line.Line,
                     line.Column - 1,
-                    line.Width + 2
+                    line.Width + 2,
+                    this
                 );
             decorator.BackgroundColor = SelectionBackgroundColor;
             decorator.ForegroundColor = SelectionForegroundColor;
             decorator.AddChild(line);
             return decorator;
+        }
+        private void DrawSelectedNumber()
+        {
+            TextLine line = new TextLine(Height - 1, 0, Width, this);
+            line.Text = string.Format("{0}/{1}", SelectedIndex + 1, lines.Count);
+            line.Alignment = Alignment.BottomRight;
+            line.BackgroundColor = SelectionBackgroundColor;
+            line.ForegroundColor = SelectionForegroundColor;
+            line.Draw();
         }
     }
 }

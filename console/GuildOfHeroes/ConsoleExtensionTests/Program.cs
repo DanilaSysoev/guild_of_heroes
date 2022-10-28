@@ -57,7 +57,7 @@ namespace ConsoleExtensionTests
             //Console.ReadKey();
 
             SelectList<string> list = new SelectList<string>(
-                0, 0, 15, 3
+                10, 10, 15, 4
             );
             list.AddItem("Первый");
             list.AddItem("Второй");
@@ -68,6 +68,7 @@ namespace ConsoleExtensionTests
             list.ItemsAlignment = Alignment.BottomRight;
             list.SelectionForegroundColor = ConsoleColor.Yellow;
             list.SelectionBackgroundColor = ConsoleColor.Blue;
+            list.SelectedNumberDisplay = true;
 
             list.Draw();
             var key = Console.ReadKey();
