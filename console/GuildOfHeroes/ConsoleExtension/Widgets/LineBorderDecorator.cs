@@ -25,24 +25,21 @@ namespace ConsoleExtension.Widgets
         protected override void DrawOwnBeforeChildren()
         {
             for(int i = Column + 1; i < Column + Width - 1; ++i)
-            {
-                Console.SetCursorPosition(
-                    ConsoleColumn() + i, ConsoleLine()
-                );
-                Console.Write(' ');
-            }
+                DrawSymbolIfPossible(ConsoleLine(), ConsoleColumn() + i, ' ');
         }
 
         protected override void DrawOwnAfterChildren()
         {
-            Console.SetCursorPosition(
-                ConsoleColumn(), ConsoleLine()
+            DrawSymbolIfPossible(
+                ConsoleLine(),
+                ConsoleColumn(),
+                LeftDecor
             );
-            Console.Write(LeftDecor);
-            Console.SetCursorPosition(
-                ConsoleColumn() + Width - 1, ConsoleLine()
+            DrawSymbolIfPossible(
+                ConsoleLine(),
+                ConsoleColumn() + Width - 1,
+                RightDecor
             );
-            Console.Write(RightDecor);
         }
 
         public const char DefaultLeftDecor = '<';

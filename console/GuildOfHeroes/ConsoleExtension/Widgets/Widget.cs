@@ -161,6 +161,16 @@ namespace ConsoleExtension.Widgets
         protected virtual void DrawOwnBeforeChildren() { }
         protected virtual void DrawOwnAfterChildren() { }
 
+        protected void DrawSymbolIfPossible(int line, int column, char symbol)
+        {
+            if(line >= 0 && line < Console.WindowHeight &&
+               column >= 0 && column < Console.WindowWidth)
+            {
+                Console.SetCursorPosition(column, line);
+                Console.Write(symbol);
+            }
+        }
+
         private List<IWidget> children;
     }
 }

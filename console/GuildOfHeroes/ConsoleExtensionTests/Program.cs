@@ -57,7 +57,7 @@ namespace ConsoleExtensionTests
             //Console.ReadKey();
 
             SelectList<string> list = new SelectList<string>(
-                10, 10, 15, 4
+                -1, -1, 15, 4
             );
             list.AddItem("Первый");
             list.AddItem("Второй");
