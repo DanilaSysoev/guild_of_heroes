@@ -56,32 +56,61 @@ namespace ConsoleExtensionTests
             //Console.WriteLine();
             //Console.ReadKey();
 
-            SelectList<string> list = new SelectList<string>(
-                -1, -1, 15, 4
-            );
-            list.AddItem("Первый");
-            list.AddItem("Второй");
-            list.AddItem("Третий");
-            list.AddItem("Четвертый");
-            list.AddItem("Пятый");
-            list.AddItem("123456789012345");
-            list.ItemsAlignment = Alignment.BottomRight;
-            list.SelectionForegroundColor = ConsoleColor.Yellow;
-            list.SelectionBackgroundColor = ConsoleColor.Blue;
-            list.SelectedNumberDisplay = true;
+            //SelectList<string> list = new SelectList<string>(
+            //    -1, -1, 15, 4
+            //);
+            //list.AddItem("Первый");
+            //list.AddItem("Второй");
+            //list.AddItem("Третий");
+            //list.AddItem("Четвертый");
+            //list.AddItem("Пятый");
+            //list.AddItem("123456789012345");
+            //list.ItemsAlignment = Alignment.BottomRight;
+            //list.SelectionForegroundColor = ConsoleColor.Yellow;
+            //list.SelectionBackgroundColor = ConsoleColor.Blue;
+            //list.SelectedNumberDisplay = true;
 
-            list.Draw();
-            var key = Console.ReadKey();
-            while(key.KeyChar != 'q')
-            {
-                if (key.Key == ConsoleKey.DownArrow)
-                    list.MoveSelectionOnNext();
-                if (key.Key == ConsoleKey.UpArrow)
-                    list.MoveSelectionOnPrevious();
-                Console.Clear();
-                list.Draw();
-                key = Console.ReadKey();
-            }
+            //list.Draw();
+            //var key = Console.ReadKey();
+            //while(key.KeyChar != 'q')
+            //{
+            //    if (key.Key == ConsoleKey.DownArrow)
+            //        list.MoveSelectionOnNext();
+            //    if (key.Key == ConsoleKey.UpArrow)
+            //        list.MoveSelectionOnPrevious();
+            //    Console.Clear();
+            //    list.Draw();
+            //    key = Console.ReadKey();
+            //}
+            Rectangle rect = new Rectangle(5, 5, 15, 10);
+
+            TextImage ti = new TextImage(
+                new string[]
+                {
+                    "░██████╗░██╗░░░██╗██╗██╗░░░░░██████╗░  ░█████╗░███████╗",
+                    "██╔════╝░██║░░░██║██║██║░░░░░██╔══██╗  ██╔══██╗██╔════╝",
+                    "██║░░██╗░██║░░░██║██║██║░░░░░██║░░██║  ██║░░██║█████╗░░",
+                    "██║░░╚██╗██║░░░██║██║██║░░░░░██║░░██║  ██║░░██║██╔══╝░░",
+                    "╚██████╔╝╚██████╔╝██║███████╗██████╔╝  ╚█████╔╝██║░░░░░",
+                    "░╚═════╝░░╚═════╝░╚═╝╚══════╝╚═════╝░  ░╚════╝░╚═╝░░░░░",
+                    "                                                       ",
+                    "   ██╗░░██╗███████╗██████╗░░█████╗░███████╗░██████╗    ",
+                    "   ██║░░██║██╔════╝██╔══██╗██╔══██╗██╔════╝██╔════╝    ",
+                    "   ███████║█████╗░░██████╔╝██║░░██║█████╗░░╚█████╗░    ",
+                    "   ██╔══██║██╔══╝░░██╔══██╗██║░░██║██╔══╝░░░╚═══██╗    ",
+                    "   ██║░░██║███████╗██║░░██║╚█████╔╝███████╗██████╔╝    ",
+                    "   ╚═╝░░╚═╝╚══════╝╚═╝░░╚═╝░╚════╝░╚══════╝╚═════╝░    "
+                },
+                5,
+                0
+            );
+
+            //rect.AddChild(ti);
+
+            //rect.Draw();
+            ti.Draw();
+
+            Console.ReadKey();
         }
     }
 }
