@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ConsoleExtension.Service;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,60 +21,30 @@ namespace ConsoleExtension.Widgets
 
         protected override void DrawOwnBeforeChildren()
         {
-            int startCharIndex = CalculateStartCharIndex();
-            int startLine = CalculateStartLine();
-            int endCharIndex = CalculateEndCharIndex(startCharIndex);
-            int endLine = CalculateEndLine(startLine);
+            Rectangle drawingRect =
+                Parent == null ? 
+                RootArea().CutInsidePart(Area) :
+                Parent.Area.CutInsidePart(Area);
 
-            for(int line = startLine, offsetLine = 0;
-                line < endLine; 
-                ++line, ++offsetLine)
+            for(int offsetLine = 0;
+                offsetLine < drawingRect.Height; 
+                ++offsetLine)
             {
-                for(int charIndex = startCharIndex, offsetColumn = 0; 
-                    charIndex < endCharIndex; 
-                    ++charIndex, ++offsetColumn)
+                int line = drawingRect.Line + offsetLine;
+                for(int offsetColumn = 0;
+                    offsetColumn < drawingRect.Width; 
+                    ++offsetColumn)
                 {
+                    int column = drawingRect.Column + offsetColumn;
                     DrawSymbolIfPossible(
-                        ParentConsoleLine() + offsetLine + Math.Max(0, Line),
-                        ParentConsoleColumn() + offsetColumn + Math.Max(0, Column),
-                        image[line][charIndex]
+                        ParentConsoleLine() + offsetLine + Math.Max(0, Area.Line),
+                        ParentConsoleColumn() + offsetColumn + Math.Max(0, Area.Column),
+                        image[line][column]
                     );
                 }
             }
         }
-
-        private int CalculateEndLine(int startLine)
-        {
-            int parentHeight =
-                Parent == null ? Console.WindowHeight : Parent.Height;
-
-            if (startLine > 0)
-                return Math.Min(Height, startLine + parentHeight);
-            else
-                return Math.Min(Height, parentHeight - Line);
-        }
-
-        private int CalculateEndCharIndex(int startCharIndex)
-        {
-            int parentWidth =
-                Parent == null ? Console.WindowWidth : Parent.Width;
-
-            if (startCharIndex > 0)
-                return Math.Min(Width, startCharIndex + parentWidth);
-            else
-                return Math.Min(Width, parentWidth - Column);
-        }
-
-        private int CalculateStartLine()
-        {
-            return Math.Max(0, -Line);
-        }
-
-        private int CalculateStartCharIndex()
-        {
-            return Math.Max(0, -Column);
-        }
-
+                
         private string[] image;
     }
 }

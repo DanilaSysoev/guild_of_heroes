@@ -57,7 +57,7 @@ namespace ConsoleExtensionTests
             //Console.ReadKey();
 
             //SelectList<string> list = new SelectList<string>(
-            //    -1, -1, 15, 4
+            //    5, 5, 15, 6
             //);
             //list.AddItem("Первый");
             //list.AddItem("Второй");
@@ -72,7 +72,7 @@ namespace ConsoleExtensionTests
 
             //list.Draw();
             //var key = Console.ReadKey();
-            //while(key.KeyChar != 'q')
+            //while (key.KeyChar != 'q')
             //{
             //    if (key.Key == ConsoleKey.DownArrow)
             //        list.MoveSelectionOnNext();
@@ -82,7 +82,7 @@ namespace ConsoleExtensionTests
             //    list.Draw();
             //    key = Console.ReadKey();
             //}
-            Rectangle rect = new Rectangle(5, 5, 15, 10);
+            Frame rect = new Frame(5, 5, 15, 10);
 
             TextImage ti = new TextImage(
                 new string[]
@@ -101,14 +101,14 @@ namespace ConsoleExtensionTests
                     "   ██║░░██║███████╗██║░░██║╚█████╔╝███████╗██████╔╝    ",
                     "   ╚═╝░░╚═╝╚══════╝╚═╝░░╚═╝░╚════╝░╚══════╝╚═════╝░    "
                 },
-                5,
+                0,
                 0
             );
 
-            //rect.AddChild(ti);
+            rect.AddChild(ti);
 
-            //rect.Draw();
-            ti.Draw();
+            rect.Draw();
+            //ti.Draw();
 
             Console.ReadKey();
         }

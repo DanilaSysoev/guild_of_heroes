@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Draw\IDrawer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\Rectangle.cs" />
     <Compile Include="Widgets\Alignment.cs" />
     <Compile Include="Widgets\IAlign.cs" />
     <Compile Include="Widgets\IChild.cs" />
@@ -55,7 +56,7 @@
     <Compile Include="Widgets\ITitled.cs" />
     <Compile Include="Widgets\IWidget.cs" />
     <Compile Include="Widgets\LineBorderDecorator.cs" />
-    <Compile Include="Widgets\Rectangle.cs" />
+    <Compile Include="Widgets\Frame.cs" />
     <Compile Include="Widgets\SelectList.cs" />
     <Compile Include="Widgets\TextLine.cs" />
     <Compile Include="Widgets\Widget.cs" />

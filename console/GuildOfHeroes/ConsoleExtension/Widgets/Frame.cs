@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleExtension.Widgets
 {
-    public class Rectangle : Widget, IColor
+    public class Frame : Widget, IColor
     {
         public bool Filled { get; set; }
 
@@ -19,7 +19,7 @@ namespace ConsoleExtension.Widgets
         public char HorizontalSymbol  { get; set; }
         public char VerticalSymbol    { get; set; }
 
-        public Rectangle(
+        public Frame(
             int line = 0,
             int column = 0,
             int width = 0,
@@ -55,9 +55,9 @@ namespace ConsoleExtension.Widgets
         private void DrawCorners()
         {
             DrawSymbol(ConsoleLine(), ConsoleColumn(), TopLeftSymbol);
-            DrawSymbol(ConsoleLine() + Height - 1, ConsoleColumn(), BottomLeftSymbol);
-            DrawSymbol(ConsoleLine(), ConsoleColumn() + Width - 1, TopRightSymbol);
-            DrawSymbol(ConsoleLine() + Height - 1, ConsoleColumn() + Width - 1, BottomRightSymbol);
+            DrawSymbol(ConsoleLine() + Area.Height - 1, ConsoleColumn(), BottomLeftSymbol);
+            DrawSymbol(ConsoleLine(), ConsoleColumn() + Area.Width - 1, TopRightSymbol);
+            DrawSymbol(ConsoleLine() + Area.Height - 1, ConsoleColumn() + Area.Width - 1, BottomRightSymbol);
         }
 
         private void DrawSymbol(int line, int column, char symbol)
@@ -72,13 +72,13 @@ namespace ConsoleExtension.Widgets
         private void DrawHorizontals()
         {
             int start = Math.Max(ConsoleColumn() + 1, ParentConsoleColumn());
-            int end = Math.Min(ConsoleColumn() + Width - 1, ParentConsoleRight());
+            int end = Math.Min(ConsoleColumn() + Area.Width - 1, ParentConsoleRight());
 
             if (LineInsideParent(ConsoleLine()))
                 DrawHorizintalLine(ConsoleLine(), start, end);
 
-            if (LineInsideParent(ConsoleLine() + Height - 1))
-                DrawHorizintalLine(ConsoleLine() + Height - 1, start, end);
+            if (LineInsideParent(ConsoleLine() + Area.Height - 1))
+                DrawHorizintalLine(ConsoleLine() + Area.Height - 1, start, end);
         }
         private void DrawHorizintalLine(int line, int column, int end)
         {
@@ -90,13 +90,13 @@ namespace ConsoleExtension.Widgets
         private void DrawVerticals()
         {
             int start = Math.Max(ConsoleLine() + 1, ParentConsoleLine());
-            int end = Math.Min(ConsoleLine() + Height - 1, ParentConsoleBottom());
+            int end = Math.Min(ConsoleLine() + Area.Height - 1, ParentConsoleBottom());
 
             if (ColumnInsideParent(ConsoleColumn()))
                 DrawVerticalLine(start, ConsoleColumn(), end);
 
-            if (ColumnInsideParent(ConsoleColumn() + Width - 1))
-                DrawVerticalLine(start, ConsoleColumn() + Width - 1, end);
+            if (ColumnInsideParent(ConsoleColumn() + Area.Width - 1))
+                DrawVerticalLine(start, ConsoleColumn() + Area.Width - 1, end);
         }
         private void DrawVerticalLine(int line, int column, int end)
         {
@@ -112,9 +112,9 @@ namespace ConsoleExtension.Widgets
             int fillBorder = Bordered ? 0 : 1;
 
             int startLine = Math.Max(ConsoleLine() + 1, ParentConsoleLine()) - fillBorder;
-            int endLine = Math.Min(ConsoleLine() + Height - 1, ParentConsoleBottom()) + fillBorder;
+            int endLine = Math.Min(ConsoleLine() + Area.Height - 1, ParentConsoleBottom()) + fillBorder;
             int startColumn = Math.Max(ConsoleColumn() + 1, ParentConsoleColumn()) - fillBorder;
-            int endColumn = Math.Min(ConsoleColumn() + Width - 1, ParentConsoleRight()) + fillBorder;
+            int endColumn = Math.Min(ConsoleColumn() + Area.Width - 1, ParentConsoleRight()) + fillBorder;
 
             for(int line = startLine; line < endLine; ++line)
             {

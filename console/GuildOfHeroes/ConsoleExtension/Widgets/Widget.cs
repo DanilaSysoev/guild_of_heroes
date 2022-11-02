@@ -1,14 +1,12 @@
-﻿using System;
+﻿using ConsoleExtension.Service;
+using System;
 using System.Collections.Generic;
 
 namespace ConsoleExtension.Widgets
 {
     public abstract class Widget : IWidget
     {
-        public virtual int Line { get; set; }
-        public virtual int Column { get; set; }
-        public virtual int Width { get; set; }
-        public virtual int Height { get; set; }
+        public virtual Rectangle Area { get; set; }
 
         public ConsoleColor BackgroundColor { get; set; }
         public ConsoleColor ForegroundColor { get; set; }
@@ -36,10 +34,7 @@ namespace ConsoleExtension.Widgets
             children = new List<IWidget>();
 
             Parent = parent;
-            Line = line;
-            Column = column;
-            Width = width;
-            Height = height;
+            Area = new Rectangle(line, column, width, height);
             Enable = true;
 
             BackgroundColor = DefaultBackgroundColor;
@@ -82,17 +77,27 @@ namespace ConsoleExtension.Widgets
             ResetConsole();
         }
 
-        public virtual int ConsoleLine() 
+        public virtual int ConsoleLine()
         {
             if (Parent == null)
-                return Line;
-            return Parent.ConsoleLine() + Line;
+                return Area.Line;
+            return Parent.ConsoleLine() + Area.Line;
         }
         public virtual int ConsoleColumn() 
         {
             if (Parent == null)
-                return Column;
-            return Parent.ConsoleColumn() + Column;
+                return Area.Column;
+            return Parent.ConsoleColumn() + Area.Column;
+        }
+
+        public static Rectangle RootArea()
+        {
+            return new Rectangle(
+                0, 
+                0, 
+                Console.WindowWidth,
+                Console.WindowHeight
+            );
         }
 
         protected int ParentConsoleLine()
@@ -112,7 +117,7 @@ namespace ConsoleExtension.Widgets
             if (Parent != null)
                 return Math.Min(
                     Console.BufferWidth,
-                    Parent.ConsoleColumn() + Parent.Width
+                    Parent.ConsoleColumn() + Parent.Area.Width
                 );
             return Console.BufferWidth;
         }
@@ -121,7 +126,7 @@ namespace ConsoleExtension.Widgets
             if (Parent != null)
                 return Math.Min(
                     Console.BufferHeight, 
-                    Parent.ConsoleLine() + Parent.Height
+                    Parent.ConsoleLine() + Parent.Area.Height
                 );
             return Console.BufferHeight;
         }

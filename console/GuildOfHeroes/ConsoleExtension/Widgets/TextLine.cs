@@ -10,11 +10,6 @@ namespace ConsoleExtension.Widgets
     {
         public string Text { get; set; }
         public Alignment Alignment { get; set; }
-        public override int Height 
-        {
-            get { return 1; }
-            set { }
-        }
 
         public TextLine(
             int line = 0,
@@ -43,7 +38,7 @@ namespace ConsoleExtension.Widgets
 
         private void PrepareTextLenAndOffsetPosition()
         {
-            textLength = Width < Text.Length ? Width : Text.Length;
+            textLength = Area.Width < Text.Length ? Area.Width : Text.Length;
             offsetPosition = OffsetDrawPosition();
         }
 
@@ -76,12 +71,12 @@ namespace ConsoleExtension.Widgets
                 case Alignment.TopCenter:
                 case Alignment.MiddleCenter:
                 case Alignment.BottomCenter:
-                    return (Width - textLength) / 2;
+                    return (Area.Width - textLength) / 2;
 
                 case Alignment.TopRight:
                 case Alignment.MiddleRight:
                 case Alignment.BottomRight:
-                    return Width - textLength;
+                    return Area.Width - textLength;
             }
 
             return 0;

@@ -24,7 +24,7 @@ namespace ConsoleExtension.Widgets
 
         protected override void DrawOwnBeforeChildren()
         {
-            for(int i = Column + 1; i < Column + Width - 1; ++i)
+            for(int i = Area.Column + 1; i < Area.Column + Area.Width - 1; ++i)
                 DrawSymbolIfPossible(ConsoleLine(), ConsoleColumn() + i, ' ');
         }
 
@@ -37,7 +37,7 @@ namespace ConsoleExtension.Widgets
             );
             DrawSymbolIfPossible(
                 ConsoleLine(),
-                ConsoleColumn() + Width - 1,
+                ConsoleColumn() + Area.Width - 1,
                 RightDecor
             );
         }

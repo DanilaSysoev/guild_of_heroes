@@ -49,14 +49,14 @@ namespace ConsoleExtension.Widgets
 
         public void AddItem(T item) 
         {
-            var newTextLine = new TextLine(items.Count, 1, Width - 2, this);
+            var newTextLine = new TextLine(items.Count, 1, Area.Width - 2, this);
             newTextLine.Text = item.ToString();
             newTextLine.Alignment = ItemsAlignment;
             lines.Add(newTextLine);
             items.Add(item);
 
             visibleAreaEndLine =
-                Math.Min(visibleAreaBeginLine + Height, lines.Count);
+                Math.Min(visibleAreaBeginLine + Area.Height, lines.Count);
         }
         public void ClearItems() 
         {
@@ -131,9 +131,9 @@ namespace ConsoleExtension.Widgets
         {
             for (int i = visibleAreaBeginLine; i < visibleAreaEndLine; ++i)
             {
-                lines[i].Line -= visibleAreaBeginLine;
+                lines[i].Area.Line -= visibleAreaBeginLine;
                 lines[i].Draw();
-                lines[i].Line += visibleAreaBeginLine;
+                lines[i].Area.Line += visibleAreaBeginLine;
             }
             if (SelectedNumberDisplay && SelectedIndex >= 0)
                 DrawSelectedNumber();
@@ -163,7 +163,7 @@ namespace ConsoleExtension.Widgets
             var decorator = lines[SelectedIndex];            
             lines[SelectedIndex] = decorator.Children[0];
             decorator.RemoveChild(lines[SelectedIndex]);
-            lines[SelectedIndex].Line = decorator.Line;
+            lines[SelectedIndex].Area.Line = decorator.Area.Line;
             lines[SelectedIndex].Parent = this;
             decorator.Clear();
             selectedIndex = -1;
@@ -174,7 +174,7 @@ namespace ConsoleExtension.Widgets
                 return;
             var line = lines[index];
             var decorator = BuildDecorator(line);
-            line.Line = 0;
+            line.Area.Line = 0;
             lines[index] = decorator;
             selectedIndex = index;
             SetupVisibleArea();
@@ -196,7 +196,7 @@ namespace ConsoleExtension.Widgets
         private void CorrectionWithSelectedVisual()
         {
             if(SelectedNumberDisplay &&
-               visibleAreaEndLine - visibleAreaBeginLine == Height)
+               visibleAreaEndLine - visibleAreaBeginLine == Area.Height)
                 --visibleAreaEndLine;
         }
 
@@ -204,7 +204,7 @@ namespace ConsoleExtension.Widgets
         {
             visibleAreaEndLine = SelectedIndex + 1;
             visibleAreaBeginLine =
-                Math.Max(visibleAreaEndLine - Height + additionalOffset,
+                Math.Max(visibleAreaEndLine - Area.Height + additionalOffset,
                 0
             );
         }
@@ -213,7 +213,7 @@ namespace ConsoleExtension.Widgets
             visibleAreaBeginLine = SelectedIndex;
             visibleAreaEndLine =
                 Math.Min(
-                    visibleAreaBeginLine + Height - additionalOffset,
+                    visibleAreaBeginLine + Area.Height - additionalOffset,
                     lines.Count
                 );
         }
@@ -221,9 +221,9 @@ namespace ConsoleExtension.Widgets
         {
             var decorator =
                 new LineBorderDecorator(
-                    line.Line,
-                    line.Column - 1,
-                    line.Width + 2,
+                    line.Area.Line,
+                    line.Area.Column - 1,
+                    line.Area.Width + 2,
                     this
                 );
             decorator.BackgroundColor = SelectionBackgroundColor;
@@ -233,7 +233,7 @@ namespace ConsoleExtension.Widgets
         }
         private void DrawSelectedNumber()
         {
-            TextLine line = new TextLine(Height - 1, 0, Width, this);
+            TextLine line = new TextLine(Area.Height - 1, 0, Area.Width, this);
             line.Text = string.Format("{0}/{1}", SelectedIndex + 1, lines.Count);
             line.Alignment = Alignment.BottomRight;
             line.BackgroundColor = SelectionBackgroundColor;

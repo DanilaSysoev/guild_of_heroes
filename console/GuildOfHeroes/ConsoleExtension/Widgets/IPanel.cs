@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ConsoleExtension.Service;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,10 +9,6 @@ namespace ConsoleExtension.Widgets
 {
     public interface IPanel
     {
-        int Line { get; set; }
-        int Column { get; set; }
-
-        int Width { get; set; }
-        int Height { get; set; }
+        Rectangle Area { get; set; }
     }
 }
