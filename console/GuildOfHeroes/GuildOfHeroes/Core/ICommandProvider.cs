@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GuildOfHeroes.DrawStateBuilders
+namespace GuildOfHeroes.Core
 {
-    public interface IDrawStateBuilder
+    public interface ICommandProvider
     {
-        IGameDrawState Build();
+        ICommand GetNextCommand();
     }
 }

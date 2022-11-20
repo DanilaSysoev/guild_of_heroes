@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{FEDB3BF8-C2FA-4E5C-98CD-C25DAD88306D}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <RootNamespace>GuildOfHeroes</RootNamespace>
     <AssemblyName>GuildOfHeroes</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
@@ -31,6 +31,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -46,51 +49,30 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArtProvider.cs" />
-    <Compile Include="ChangePageAction.cs" />
-    <Compile Include="ChangeSelectionAction.cs" />
-    <Compile Include="Direction.cs" />
-    <Compile Include="Class.cs" />
-    <Compile Include="ConsoleInputManager.cs" />
-    <Compile Include="DrawState.cs" />
-    <Compile Include="DrawStates\DrawStateBasedOnSelectionUnit.cs" />
-    <Compile Include="DrawStateBuilders\IDrawStateBuilder.cs" />
-    <Compile Include="DrawStateBuilders\MainMenuDrawStateBuilder.cs" />
-    <Compile Include="DrawStates\ExitDrawState.cs" />
-    <Compile Include="DrawStates\SelectGuildMasterDrawState.cs" />
-    <Compile Include="EntityBasedSelectionUnit.cs" />
-    <Compile Include="GuildMaster.cs" />
-    <Compile Include="ISelectionUnit.cs" />
-    <Compile Include="Game.cs" />
-    <Compile Include="GameDraw.cs" />
-    <Compile Include="DrawStates\IGameDrawState.cs" />
-    <Compile Include="Hero.cs" />
-    <Compile Include="HeroGeneratorPattern.cs" />
-    <Compile Include="IGameDraw.cs" />
-    <Compile Include="IInputAction.cs" />
-    <Compile Include="IInputManager.cs" />
-    <Compile Include="DrawStates\MainMenuDrawState.cs" />
-    <Compile Include="MenuItemSelectionUnit.cs" />
-    <Compile Include="NameGenerator.cs" />
-    <Compile Include="ObjectWithName.cs" />
+    <Compile Include="Core\ICommand.cs" />
+    <Compile Include="Core\ICommandExecuter.cs" />
+    <Compile Include="Core\ICommandProvider.cs" />
+    <Compile Include="Entities\Class.cs" />
+    <Compile Include="Entities\GuildMaster.cs" />
+    <Compile Include="Core\Game.cs" />
+    <Compile Include="Entities\Hero.cs" />
+    <Compile Include="Entities\Service\HeroGeneratorPattern.cs" />
+    <Compile Include="Entities\Service\NameGenerator.cs" />
+    <Compile Include="Entities\ObjectWithName.cs" />
+    <Compile Include="Core\IDrawManager.cs" />
+    <Compile Include="Entities\World.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Race.cs" />
-    <Compile Include="RandomGlobal.cs" />
-    <Compile Include="RandomRange.cs" />
-    <Compile Include="SelectAction.cs" />
-    <Compile Include="SelectionUnitBase.cs" />
-    <Compile Include="Service\AttributeCollection.cs" />
-    <Compile Include="Service\JsonBuilder.cs" />
-    <Compile Include="Skill.cs" />
+    <Compile Include="Entities\Race.cs" />
+    <Compile Include="Entities\Service\RandomGlobal.cs" />
+    <Compile Include="Entities\Service\RandomRange.cs" />
+    <Compile Include="Entities\Service\AttributeCollection.cs" />
+    <Compile Include="Entities\Service\JsonBuilder.cs" />
+    <Compile Include="Entities\Skill.cs" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Data\Art\Title.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="Data\Classes.json">
@@ -122,6 +104,9 @@
       <Project>{42d35d84-4cc2-4d81-b88e-cb8a7ced1ac3}</Project>
       <Name>ConsoleExtension</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Core\Commands\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
