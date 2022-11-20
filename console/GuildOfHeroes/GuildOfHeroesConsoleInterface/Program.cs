@@ -4,13 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GuildOfHeroes
+namespace GuildOfHeroesConsoleInterface
 {
-    public enum Direction
+    class Program
     {
-        Up,
-        Right,
-        Down,
-        Left
+        static void Main(string[] args)
+        {
+        }
     }
 }

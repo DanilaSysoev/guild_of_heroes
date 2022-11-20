@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GuildOfHeroes
+namespace GuildOfHeroes.Entities
 {
-    public interface IInputManager
+    public class World
     {
-        IInputAction GetNextAction();
     }
 }
