@@ -1,5 +1,6 @@
 ﻿using GuildOfHeroes.Entities;
 using GuildOfHeroes.Entities.Service;
+using System;
 
 namespace GuildOfHeroes.Core
 {
@@ -7,30 +8,45 @@ namespace GuildOfHeroes.Core
     {
         public static Game Instance { get; private set; }
 
+        private World world;
         private IDrawManager drawManager;
         private IWorldUpdater worldUpdater;
-        private World world;
+        private IGamePreparer gamePreparer;
 
         private bool gameActive;
 
         public Game(
             IDrawManager drawManager,
             IWorldUpdater worldUpdater,
-            World world
+            IGamePreparer gamePreparer
         )
         {
             Instance = this;
             gameActive = true;
             this.drawManager = drawManager;
             this.worldUpdater = worldUpdater;
-            this.world = world;
+            this.gamePreparer = gamePreparer;
         }
 
         public void Run()
         {
-            Load();
+            PrepareGame();
             while (gameActive)
                 GameStep();
+        }
+
+        private void PrepareGame()
+        {
+            LoadData();
+            world = BuildWorld();
+            gamePreparer.Prepare(world);
+            drawManager.Setup();
+            worldUpdater.Setup();
+        }
+
+        private World BuildWorld()
+        {
+            return new World();
         }
 
         private void GameStep()
@@ -44,7 +60,7 @@ namespace GuildOfHeroes.Core
             gameActive = false;
         }
 
-        private void Load()
+        private void LoadData()
         {
             Skill.Load();
             Race.Load();

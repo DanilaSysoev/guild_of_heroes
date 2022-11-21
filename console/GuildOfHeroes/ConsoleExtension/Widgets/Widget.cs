@@ -33,12 +33,14 @@ namespace ConsoleExtension.Widgets
         {
             children = new List<IWidget>();
 
-            Parent = parent;
             Area = new Rectangle(line, column, width, height);
             Enable = true;
 
             BackgroundColor = DefaultBackgroundColor;
             ForegroundColor = DefaultForegroundColor;
+
+            if (parent != null)
+                parent.AddChild(this);
         }
 
         public void AddChild(IWidget child)

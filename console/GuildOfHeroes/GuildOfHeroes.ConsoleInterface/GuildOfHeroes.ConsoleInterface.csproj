@@ -44,15 +44,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArtProvider.cs" />
+    <Compile Include="Base\ISelectable.cs" />
     <Compile Include="Commands\SelectCommand.cs" />
     <Compile Include="Commands\RightCommand.cs" />
     <Compile Include="Commands\DownCommand.cs" />
     <Compile Include="Commands\LeftCommand.cs" />
     <Compile Include="Commands\UpCommand.cs" />
+    <Compile Include="ConsoleGamePreparer.cs" />
     <Compile Include="ConsoleWorldUpdater.cs" />
     <Compile Include="Base\ICommand.cs" />
     <Compile Include="Base\ICommandExecuter.cs" />
     <Compile Include="Base\ICommandProvider.cs" />
+    <Compile Include="MainMenuScreen.cs" />
+    <Compile Include="MenuItems\Main\ContinueGameMenuItem.cs" />
+    <Compile Include="MenuItems\Main\OptionsMenuItem.cs" />
+    <Compile Include="MenuItems\Main\ExitMenuItem.cs" />
+    <Compile Include="MenuItems\Main\StartGameMenuItem.cs" />
+    <Compile Include="MenuItems\MenuItem.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
