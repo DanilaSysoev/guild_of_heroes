@@ -13,9 +13,9 @@ namespace ConsoleExtension.Widgets
 
         public bool Enable { get; set; }
 
-        public IReadOnlyList<IWidget> Children 
-        { 
-            get 
+        public IReadOnlyList<IWidget> Children
+        {
+            get
             {
                 return children;
             }
@@ -83,7 +83,7 @@ namespace ConsoleExtension.Widgets
                 return Area.Line;
             return Parent.ConsoleLine() + Area.Line;
         }
-        public virtual int ConsoleColumn() 
+        public virtual int ConsoleColumn()
         {
             if (Parent == null)
                 return Area.Column;
@@ -93,8 +93,8 @@ namespace ConsoleExtension.Widgets
         public static Rectangle RootArea()
         {
             return new Rectangle(
-                0, 
-                0, 
+                0,
+                0,
                 Console.WindowWidth,
                 Console.WindowHeight
             );
@@ -125,7 +125,7 @@ namespace ConsoleExtension.Widgets
         {
             if (Parent != null)
                 return Math.Min(
-                    Console.BufferHeight, 
+                    Console.BufferHeight,
                     Parent.ConsoleLine() + Parent.Area.Height
                 );
             return Console.BufferHeight;
@@ -146,10 +146,10 @@ namespace ConsoleExtension.Widgets
                    column < ParentConsoleRight();
         }
 
-        public static ConsoleColor 
+        public static ConsoleColor
         DefaultBackgroundColor = ConsoleColor.Black;
 
-        public static ConsoleColor 
+        public static ConsoleColor
         DefaultForegroundColor = ConsoleColor.Gray;
 
 
@@ -168,7 +168,7 @@ namespace ConsoleExtension.Widgets
 
         protected void DrawSymbolIfPossible(int line, int column, char symbol)
         {
-            if(line >= 0 && line < Console.WindowHeight &&
+            if (line >= 0 && line < Console.WindowHeight &&
                column >= 0 && column < Console.WindowWidth)
             {
                 Console.SetCursorPosition(column, line);

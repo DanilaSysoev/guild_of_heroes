@@ -1,10 +1,8 @@
-﻿using System;
+﻿using GuildOfHeroes.Entities.Service;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace GuildOfHeroes
+namespace GuildOfHeroes.Entities
 {
     public class Hero
     {
@@ -26,18 +24,18 @@ namespace GuildOfHeroes
         {
             get
             {
-                return BASE_LOYALTY + 
-                       AccumulatedLoyalty + 
-                       Race.LoyaltyModifier + 
+                return BASE_LOYALTY +
+                       AccumulatedLoyalty +
+                       Race.LoyaltyModifier +
                        Class.LoyaltyModifier;
             }
         }
 
         public int GetSkill(Skill skill)
         {
-            return 
-                Skills[skill] + 
-                Race.GetSkillModifier(skill) + 
+            return
+                Skills[skill] +
+                Race.GetSkillModifier(skill) +
                 Class.GetSkillModifier(skill);
         }
 
@@ -55,7 +53,7 @@ namespace GuildOfHeroes
             Hero hero = new Hero();
             hero.Race = SelectWithWeights(pattern.RacesWeights);
             hero.Class = SelectWithWeights(pattern.ClassesWeights);
-            foreach(var skill in Skill.GetAll())
+            foreach (var skill in Skill.GetAll())
             {
                 if (pattern.SkillsRange.ContainsKey(skill))
                     hero.Skills.Add(skill, pattern.SkillsRange[skill].Get());
@@ -76,7 +74,7 @@ namespace GuildOfHeroes
             int sum = entityWeights.Sum(kvp => kvp.Value);
             int v = RandomGlobal.Range(0, sum);
             int curSum = 0;
-            foreach(var entityWeight in entityWeights)
+            foreach (var entityWeight in entityWeights)
             {
                 if (v >= curSum && v < curSum + entityWeight.Value)
                     return entityWeight.Key;

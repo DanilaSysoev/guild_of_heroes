@@ -1,13 +1,9 @@
-﻿using GuildOfHeroes.Service;
-using Newtonsoft.Json.Linq;
-using System;
+﻿using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace GuildOfHeroes
+namespace GuildOfHeroes.Entities.Service
 {
     public class HeroGeneratorPattern : ObjectWithName
     {

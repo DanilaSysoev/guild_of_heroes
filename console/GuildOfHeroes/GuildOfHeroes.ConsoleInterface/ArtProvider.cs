@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace GuildOfHeroes
+namespace GuildOfHeroes.ConsoleInterface
 {
     public static class ArtProvider
-    {        
+    {
         public static IReadOnlyList<string> Title { get; private set; }
 
         public static void Load()

@@ -1,11 +1,10 @@
-﻿using GuildOfHeroes.Service;
+﻿using GuildOfHeroes.Entities.Service;
 using Newtonsoft.Json.Linq;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace GuildOfHeroes
+namespace GuildOfHeroes.Entities
 {
     public class Race : ObjectWithName
     {

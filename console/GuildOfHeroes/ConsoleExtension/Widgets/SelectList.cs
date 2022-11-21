@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ConsoleExtension.Widgets
 {
@@ -11,11 +8,11 @@ namespace ConsoleExtension.Widgets
         public IReadOnlyList<T> Items { get { return items; } }
         public T SelectedItem { get { return items[selectedIndex]; } }
         public int SelectedIndex { get { return selectedIndex; } }
-        public ConsoleColor SelectionBackgroundColor { get; set; } 
+        public ConsoleColor SelectionBackgroundColor { get; set; }
         public ConsoleColor SelectionForegroundColor { get; set; }
         public bool SelectedNumberDisplay { get; set; }
 
-        public Alignment ItemsAlignment 
+        public Alignment ItemsAlignment
         {
             get { return itemsAlignment; }
             set
@@ -25,7 +22,7 @@ namespace ConsoleExtension.Widgets
                 SetItems(items);
                 SetSelection(selected);
             }
-        }        
+        }
 
         public SelectList(
            int line = 0,
@@ -47,7 +44,7 @@ namespace ConsoleExtension.Widgets
             SelectedNumberDisplay = false;
         }
 
-        public void AddItem(T item) 
+        public void AddItem(T item)
         {
             var newTextLine = new TextLine(items.Count, 1, Area.Width - 2, this);
             newTextLine.Text = item.ToString();
@@ -58,13 +55,13 @@ namespace ConsoleExtension.Widgets
             visibleAreaEndLine =
                 Math.Min(visibleAreaBeginLine + Area.Height, lines.Count);
         }
-        public void ClearItems() 
+        public void ClearItems()
         {
             items = new List<T>();
             lines = new List<IWidget>();
             selectedIndex = -1;
         }
-        public void RemoveItem(T item) 
+        public void RemoveItem(T item)
         {
             RemoveAt(items.IndexOf(item));
         }
@@ -80,18 +77,18 @@ namespace ConsoleExtension.Widgets
             SetSelection(newSelectedIndex);
         }
 
-        public void AddItems(IEnumerable<T> items) 
+        public void AddItems(IEnumerable<T> items)
         {
             foreach (var item in items)
                 AddItem(item);
         }
-        public void SetItems(IEnumerable<T> items) 
+        public void SetItems(IEnumerable<T> items)
         {
             ClearItems();
             AddItems(items);
         }
 
-        public void MoveSelectionOnNext() 
+        public void MoveSelectionOnNext()
         {
             if (lines.Count == 0)
                 return;
@@ -113,13 +110,13 @@ namespace ConsoleExtension.Widgets
                 SetSelection(lines.Count - 1);
             else
             {
-                int newSelected = 
+                int newSelected =
                     (SelectedIndex + lines.Count - 1) % lines.Count;
                 RemoveSelection();
                 SetSelection(newSelected);
             }
         }
-        public void Select(int index) 
+        public void Select(int index)
         {
             if (lines.Count == 0)
                 return;
@@ -160,7 +157,7 @@ namespace ConsoleExtension.Widgets
         {
             if (SelectedIndex < 0)
                 return;
-            var decorator = lines[SelectedIndex];            
+            var decorator = lines[SelectedIndex];
             lines[SelectedIndex] = decorator.Children[0];
             decorator.RemoveChild(lines[SelectedIndex]);
             lines[SelectedIndex].Area.Line = decorator.Area.Line;
@@ -195,7 +192,7 @@ namespace ConsoleExtension.Widgets
 
         private void CorrectionWithSelectedVisual()
         {
-            if(SelectedNumberDisplay &&
+            if (SelectedNumberDisplay &&
                visibleAreaEndLine - visibleAreaBeginLine == Area.Height)
                 --visibleAreaEndLine;
         }

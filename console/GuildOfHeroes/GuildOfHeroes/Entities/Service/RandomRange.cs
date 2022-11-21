@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace GuildOfHeroes
+﻿namespace GuildOfHeroes.Entities.Service
 {
     public class RandomRange
     {

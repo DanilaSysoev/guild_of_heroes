@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("GuildOfHeroesConsoleInterface")]
+[assembly: AssemblyTitle("GuildOfHeroes.ConsoleInterface")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("GuildOfHeroesConsoleInterface")]
+[assembly: AssemblyProduct("GuildOfHeroes.ConsoleInterface")]
 [assembly: AssemblyCopyright("Copyright ©  2022")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("2fd1a284-a04c-45e5-a44b-d0af2330b1b8")]
+[assembly: Guid("90978bf0-b3b6-4ba4-b8a5-7ec5d2365241")]
 
 // Version information for an assembly consists of the following four values:
 //

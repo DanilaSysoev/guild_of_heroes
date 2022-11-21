@@ -1,18 +1,18 @@
-﻿using GuildOfHeroes.Service;
+﻿using GuildOfHeroes.Entities.Service;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace GuildOfHeroes
+namespace GuildOfHeroes.Entities
 {
     public class Skill : ObjectWithName
     {
-        private Skill(string name) 
+        private Skill(string name)
             : base(name)
         {
         }
-        
+
         public override bool Equals(object obj)
         {
             var sObj = obj as Skill;

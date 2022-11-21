@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ConsoleExtension.Widgets
 {
@@ -58,7 +54,7 @@ namespace ConsoleExtension.Widgets
         }
 
         private int CalculateStartDrawPosition()
-        {            
+        {
             int startDrawPosition = ConsoleColumn();
             startDrawPosition += offsetPosition;
             return Math.Max(ParentConsoleColumn(), startDrawPosition);

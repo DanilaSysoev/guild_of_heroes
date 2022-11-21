@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2FD1A284-A04C-45E5-A44B-D0AF2330B1B8}</ProjectGuid>
+    <ProjectGuid>{90978BF0-B3B6-4BA4-B8A5-7EC5D2365241}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>GuildOfHeroesConsoleInterface</RootNamespace>
-    <AssemblyName>GuildOfHeroesConsoleInterface</AssemblyName>
+    <RootNamespace>GuildOfHeroes.ConsoleInterface</RootNamespace>
+    <AssemblyName>GuildOfHeroes.ConsoleInterface</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -44,6 +44,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArtProvider.cs" />
+    <Compile Include="Commands\SelectCommand.cs" />
+    <Compile Include="Commands\RightCommand.cs" />
+    <Compile Include="Commands\DownCommand.cs" />
+    <Compile Include="Commands\LeftCommand.cs" />
+    <Compile Include="Commands\UpCommand.cs" />
+    <Compile Include="ConsoleWorldUpdater.cs" />
+    <Compile Include="Base\ICommand.cs" />
+    <Compile Include="Base\ICommandExecuter.cs" />
+    <Compile Include="Base\ICommandProvider.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -54,6 +63,17 @@
     <None Include="Art\Title.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\ConsoleExtension\ConsoleExtension.csproj">
+      <Project>{42d35d84-4cc2-4d81-b88e-cb8a7ced1ac3}</Project>
+      <Name>ConsoleExtension</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GuildOfHeroes\GuildOfHeroes.csproj">
+      <Project>{fedb3bf8-c2fa-4e5c-98cd-c25dad88306d}</Project>
+      <Name>GuildOfHeroes</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

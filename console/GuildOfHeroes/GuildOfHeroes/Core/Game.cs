@@ -1,4 +1,5 @@
 ﻿using GuildOfHeroes.Entities;
+using GuildOfHeroes.Entities.Service;
 
 namespace GuildOfHeroes.Core
 {
@@ -6,38 +7,35 @@ namespace GuildOfHeroes.Core
     {
         public static Game Instance { get; private set; }
 
-        private ICommandProvider commandProvider;
         private IDrawManager drawManager;
-        private ICommandExecuter commandExecuter;
+        private IWorldUpdater worldUpdater;
         private World world;
 
         private bool gameActive;
 
         public Game(
-            ICommandProvider commandProvider,
             IDrawManager drawManager,
-            ICommandExecuter commandExecuter,
+            IWorldUpdater worldUpdater,
             World world
-        ) {
+        )
+        {
             Instance = this;
             gameActive = true;
-            this.commandProvider = commandProvider;
             this.drawManager = drawManager;
-            this.commandExecuter = commandExecuter;
+            this.worldUpdater = worldUpdater;
             this.world = world;
         }
 
         public void Run()
         {
             Load();
-            while(gameActive)
+            while (gameActive)
                 GameStep();
         }
 
         private void GameStep()
         {
-            var command = commandProvider.GetNextCommand();
-            command.Execute(commandExecuter);
+            worldUpdater.Update(world);
             drawManager.Draw(world);
         }
 

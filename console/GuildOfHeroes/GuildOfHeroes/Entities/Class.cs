@@ -1,12 +1,10 @@
-﻿using GuildOfHeroes.Service;
-using System;
+﻿using GuildOfHeroes.Entities.Service;
+using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
-namespace GuildOfHeroes
+namespace GuildOfHeroes.Entities
 {
     public class Class : ObjectWithName
     {
@@ -17,7 +15,7 @@ namespace GuildOfHeroes
             string name,
             int loyaltyModifier,
             Dictionary<Skill, int> skillModifiers
-        ) 
+        )
             : base(name)
         {
             this.skillModifiers = skillModifiers;

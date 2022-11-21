@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ConsoleExtension.Widgets
 {
@@ -12,12 +8,12 @@ namespace ConsoleExtension.Widgets
 
         public bool Bordered { get; set; }
 
-        public char TopLeftSymbol     { get; set; }
-        public char TopRightSymbol    { get; set; }
-        public char BottomLeftSymbol  { get; set; }
+        public char TopLeftSymbol { get; set; }
+        public char TopRightSymbol { get; set; }
+        public char BottomLeftSymbol { get; set; }
         public char BottomRightSymbol { get; set; }
-        public char HorizontalSymbol  { get; set; }
-        public char VerticalSymbol    { get; set; }
+        public char HorizontalSymbol { get; set; }
+        public char VerticalSymbol { get; set; }
 
         public Frame(
             int line = 0,
@@ -27,12 +23,12 @@ namespace ConsoleExtension.Widgets
             IWidget parent = null
         ) : base(line, column, width, height, parent)
         {
-            TopLeftSymbol     = DefaultTopLeftSymbol;
-            TopRightSymbol    = DefaultTopRightSymbol;
-            BottomLeftSymbol  = DefaultBottomLeftSymbol;
+            TopLeftSymbol = DefaultTopLeftSymbol;
+            TopRightSymbol = DefaultTopRightSymbol;
+            BottomLeftSymbol = DefaultBottomLeftSymbol;
             BottomRightSymbol = DefaultBottomRightSymbol;
-            HorizontalSymbol  = DefaultHorizontalSymbol;
-            VerticalSymbol    = DefaultVerticalSymbol;
+            HorizontalSymbol = DefaultHorizontalSymbol;
+            VerticalSymbol = DefaultVerticalSymbol;
 
             Bordered = true;
         }
@@ -62,7 +58,7 @@ namespace ConsoleExtension.Widgets
 
         private void DrawSymbol(int line, int column, char symbol)
         {
-            if(PositionInsideParent(line, column))
+            if (PositionInsideParent(line, column))
             {
                 Console.SetCursorPosition(column, line);
                 Console.Write(symbol);
@@ -116,7 +112,7 @@ namespace ConsoleExtension.Widgets
             int startColumn = Math.Max(ConsoleColumn() + 1, ParentConsoleColumn()) - fillBorder;
             int endColumn = Math.Min(ConsoleColumn() + Area.Width - 1, ParentConsoleRight()) + fillBorder;
 
-            for(int line = startLine; line < endLine; ++line)
+            for (int line = startLine; line < endLine; ++line)
             {
                 Console.SetCursorPosition(startColumn, line);
                 for (int column = startColumn; column < endColumn; ++column)
@@ -126,12 +122,12 @@ namespace ConsoleExtension.Widgets
             }
         }
 
-        public const char DefaultTopLeftSymbol     = '+';
-        public const char DefaultTopRightSymbol    = '+';
-        public const char DefaultBottomLeftSymbol  = '+';
+        public const char DefaultTopLeftSymbol = '+';
+        public const char DefaultTopRightSymbol = '+';
+        public const char DefaultBottomLeftSymbol = '+';
         public const char DefaultBottomRightSymbol = '+';
-        public const char DefaultHorizontalSymbol  = '-';
-        public const char DefaultVerticalSymbol    = '|';
+        public const char DefaultHorizontalSymbol = '-';
+        public const char DefaultVerticalSymbol = '|';
 
     }
 }

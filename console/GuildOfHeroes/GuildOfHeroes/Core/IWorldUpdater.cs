@@ -2,8 +2,8 @@
 
 namespace GuildOfHeroes.Core
 {
-    public interface ICommandExecuter
+    public interface IWorldUpdater
     {
-
+        void Update(World world);
     }
 }

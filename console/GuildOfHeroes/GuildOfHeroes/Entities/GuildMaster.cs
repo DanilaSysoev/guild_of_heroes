@@ -1,13 +1,9 @@
-﻿using GuildOfHeroes.Service;
+﻿using GuildOfHeroes.Entities.Service;
 using Newtonsoft.Json.Linq;
-using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace GuildOfHeroes
+namespace GuildOfHeroes.Entities
 {
     public class GuildMaster : ObjectWithName
     {
@@ -19,9 +15,11 @@ namespace GuildOfHeroes
         public int SameClassLoyaltyModifier { get; private set; }
 
         public IReadOnlyDictionary<Race, int>
-        RaceLoyaltyModifiers { get; private set; }
-        public IReadOnlyDictionary<Class, int> 
-        ClassLoyaltyModifiers { get; private set; }
+        RaceLoyaltyModifiers
+        { get; private set; }
+        public IReadOnlyDictionary<Class, int>
+        ClassLoyaltyModifiers
+        { get; private set; }
 
         private GuildMaster(
             string name,
@@ -86,7 +84,7 @@ namespace GuildOfHeroes
                     token => token.Value<int>("value")
                 )
             );
-        }        
+        }
 
         private static Dictionary<string, GuildMaster> guildMasters;
     }

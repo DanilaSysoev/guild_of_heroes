@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ConsoleExtension.Widgets
+﻿namespace ConsoleExtension.Widgets
 {
     public class LineBorderDecorator : Widget
     {
@@ -24,7 +18,7 @@ namespace ConsoleExtension.Widgets
 
         protected override void DrawOwnBeforeChildren()
         {
-            for(int i = Area.Column + 1; i < Area.Column + Area.Width - 1; ++i)
+            for (int i = Area.Column + 1; i < Area.Column + Area.Width - 1; ++i)
                 DrawSymbolIfPossible(ConsoleLine(), ConsoleColumn() + i, ' ');
         }
 

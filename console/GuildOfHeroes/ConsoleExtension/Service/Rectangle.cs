@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ConsoleExtension.Service
 {
     public class Rectangle
     {
-        public int Line   { get; set; }
+        public int Line { get; set; }
         public int Column { get; set; }
-        public int Width  { get; set; }
+        public int Width { get; set; }
         public int Height { get; set; }
 
         public Rectangle(
@@ -18,7 +14,8 @@ namespace ConsoleExtension.Service
             int column = 0,
             int width = 0,
             int height = 0
-        ) {
+        )
+        {
             Line = line;
             Column = column;
             Width = width;
@@ -27,7 +24,7 @@ namespace ConsoleExtension.Service
 
         public Rectangle CutInsidePart(Rectangle insideRectangle)
         {
-            return new Rectangle (
+            return new Rectangle(
                 CalculateLine(insideRectangle),
                 CalculateColumn(insideRectangle),
                 CalculateWidth(insideRectangle),
@@ -54,7 +51,7 @@ namespace ConsoleExtension.Service
                 return 0;
             if (Column < 0)
                 return Math.Min(
-                    Width, 
+                    Width,
                     insideRectangle.Width + insideRectangle.Column
                 );
             return Width - insideRectangle.Column;

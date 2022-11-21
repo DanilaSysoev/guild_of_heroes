@@ -1,9 +1,5 @@
 ﻿using ConsoleExtension.Service;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ConsoleExtension.Widgets
 {
@@ -22,17 +18,17 @@ namespace ConsoleExtension.Widgets
         protected override void DrawOwnBeforeChildren()
         {
             Rectangle drawingRect =
-                Parent == null ? 
+                Parent == null ?
                 RootArea().CutInsidePart(Area) :
                 Parent.Area.CutInsidePart(Area);
 
-            for(int offsetLine = 0;
-                offsetLine < drawingRect.Height; 
+            for (int offsetLine = 0;
+                offsetLine < drawingRect.Height;
                 ++offsetLine)
             {
                 int line = drawingRect.Line + offsetLine;
-                for(int offsetColumn = 0;
-                    offsetColumn < drawingRect.Width; 
+                for (int offsetColumn = 0;
+                    offsetColumn < drawingRect.Width;
                     ++offsetColumn)
                 {
                     int column = drawingRect.Column + offsetColumn;
@@ -44,7 +40,7 @@ namespace ConsoleExtension.Widgets
                 }
             }
         }
-                
+
         private string[] image;
     }
 }
