@@ -11,6 +11,7 @@ namespace ConsoleExtension.Widgets
         public ConsoleColor SelectionBackgroundColor { get; set; }
         public ConsoleColor SelectionForegroundColor { get; set; }
         public bool SelectedNumberDisplay { get; set; }
+        public bool IsCycled { get; set; }
 
         public Alignment ItemsAlignment
         {
@@ -42,11 +43,13 @@ namespace ConsoleExtension.Widgets
             visibleAreaEndLine = 0;
 
             SelectedNumberDisplay = false;
+            IsCycled = true;
         }
 
         public void AddItem(T item)
         {
-            var newTextLine = new TextLine(items.Count, 1, Area.Width - 2, this);
+            var newTextLine = new TextLine(items.Count, 1, Area.Width - 2);
+            newTextLine.Parent = this;
             newTextLine.Text = item.ToString();
             newTextLine.Alignment = ItemsAlignment;
             lines.Add(newTextLine);
@@ -96,7 +99,11 @@ namespace ConsoleExtension.Widgets
                 SetSelection(0);
             else
             {
-                int newSelected = (SelectedIndex + 1) % lines.Count;
+                int newSelected = SelectedIndex + 1;
+                if (newSelected >= lines.Count && !IsCycled)
+                    return;
+                if(newSelected >= lines.Count)
+                    newSelected = lines.Count - 1;
                 RemoveSelection();
                 SetSelection(newSelected);
             }
@@ -105,13 +112,15 @@ namespace ConsoleExtension.Widgets
         {
             if (lines.Count == 0)
                 return;
-
-            if (SelectedIndex < 0)
+            if (SelectedIndex < 0 && IsCycled)
                 SetSelection(lines.Count - 1);
             else
             {
-                int newSelected =
-                    (SelectedIndex + lines.Count - 1) % lines.Count;
+                int newSelected = SelectedIndex - 1;
+                if (newSelected < 0 && !IsCycled)
+                    return;
+                if (newSelected < 0)
+                    newSelected = lines.Count - 1;
                 RemoveSelection();
                 SetSelection(newSelected);
             }
@@ -220,9 +229,9 @@ namespace ConsoleExtension.Widgets
                 new LineBorderDecorator(
                     line.Area.Line,
                     line.Area.Column - 1,
-                    line.Area.Width + 2,
-                    this
+                    line.Area.Width + 2                    
                 );
+            decorator.Parent = this;
             decorator.BackgroundColor = SelectionBackgroundColor;
             decorator.ForegroundColor = SelectionForegroundColor;
             decorator.AddChild(line);

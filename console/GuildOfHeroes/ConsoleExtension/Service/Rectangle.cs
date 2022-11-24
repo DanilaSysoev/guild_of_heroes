@@ -9,6 +9,9 @@ namespace ConsoleExtension.Service
         public int Width { get; set; }
         public int Height { get; set; }
 
+        public int RightBorder { get { return Column + Width - 1; } }
+        public int BottomBorder { get { return Line + Height - 1; } }
+
         public Rectangle(
             int line = 0,
             int column = 0,
@@ -46,27 +49,32 @@ namespace ConsoleExtension.Service
         }
         private int CalculateWidth(Rectangle insideRectangle)
         {
-            if (insideRectangle.Line >= Height ||
-                insideRectangle.Column >= Width)
+            if (NotIntersect(insideRectangle))
                 return 0;
-            if (Column < 0)
-                return Math.Min(
-                    Width,
-                    insideRectangle.Width + insideRectangle.Column
-                );
-            return Width - insideRectangle.Column;
+            int leftCut = insideRectangle.Column < 0 ? -Column : 0;
+            int rightCut =
+                insideRectangle.RightBorder >= Width ?
+                insideRectangle.RightBorder - Width + 1 : 0;
+            return insideRectangle.Width - leftCut - rightCut;
         }
+
+        private bool NotIntersect(Rectangle insideRectangle)
+        {
+            return insideRectangle.Line >= Height ||
+                   insideRectangle.Column >= Width ||
+                   insideRectangle.RightBorder < 0 ||
+                   insideRectangle.BottomBorder < 0;
+        }
+
         private int CalculateHeight(Rectangle insideRectangle)
         {
-            if (insideRectangle.Line >= Height ||
-                insideRectangle.Column >= Width)
+            if (NotIntersect(insideRectangle))
                 return 0;
-            if (Line < 0)
-                return Math.Min(
-                    Height,
-                    insideRectangle.Height + insideRectangle.Line
-                );
-            return Height - insideRectangle.Line;
+            int topCut = insideRectangle.Line < 0 ? -Line : 0;
+            int bottomCut =
+                insideRectangle.BottomBorder >= Height ?
+                insideRectangle.BottomBorder - Height + 1 : 0;
+            return insideRectangle.Height - topCut - bottomCut;
         }
     }
 }

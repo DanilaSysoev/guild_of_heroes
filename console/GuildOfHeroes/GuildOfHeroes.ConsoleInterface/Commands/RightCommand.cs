@@ -2,11 +2,14 @@
 
 namespace GuildOfHeroes.ConsoleInterface.Commands
 {
-    public class RightCommand : ICommand
+    partial class Command
     {
-        public void Execute(ICommandExecuter commandExecuter)
+        private class RightCommand : ICommand
         {
-            commandExecuter.ExecuteRightCommand();
+            public void Execute(ICommandExecuter commandExecuter)
+            {
+                commandExecuter.ExecuteRightCommand();
+            }
         }
     }
 }

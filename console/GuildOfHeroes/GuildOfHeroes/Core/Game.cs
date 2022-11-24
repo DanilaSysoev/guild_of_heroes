@@ -41,7 +41,6 @@ namespace GuildOfHeroes.Core
             world = BuildWorld();
             gamePreparer.Prepare(world);
             drawManager.Setup();
-            worldUpdater.Setup();
         }
 
         private World BuildWorld()
@@ -51,8 +50,8 @@ namespace GuildOfHeroes.Core
 
         private void GameStep()
         {
-            worldUpdater.Update(world);
             drawManager.Draw(world);
+            worldUpdater.Update(world);
         }
 
         public void StopGame()

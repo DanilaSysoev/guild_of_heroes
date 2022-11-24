@@ -10,7 +10,7 @@ namespace GuildOfHeroes.ConsoleInterface.MenuItems.Main
 
         public override void Select()
         {
-
+            
         }
     }
 }

@@ -12,6 +12,7 @@ namespace GuildOfHeroes.ConsoleInterface
     {
         public void Prepare(World world)
         {
+            Console.CursorVisible = false;
             ArtProvider.Load();
         }
     }

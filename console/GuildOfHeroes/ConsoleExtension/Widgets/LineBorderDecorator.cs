@@ -18,7 +18,7 @@
 
         protected override void DrawOwnBeforeChildren()
         {
-            for (int i = Area.Column + 1; i < Area.Column + Area.Width - 1; ++i)
+            for (int i = Area.Column + 1; i < Area.RightBorder; ++i)
                 DrawSymbolIfPossible(ConsoleLine(), ConsoleColumn() + i, ' ');
         }
 

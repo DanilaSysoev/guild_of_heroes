@@ -4,13 +4,14 @@ using GuildOfHeroes.ConsoleInterface.MenuItems.Main;
 using GuildOfHeroes.Core;
 using GuildOfHeroes.Entities;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
-namespace GuildOfHeroes.ConsoleInterface
+namespace GuildOfHeroes.ConsoleInterface.Screens
 {
     public class MainMenuScreen : ICommandExecuter, IDrawManager
     {
+        private const ConsoleColor MenuSelectionForeground = ConsoleColor.Yellow;
+
         private Frame rootFrame;
         private TextImage title;
         private SelectList<ISelectable> menu;
@@ -26,6 +27,7 @@ namespace GuildOfHeroes.ConsoleInterface
         }
         public void Draw(World world)
         {
+            Console.Clear();
             rootFrame.Draw();
         }
         public void Setup()
@@ -42,17 +44,19 @@ namespace GuildOfHeroes.ConsoleInterface
             int width = 
                 items.Max(s => s.ToString().Length) + MenuWidthAddition;
             int titleEnd = title.Area.Line + title.Area.Height;
-            int line = (Console.WindowHeight - titleEnd) / 2;
+            int line = (Console.WindowHeight + titleEnd) / 2;
             int column = (Console.WindowWidth - width) / 2;
 
             menu = new SelectList<ISelectable>(
-                line, 
-                column, 
-                width, 
+                line,
+                column,
+                width,
                 items.Length,
                 rootFrame
             );
+            menu.SelectionForegroundColor = MenuSelectionForeground;
             menu.AddItems(items);
+            menu.Select(0);
         }
         private static ISelectable[] CreateMenuItems()
         {
@@ -73,6 +77,27 @@ namespace GuildOfHeroes.ConsoleInterface
                 (Console.WindowWidth - ArtProvider.Title[0].Length) / 2;
 
             title = new TextImage(ArtProvider.Title.ToArray(), line, column, rootFrame);
+        }
+
+        public void ExecuteUpCommand()
+        {
+            menu.MoveSelectionOnPrevious();
+        }
+
+        public void ExecuteDownCommand()
+        {
+            menu.MoveSelectionOnNext();
+        }
+
+        public void ExecuteLeftCommand()
+        {}
+
+        public void ExecuteRightCommand()
+        {}
+
+        public void ExecuteSelectCommand()
+        {
+            menu.SelectedItem.Select();
         }
     }
 }
