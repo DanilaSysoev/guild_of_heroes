@@ -1,4 +1,5 @@
-﻿using ConsoleExtension.Service;
+﻿using ConsoleExtension.Draw;
+using ConsoleExtension.Service;
 using System;
 using System.Collections.Generic;
 
@@ -23,7 +24,10 @@ namespace ConsoleExtension.Widgets
 
         public IWidget Parent { get; set; }
 
+        public IConsole Console { get; private set; }
+
         public Widget(
+            IConsole console,
             int line = 0,
             int column = 0,
             int width = 0,
@@ -38,6 +42,7 @@ namespace ConsoleExtension.Widgets
 
             BackgroundColor = DefaultBackgroundColor;
             ForegroundColor = DefaultForegroundColor;
+            Console = console;
 
             if (parent != null)
                 parent.AddChild(this);
@@ -92,13 +97,13 @@ namespace ConsoleExtension.Widgets
             return Parent.ConsoleColumn() + Area.Column;
         }
 
-        public static Rectangle RootArea()
+        public Rectangle RootArea()
         {
             return new Rectangle(
                 0,
                 0,
-                Console.WindowWidth,
-                Console.WindowHeight
+                Console.BufferWidth,
+                Console.BufferHeight
             );
         }
 
@@ -170,8 +175,8 @@ namespace ConsoleExtension.Widgets
 
         protected void DrawSymbolIfPossible(int line, int column, char symbol)
         {
-            if (line >= 0 && line < Console.WindowHeight &&
-               column >= 0 && column < Console.WindowWidth)
+            if (line >= 0 && line < Console.BufferHeight &&
+               column >= 0 && column < Console.BufferWidth)
             {
                 Console.SetCursorPosition(column, line);
                 Console.Write(symbol);

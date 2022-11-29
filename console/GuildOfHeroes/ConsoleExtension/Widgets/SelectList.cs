@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ConsoleExtension.Draw;
+using System;
 using System.Collections.Generic;
 
 namespace ConsoleExtension.Widgets
@@ -26,12 +27,13 @@ namespace ConsoleExtension.Widgets
         }
 
         public SelectList(
-           int line = 0,
-           int column = 0,
-           int width = 0,
-           int height = 0,
-           IWidget parent = null
-        ) : base(line, column, width, height, parent)
+            IConsole console,
+            int line = 0,
+            int column = 0,
+            int width = 0,
+            int height = 0,
+            IWidget parent = null
+        ) : base(console, line, column, width, height, parent)
         {
             items = new List<T>();
             lines = new List<IWidget>();
@@ -48,7 +50,8 @@ namespace ConsoleExtension.Widgets
 
         public void AddItem(T item)
         {
-            var newTextLine = new TextLine(items.Count, 1, Area.Width - 2);
+            var newTextLine = 
+                new TextLine(Console, items.Count, 1, Area.Width - 2);
             newTextLine.Parent = this;
             newTextLine.Text = item.ToString();
             newTextLine.Alignment = ItemsAlignment;
@@ -103,7 +106,7 @@ namespace ConsoleExtension.Widgets
                 if (newSelected >= lines.Count && !IsCycled)
                     return;
                 if(newSelected >= lines.Count)
-                    newSelected = lines.Count - 1;
+                    newSelected = 0;
                 RemoveSelection();
                 SetSelection(newSelected);
             }
@@ -227,6 +230,7 @@ namespace ConsoleExtension.Widgets
         {
             var decorator =
                 new LineBorderDecorator(
+                    Console,
                     line.Area.Line,
                     line.Area.Column - 1,
                     line.Area.Width + 2                    
@@ -239,8 +243,10 @@ namespace ConsoleExtension.Widgets
         }
         private void DrawSelectedNumber()
         {
-            TextLine line = new TextLine(Area.Height - 1, 0, Area.Width, this);
-            line.Text = string.Format("{0}/{1}", SelectedIndex + 1, lines.Count);
+            TextLine line = 
+                new TextLine(Console, Area.Height - 1, 0, Area.Width, this);
+            line.Text =
+                string.Format("{0}/{1}", SelectedIndex + 1, lines.Count);
             line.Alignment = Alignment.BottomRight;
             line.BackgroundColor = SelectionBackgroundColor;
             line.ForegroundColor = SelectionForegroundColor;

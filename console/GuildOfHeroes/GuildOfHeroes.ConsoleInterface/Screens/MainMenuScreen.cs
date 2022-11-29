@@ -1,4 +1,6 @@
-﻿using ConsoleExtension.Widgets;
+﻿using ConsoleExtension;
+using ConsoleExtension.Draw;
+using ConsoleExtension.Widgets;
 using GuildOfHeroes.ConsoleInterface.Base;
 using GuildOfHeroes.ConsoleInterface.MenuItems.Main;
 using GuildOfHeroes.Core;
@@ -15,6 +17,7 @@ namespace GuildOfHeroes.ConsoleInterface.Screens
         private Frame rootFrame;
         private TextImage title;
         private SelectList<ISelectable> menu;
+        private IConsole console;
 
         public MainMenuScreen(int width, int height)
         {
@@ -22,21 +25,23 @@ namespace GuildOfHeroes.ConsoleInterface.Screens
             Console.WindowHeight = height;
             Console.CursorVisible = false;
 
-            rootFrame = new Frame(0, 0, width, height);
+            console = ConsoleBuilder.Build(width, height);
+            rootFrame = new Frame(console, 0, 0, width, height);
             rootFrame.ForegroundColor = ConsoleColor.Blue;
         }
         public void Draw(World world)
         {
-            Console.Clear();
             rootFrame.Draw();
+
+            console.Draw();
         }
         public void Setup()
         {
-            BuildTitle();
-            BuildMenu();
+            BuildTitle(console);
+            BuildMenu(console);
         }
 
-        private void BuildMenu()
+        private void BuildMenu(IConsole console)
         {
             const int MenuWidthAddition = 10;
 
@@ -48,6 +53,7 @@ namespace GuildOfHeroes.ConsoleInterface.Screens
             int column = (Console.WindowWidth - width) / 2;
 
             menu = new SelectList<ISelectable>(
+                console,
                 line,
                 column,
                 width,
@@ -67,7 +73,7 @@ namespace GuildOfHeroes.ConsoleInterface.Screens
                 new ExitMenuItem()
             };
         }
-        private void BuildTitle()
+        private void BuildTitle(IConsole console)
         {
             const int TopOffset = 2;
 
@@ -76,7 +82,9 @@ namespace GuildOfHeroes.ConsoleInterface.Screens
             int column =
                 (Console.WindowWidth - ArtProvider.Title[0].Length) / 2;
 
-            title = new TextImage(ArtProvider.Title.ToArray(), line, column, rootFrame);
+            title = new TextImage(
+                console, ArtProvider.Title.ToArray(), line, column, rootFrame
+            );
         }
 
         public void ExecuteUpCommand()

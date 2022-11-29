@@ -1,4 +1,5 @@
-﻿using ConsoleExtension.Service;
+﻿using ConsoleExtension.Draw;
+using ConsoleExtension.Service;
 using System;
 
 namespace ConsoleExtension.Widgets
@@ -6,11 +7,12 @@ namespace ConsoleExtension.Widgets
     public class TextImage : Widget
     {
         public TextImage(
+            IConsole console,
             string[] image,
             int line = 0,
             int column = 0,
             IWidget parent = null
-        ) : base(line, column, image[0].Length, image.Length, parent)
+        ) : base(console, line, column, image[0].Length, image.Length, parent)
         {
             this.image = image;
         }

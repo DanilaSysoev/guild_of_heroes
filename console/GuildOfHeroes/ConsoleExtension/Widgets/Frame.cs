@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ConsoleExtension.Draw;
+using System;
 
 namespace ConsoleExtension.Widgets
 {
@@ -16,12 +17,13 @@ namespace ConsoleExtension.Widgets
         public char VerticalSymbol { get; set; }
 
         public Frame(
+            IConsole console,
             int line = 0,
             int column = 0,
             int width = 0,
             int height = 0,
             IWidget parent = null
-        ) : base(line, column, width, height, parent)
+        ) : base(console, line, column, width, height, parent)
         {
             TopLeftSymbol = DefaultTopLeftSymbol;
             TopRightSymbol = DefaultTopRightSymbol;

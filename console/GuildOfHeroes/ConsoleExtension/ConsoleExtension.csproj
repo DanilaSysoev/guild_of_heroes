@@ -42,6 +42,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DoubleBufferConsole.cs" />
+    <Compile Include="Draw\IConsole.cs" />
     <Compile Include="Draw\IDrawer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\Rectangle.cs" />

@@ -52,6 +52,7 @@
     <Compile Include="Commands\DownCommand.cs" />
     <Compile Include="Commands\LeftCommand.cs" />
     <Compile Include="Commands\UpCommand.cs" />
+    <Compile Include="ConsoleBuilder.cs" />
     <Compile Include="ConsoleCommandProvider.cs" />
     <Compile Include="ConsoleGamePreparer.cs" />
     <Compile Include="ConsoleWorldUpdater.cs" />

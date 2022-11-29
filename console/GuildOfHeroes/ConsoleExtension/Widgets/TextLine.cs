@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ConsoleExtension.Draw;
+using System;
 
 namespace ConsoleExtension.Widgets
 {
@@ -8,11 +9,12 @@ namespace ConsoleExtension.Widgets
         public Alignment Alignment { get; set; }
 
         public TextLine(
+            IConsole console,
             int line = 0,
             int column = 0,
             int width = 0,
             IWidget parent = null
-        ) : base(line, column, width, 1, parent)
+        ) : base(console, line, column, width, 1, parent)
         {
         }
 
