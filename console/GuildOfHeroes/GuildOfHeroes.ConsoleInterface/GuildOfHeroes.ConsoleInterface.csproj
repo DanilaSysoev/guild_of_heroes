@@ -67,6 +67,9 @@
     <Compile Include="MenuItems\MenuItem.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Screens\SelectGuildMasterScreen.cs" />
+    <Compile Include="Screens\SelectionList.cs" />
+    <Compile Include="UIElements\GuildMasterDescriptionUIElement.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

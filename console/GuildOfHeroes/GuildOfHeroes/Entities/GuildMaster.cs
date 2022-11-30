@@ -2,6 +2,7 @@
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace GuildOfHeroes.Entities
 {
@@ -50,7 +51,6 @@ namespace GuildOfHeroes.Entities
             Selected = guildMasters[name];
         }
 
-
         public static void Load()
         {
             JArray guildMastersData = null;
@@ -62,6 +62,19 @@ namespace GuildOfHeroes.Entities
                 nameData => nameData.Value<string>("name"),
                 BuildGuildMaster
             );
+        }
+
+        public static GuildMaster Get(string name)
+        {
+            return guildMasters[name];
+        }
+        public static List<string> GetNames()
+        {
+            return guildMasters.Keys.ToList();
+        }
+        public static List<GuildMaster> GetAll()
+        {
+            return guildMasters.Values.ToList();
         }
 
         private static GuildMaster BuildGuildMaster(JToken guildMasterData)

@@ -10,7 +10,7 @@ using System.Linq;
 
 namespace GuildOfHeroes.ConsoleInterface.Screens
 {
-    public class MainMenuScreen : ICommandExecuter, IDrawManager
+    class MainMenuScreen : ICommandExecuter, IDrawManager
     {
         private const ConsoleColor MenuSelectionForeground = ConsoleColor.Yellow;
 
