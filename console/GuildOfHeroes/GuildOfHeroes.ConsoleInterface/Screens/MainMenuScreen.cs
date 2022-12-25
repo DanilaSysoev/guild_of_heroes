@@ -61,6 +61,7 @@ namespace GuildOfHeroes.ConsoleInterface.Screens
                 rootFrame
             );
             menu.SelectionForegroundColor = MenuSelectionForeground;
+            menu.Title = "Main Menu";
             menu.AddItems(items);
             menu.Select(0);
         }

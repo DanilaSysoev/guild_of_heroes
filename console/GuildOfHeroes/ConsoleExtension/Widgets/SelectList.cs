@@ -11,9 +11,18 @@ namespace ConsoleExtension.Widgets
         public int SelectedIndex { get { return selectedIndex; } }
         public ConsoleColor SelectionBackgroundColor { get; set; }
         public ConsoleColor SelectionForegroundColor { get; set; }
-        public bool SelectedNumberDisplay { get; set; }
+        public bool SelectedNumberDisplay 
+        {
+            get { return selectedNumberDisplay; }
+            set 
+            {
+                selectedNumberDisplay = value;
+                SetupVisibleArea();
+            }
+        }
         public bool IsCycled { get; set; }
-
+        public string Title { get; set; }
+        public bool TitleDisplay { get; set; }
         public Alignment ItemsAlignment
         {
             get { return itemsAlignment; }
@@ -46,6 +55,9 @@ namespace ConsoleExtension.Widgets
 
             SelectedNumberDisplay = false;
             IsCycled = true;
+
+            Title = "";
+            TitleDisplay = false;
         }
 
         public void AddItem(T item)
@@ -138,12 +150,16 @@ namespace ConsoleExtension.Widgets
 
         protected override void DrawOwnBeforeChildren()
         {
+            int titleOffset = TitleDisplay ? 1 : 0;
+
             for (int i = visibleAreaBeginLine; i < visibleAreaEndLine; ++i)
             {
-                lines[i].Area.Line -= visibleAreaBeginLine;
+                lines[i].Area.Line -= visibleAreaBeginLine - titleOffset;
                 lines[i].Draw();
-                lines[i].Area.Line += visibleAreaBeginLine;
+                lines[i].Area.Line += visibleAreaBeginLine - titleOffset;
             }
+            if (TitleDisplay)
+                DrawTitle();
             if (SelectedNumberDisplay && SelectedIndex >= 0)
                 DrawSelectedNumber();
         }
@@ -154,6 +170,7 @@ namespace ConsoleExtension.Widgets
         private Alignment itemsAlignment;
         private int visibleAreaBeginLine;
         private int visibleAreaEndLine;
+        private bool selectedNumberDisplay;
 
         private int CalcNewSelectedIndexOnRemove(int position)
         {
@@ -190,8 +207,8 @@ namespace ConsoleExtension.Widgets
         }
         private void SetupVisibleArea()
         {
-            int additionalOffset = SelectedNumberDisplay ? 1 : 0;
-
+            int additionalOffset = (SelectedNumberDisplay ? 1 : 0) + 
+                                   (TitleDisplay ? 1 : 0);
             if (SelectedIndex < 0)
                 return;
             if (SelectedIndex < visibleAreaBeginLine)
@@ -199,14 +216,13 @@ namespace ConsoleExtension.Widgets
             else if (SelectedIndex >= visibleAreaEndLine)
                 MovedownToSelected(additionalOffset);
             else
-                CorrectionWithSelectedVisual();
+                CorrectionWithTitleAndSelectedVisual(additionalOffset);
         }
 
-        private void CorrectionWithSelectedVisual()
+        private void CorrectionWithTitleAndSelectedVisual(int additionalOffset)
         {
-            if (SelectedNumberDisplay &&
-               visibleAreaEndLine - visibleAreaBeginLine == Area.Height)
-                --visibleAreaEndLine;
+            if (visibleAreaEndLine - visibleAreaBeginLine + additionalOffset >= Area.Height)
+                visibleAreaEndLine = visibleAreaBeginLine + Area.Height - additionalOffset;
         }
 
         private void MovedownToSelected(int additionalOffset)
@@ -244,12 +260,24 @@ namespace ConsoleExtension.Widgets
         private void DrawSelectedNumber()
         {
             TextLine line = 
-                new TextLine(Console, Area.Height - 1, 0, Area.Width, this);
+                new TextLine(Console, Area.Height - 1, 0, Area.Width, null);
             line.Text =
                 string.Format("{0}/{1}", SelectedIndex + 1, lines.Count);
             line.Alignment = Alignment.BottomRight;
             line.BackgroundColor = SelectionBackgroundColor;
             line.ForegroundColor = SelectionForegroundColor;
+            line.Parent = this;
+            line.Draw();
+        }
+        private void DrawTitle()
+        {
+            TextLine line =
+                new TextLine(Console, 0, 0, Area.Width, null);
+            line.Text = Title;
+            line.Alignment = Alignment.TopLeft;
+            line.BackgroundColor = SelectionBackgroundColor;
+            line.ForegroundColor = SelectionForegroundColor;
+            line.Parent = this;
             line.Draw();
         }
     }
